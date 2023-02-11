@@ -1,0 +1,281 @@
+@font-face {
+	font-family: "Disposable droid";
+	src:         url("./res/disposable-droid.ttf");
+}
+
+body {
+	margin:  0px;
+	padding: 0px;
+	background-color: #101014;
+
+	color:       #efefef;
+	font-family: Open Sans, sans-serif;
+}
+
+* {
+	font-family: Open Sans, sans-serif;
+}
+
+a {
+	color:           #7aaafd;
+	text-decoration: none;
+}
+
+a:hover {
+	color:           #ed77ee;
+	text-decoration: underline;
+}
+
+.heart {
+	color: #f45874;
+}
+
+.dot {
+	margin-left:  10px;
+	margin-right: 10px;
+}
+
+div.page {
+	display:      block;
+	margin-left:  auto;
+	margin-right: auto;
+
+	min-width: 800px;
+	max-width: 1000px;
+}
+
+div.main-pad {
+	padding: 0px 10px 0px 10px;
+}
+
+div.footer-pad {
+	padding: 0px 0px 0px 30px;
+}
+
+ul {
+	margin-top:    5px;
+	margin-bottom: 0px;
+}
+
+ul.nav-ul {
+	margin:  0px;
+	padding: 0px;
+}
+
+li.nav-li {
+	float:   left;
+	display: inline-block;
+	margin:  0px;
+	padding: 0px;
+}
+
+p, h1, h2 {
+	margin: 0px;
+}
+
+.arrow {
+	color: #bb3e93;
+}
+
+.tool-title {
+	text-align:    center;
+	margin-bottom: 5px;
+}
+
+a.tool:link {
+	text-decoration: none;
+
+	display: inline-block;
+
+	padding: 10px;
+}
+
+a.tool:hover {
+	background-color: #333640;
+}
+
+div.tool-bar {
+	margin-top: 50px;
+	float:      right;
+	width:      60px;
+
+	height: 100%;
+
+	padding: 5px;
+}
+
+img.tool-icon {
+	filter: invert(100%) brightness(1000%);
+	width:  40px;
+}
+
+h1 {
+	color: #efefef;
+
+	padding-top:    40px;
+	padding-bottom: 5px;
+	padding-left:   10px;
+	font-size:      35px;
+}
+
+a.card {
+	text-decoration: none;
+}
+
+p {
+	color: #cfcfcf;
+
+	font-size: 16px;
+}
+
+i.icon {
+	font-size: 18px;
+}
+
+a.nav-tab-active {
+	color:            #ffffff!important;
+	background-color: #bb3e93;
+}
+
+a.nav-tab:link {
+	font-size: 20px;
+
+	margin: 0px;
+
+	display: inline-block;
+	padding: 12px 24px;
+
+	color:           #efefef;
+	text-decoration: none;
+}
+
+a.nav-tab:visited {
+	color: #efefef;
+}
+
+a.nav-tab:hover {
+	color:            #efefef!important;
+	background-color: #333640;
+}
+
+button {
+	border: 0px;
+	background-color: #bb3e93;
+	color:            #efefef;
+
+	padding:   12px 24px;
+	font-size: 18px;
+
+	box-shadow: 0px 2px 8px #00000055;
+}
+
+button:hover {
+	background-color: #4b4e59;
+}
+
+hr.gap {
+	border: 0px;
+	margin: 0px;
+
+	padding-top: 30px;
+}
+
+.right {
+	display: inline-block;
+	float:   right;
+	height:  100%;
+}
+
+.margin-right {
+	margin-right: 5px;
+}
+
+img.nav-bar-icon {
+	padding: 12px 24px;
+	height: 30px;
+}
+
+nav {
+	padding: 0px;
+	margin:  0px;
+
+	background-color: #101014;
+
+	position: fixed;
+	width:    100%;
+	z-index:  1;
+	top:      0px;
+
+	box-shadow: 0px 2px 8px #00000088;
+
+	width:     100%;
+	min-width: 800px;
+}
+
+#header-greeting {
+	color: #efefef;
+
+	margin: 0px;
+
+	padding:   20px;
+	font-size: 100px;
+
+	text-align: center;
+	position:   relative;
+
+	text-shadow: 5px 5px 10px #00000022;
+}
+
+.center {
+	display:      block;
+	margin-left:  auto;
+	margin-right: auto;
+	text-align:   center;
+}
+
+#header-bg-img {
+	position: absolute;
+
+	left: 0px;
+	top:  0px;
+
+	background-color:    #bb3e93;
+	background-position: center;
+	background-image:    url("./res/bg.png");
+	background-size:     100% auto;
+
+	height: 100%;
+	width:  100%;
+}
+
+hr.nav-gap {
+	margin-top: 40px;
+}
+
+header {
+	position: relative;
+	padding:  110px 0px 110px 0px;
+
+	background-color: #f37863;
+
+	width:     100%;
+	min-width: 800px;
+
+	z-index: -1;
+}
+
+main {
+	background-color: #212328;
+
+	width:     100%;
+	min-width: 800px;
+
+	box-shadow: 0px -2px 8px #00000088;
+}
+
+footer {
+	background-color: #101014;
+
+	width:     100%;
+	min-width: 800px;
+}
