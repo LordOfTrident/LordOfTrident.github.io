@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<title>Home | LordOfTrident's website</title>
 	<meta name="description" content="My website">
 	<meta name="keywords" content="LordOfTrident, Trident, TR-ED, Trident Editor">
 	<meta name="author" content="LordOfTrident">
@@ -15,138 +15,151 @@
 </head>
 
 <body>
+	<button class="theme" id="dark-theme" onclick="setTheme('dark')">
+		<i class="icon icon-margin fa fa-moon-o fa-sm"></i>Dark
+	</button>
+	<button class="theme" id="light-theme" onclick="setTheme('light')">
+		<i class="icon icon-margin fa fa-sun-o fa-sm"></i>Light
+	</button>
+
+	<button class="right" onclick="backToTop()" id="back-to-top">
+		<i class="icon fa fa-arrow-up fa-sm"></i>
+	</button>
+
 	<nav>
-		<div class="page">
-			<ul class="nav-ul">
-				<li class="nav-li">
-					<a class="nav-tab nav-tab-active" href="/"><i class="icon fa fa-home fa-sm margin-right"></i>Home</a>
-				</li>
-				<li class="nav-li">
-					<a class="nav-tab" href="/projects">Projects</a>
-				</li>
-				<li class="nav-li">
-					<a class="nav-tab" href="/ads">Ads</a>
-				</li>
-			</ul>
-			<ul class="nav-ul right">
-				<li class="nav-li">
-					<a class="nav-tab" href="https://github.com/LordOfTrident" target="_blank">
-						<i class="icon fa fa-github fa-sm"></i>
-					</a>
-				</li>
-				<li class="nav-li">
-					<a class="nav-tab" href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
-						<i class="icon fa fa-youtube-play fa-sm"></i>
-					</a>
-				</li>
-			</ul>
-		</div>
+		<ul class="nav left">
+			<li id="open-menu">
+				<a href="javascript:void(0);" onclick="openMenu()">
+					<i class="icon fa fa-bars fa-sm"></i>
+				</a>
+			</li>
+		</ul>
+		<ul class="nav right">
+			<li>
+				<a href="https://github.com/LordOfTrident" target="_blank">
+					<i class="icon fa fa-github fa-sm"></i>
+				</a>
+			</li>
+			<li>
+				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+					<i class="icon fa fa-youtube-play fa-sm"></i>
+				</a>
+			</li>
+		</ul>
+		<ul id="menu" class="nav left">
+			<li>
+				<a href="/index.html">
+					<i class="icon icon-margin fa fa-home fa-sm"></i>Home
+				</a>
+			</li>
+			<li>
+				<a href="/projects/index.html">Projects</a>
+			</li>
+			<li>
+				<a href="/ads/index.html">Ads</a>
+			</li>
+		</ul>
 	</nav>
-	<hr class="nav-gap"></hr>
+
 	<header>
-		<div id="header-bg-img"></div>
-		<div class="page">
-			<h1 id="header-greeting">👋 Hello there!</h1>
+		<div id="intro">
+			<div id="intro-center">
+				<h1 id="intro-label">
+					<span class="prompt">$</span> Welcome!
+				</h1>
+			</div>
 		</div>
 	</header>
+
 	<main>
-		<div class="page">
-			<div class="main-pad">
-				<div class="tool-bar">
-					<h2 class="tool-title">Tools</h2>
-					<a class="tool" href="https://en.wikipedia.org/wiki/Linux" target="_blank">
-						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-plain.svg">
-					</a>
-					<a class="tool" href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">
-						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-plain.svg">
-					</a>
-					<a class="tool" href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">
-						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-plain.svg">
-					</a>
-					<a class="tool" href="https://go.dev/" target="_blank">
-						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-plain.svg">
-					</a>
-					<a class="tool" href="https://www.lua.org/" target="_blank">
-						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/lua/lua-plain.svg">
-					</a>
-					<a class="tool" href="https://en.wikipedia.org/wiki/HTML5" target="_blank">
-						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg">
-					</a>
-					<a class="tool" href="https://en.wikipedia.org/wiki/CSS" target="_blank">
-						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg">
-					</a>
+		<div class="content">
+			<div class="paragraphs">
+				<div class="paragraph" id="hello-there">
+					<h1><span class="accent">></span> Hello there</h1>
+					<p>I'm <b>LordOfTrident</b>, a teen hobbyist programmer</p>
+					<ul>
+						<li>
+							<p>I'm a male</p>
+						</li>
+						<li>
+							<p>I enjoy low level programming and computer graphics</p>
+						</li>
+						<li>
+							<p>My favorite programming language is <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a></p>
+						</li>
+						<li>
+							<p>My main OS is <a href="https://ubuntu.com/" target="_blank">Ubuntu</a> 20.04 with i3wm</p>
+						</li>
+					</ul>
 				</div>
 
-				<h1><b class="arrow">></b> Welcome</h1>
-				<p>Im <b>LordOfTrident</b>, a teen hobbyist programmer</p>
-				<ul>
-					<li>
-						<p>Im a male</p>
-					</li>
-					<li>
-						<p>I enjoy low level programming and computer graphics</p>
-					</li>
-					<li>
-						<p>Favorite programming language is <a href="https://go.dev/" target="_blank"><b>Go</b></a></p>
-					</li>
-					<li>
-						<p>My main OS is <a href="https://ubuntu.com/" target="_blank"><b>Ubuntu</b></a> 20.04 with i3wm</p>
-					</li>
-				</ul>
+				<div class="paragraph" id="active-projects">
+					<h1><span class="accent">></span> Active projects</h1>
+					<p>Projects i work on sometimes</p>
+					<ul>
+						<li>
+							<p><a href="https://github.com/LordOfTrident/chol" target="_blank">chol</a> - C Header-only libraries</p>
+						</li>
+						<li>
+							<p><a href="https://github.com/LordOfTrident/reicaster" target="_blank">reicaster</a> - A 3D raycaster using C++/SDL2</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="clearfix"></div>
 
-				<h1><b class="arrow">></b> Active projects</h1>
-				<p>Projects i work on sometimes</p>
-				<ul>
-					<li>
-						<p><a href="https://avm-collection.github.io" target="_blank"><b>AVM</b></a> - Stack based virtual machine in C</p>
-					</li>
-					<li>
-						<p><a href="https://avm-collection.github.io/russel" target="_blank"><b>Russel</b></a> - Programming language in Go compiled to AVM bytecode</p>
-					</li>
-					<li>
-						<p><a href="https://github.com/LordOfTrident/tokiscript" target="_blank"><b>tokiscript</b></a> - A simple scripting language in C</p>
-					</li>
-					<li>
-						<p><a href="https://github.com/LordOfTrident/reicaster" target="_blank"><b>reicaster</b></a> - A 3D raycaster using C++/SDL2</p>
-					</li>
-				</ul>
+			<div class="tools">
+				<h1>Tools<div class="underline"></div></h1>
+				<a href="https://en.wikipedia.org/wiki/Linux" target="_blank">
+					<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-plain.svg">
+				</a>
+				<a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">
+					<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-plain.svg">
+				</a>
+				<a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">
+					<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-plain.svg">
+				</a>
+				<a href="https://go.dev/" target="_blank">
+					<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-plain.svg">
+				</a>
+				<a href="https://www.lua.org/" target="_blank">
+					<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/lua/lua-plain.svg">
+				</a>
+				<a href="https://en.wikipedia.org/wiki/HTML5" target="_blank">
+					<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg">
+				</a>
+				<a href="https://en.wikipedia.org/wiki/CSS" target="_blank">
+					<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg">
+				</a>
+			</div>
 
-				<hr class="gap">
-				<hr class="gap">
-
-				<a class="card" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img width="45%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=LordOfTrident&theme=nord&border_radius=5&layout=compact&bg_color=212328&title_color=efefef&icon_color=4d5862&text_color=cfcfcf&border_color=212328"/>
+			<div class="github">
+				<h1>Github stats<div class="underline"></div></h1>
+				<a class="no-underline" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+					<img class="github-card github-langs">
 				</a>
 
-				<a class="card" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img width="45%" src="https://github-readme-stats.vercel.app/api/?username=LordOfTrident&theme=nord&border_radius=5&show_icons=true&layout=compact&bg_color=212328&title_color=efefef&icon_color=e43aae&text_color=cfcfcf&border_color=212328"/>
+				<a class="no-underline" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+					<img class="github-card github-stats">
 				</a>
-
-				<hr class="gap">
 			</div>
 		</div>
 	</main>
+
 	<footer>
-		<div class="page">
-			<div class="footer-pad">
-				<button class="right" onclick="backToTop()" id="back-to-top">Back to top</button>
-
-				<hr class="gap">
-				<p>Made with <b class="heart"><3</b> by LordOfTrident</p>
-				<hr class="gap">
-
-				<p>This page is licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL v3</a></p>
-				<p>The source code can be found on <a href="https://github.com/LordOfTrident/LordOfTrident.github.io" target="_blank">Github</a></p>
-				<hr class="gap">
+		<div class="footer-content">
+			<div class="right">
+				<img class="right" src="/res/logo.png">
 			</div>
-		<div>
+			<div class="left">
+				<h3>Made with <span class="heart"><3</span> by LordOfTrident</h3>
+				<p>This page is licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL v3</a></p>
+				<p>You can find the source code <a href="https://github.com/LordOfTrident/LordOfTrident.github.io" target="_blank">here</a></p>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 	</footer>
 </body>
 
-<script>
-	function backToTop() {
-		document.body.scrollTop = 0
-		document.documentElement.scrollTop = 0
-	}
-</script>
+<script src="/script.js"></script>
 </html>

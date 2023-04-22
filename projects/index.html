@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<title>Projects | LordOfTrident's website</title>
 	<meta name="description" content="My website">
 	<meta name="keywords" content="LordOfTrident, Trident, TR-ED, Trident Editor">
 	<meta name="author" content="LordOfTrident">
@@ -15,68 +15,81 @@
 </head>
 
 <body>
+	<button class="theme" id="dark-theme" onclick="setTheme('dark')">
+		<i class="icon icon-margin fa fa-moon-o fa-sm"></i>Dark
+	</button>
+	<button class="theme" id="light-theme" onclick="setTheme('light')">
+		<i class="icon icon-margin fa fa-sun-o fa-sm"></i>Light
+	</button>
+
+	<button class="right" onclick="backToTop()" id="back-to-top">
+		<i class="icon fa fa-arrow-up fa-sm"></i>
+	</button>
+
 	<nav>
-		<div class="page">
-			<ul class="nav-ul">
-				<li class="nav-li">
-					<a class="nav-tab" href="/"><i class="icon fa fa-home fa-sm margin-right"></i>Home</a>
-				</li>
-				<li class="nav-li">
-					<a class="nav-tab nav-tab-active" href="/projects">Projects</a>
-				</li>
-				<li class="nav-li">
-					<a class="nav-tab" href="/ads">Ads</a>
-				</li>
-			</ul>
-			<ul class="nav-ul right">
-				<li class="nav-li">
-					<a class="nav-tab" href="https://github.com/LordOfTrident" target="_blank">
-						<i class="icon fa fa-github fa-sm"></i>
-					</a>
-				</li>
-				<li class="nav-li">
-					<a class="nav-tab" href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
-						<i class="icon fa fa-youtube-play fa-sm"></i>
-					</a>
-				</li>
-			</ul>
-		</div>
+		<ul class="nav left">
+			<li id="open-menu">
+				<a href="javascript:void(0);" onclick="openMenu()">
+					<i class="icon fa fa-bars fa-sm"></i>
+				</a>
+			</li>
+		</ul>
+		<ul class="nav right">
+			<li>
+				<a href="https://github.com/LordOfTrident" target="_blank">
+					<i class="icon fa fa-github fa-sm"></i>
+				</a>
+			</li>
+			<li>
+				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+					<i class="icon fa fa-youtube-play fa-sm"></i>
+				</a>
+			</li>
+		</ul>
+		<ul id="menu" class="nav left">
+			<li>
+				<a href="/index.html">
+					<i class="icon icon-margin fa fa-home fa-sm"></i>Home
+				</a>
+			</li>
+			<li>
+				<a href="/projects/index.html">Projects</a>
+			</li>
+			<li>
+				<a href="/ads/index.html">Ads</a>
+			</li>
+		</ul>
 	</nav>
-	<hr class="nav-gap"></hr>
+
+	<header>
+	</header>
+
 	<main>
-		<div class="page">
-			<div class="main-pad">
-				<h1><b class="arrow">></b> Unfinished</h1>
-				<p>Coming soon</p>
-
-				<hr class="gap">
-				<img class="center" src="https://cdn.codespeedy.com/wp-content/uploads/2019/03/Chrome-Broken-Image-Icon.png">
-
-				<hr class="gap">
+		<div class="content">
+			<div class="paragraphs">
+				<div class="paragraph">
+					<h1><span class="accent">></span> Unfinished</h1>
+					<p>This page is unfinished</p>
+				</div>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 	</main>
+
 	<footer>
-		<div class="page">
-			<div class="footer-pad">
-				<button class="right" onclick="backToTop()" id="back-to-top">Back to top</button>
-
-				<hr class="gap">
-				<p>Made with <b class="heart"><3</b> by LordOfTrident</p>
-				<hr class="gap">
-
-				<p>This page is licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL v3</a></p>
-				<p>The source code can be found on <a href="https://github.com/LordOfTrident/LordOfTrident.github.io" target="_blank">Github</a></p>
-				<hr class="gap">
+		<div class="footer-content">
+			<div class="right">
+				<img class="right" src="/res/logo.png">
 			</div>
-		<div>
+			<div class="left">
+				<h3>Made with <span class="heart"><3</span> by LordOfTrident</h3>
+				<p>This page is licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL v3</a></p>
+				<p>You can find the source code <a href="https://github.com/LordOfTrident/LordOfTrident.github.io" target="_blank">here</a></p>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 	</footer>
 </body>
 
-<script>
-	function backToTop() {
-		document.body.scrollTop = 0
-		document.documentElement.scrollTop = 0
-	}
-</script>
+<script src="/script.js"></script>
 </html>
