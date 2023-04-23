@@ -28,13 +28,14 @@
 
 	--color-heart: #f45874;
 
-	--color-tool:        #383b42;
+	--color-tool:        #383b4255; /* 32343a */
 	--color-tool-select: var(--color-footer);
 
-	--img-bg: url("/res/bg-dark.png");
+	--img-bg:         url("/res/bg-dark.png");
+	--img-content-bg: url("/res/content-bg-dark.png");
 
-	--img-github-langs: url("https://github-readme-stats.vercel.app/api/top-langs/?username=LordOfTrident&theme=nord&border_radius=5&layout=compact&bg_color=212328&title_color=efefef&icon_color=4d5862&text_color=cfcfcf&border_color=212328");
-	--img-github-stats: url("https://github-readme-stats.vercel.app/api/?username=LordOfTrident&theme=nord&border_radius=5&show_icons=true&layout=compact&bg_color=212328&title_color=efefef&icon_color=e43aae&text_color=cfcfcf&border_color=212328");
+	--img-github-langs: url("https://github-readme-stats.vercel.app/api/top-langs/?username=LordOfTrident&theme=nord&border_radius=5&layout=compact&bg_color=32343a00&title_color=efefef&icon_color=4d5862&text_color=cfcfcf&border_color=32343a00");
+	--img-github-stats: url("https://github-readme-stats.vercel.app/api/?username=LordOfTrident&theme=nord&border_radius=5&show_icons=true&layout=compact&bg_color=32343a00&title_color=efefef&icon_color=e43aae&text_color=cfcfcf&border_color=32343a00");
 }
 
 :root.light, :root {
@@ -67,12 +68,14 @@
 
 	--color-heart: #e93555;
 
+	--color-tool:        #ffffff;
 	--color-tool-select: var(--color-footer);
 
-	--img-bg: url("/res/bg-light.png");
+	--img-bg:         url("/res/bg-light.png");
+	--img-content-bg: url("/res/content-bg-light.png");
 
-	--img-github-langs: url("https://github-readme-stats.vercel.app/api/top-langs/?username=LordOfTrident&theme=nord&border_radius=5&layout=compact&bg_color=ffffff&title_color=000000&icon_color=4d5862&text_color=000000&border_color=ffffff");
-	--img-github-stats: url("https://github-readme-stats.vercel.app/api/?username=LordOfTrident&theme=nord&border_radius=5&show_icons=true&layout=compact&bg_color=ffffff&title_color=000000&icon_color=e43aae&text_color=000000&border_color=ffffff");
+	--img-github-langs: url("https://github-readme-stats.vercel.app/api/top-langs/?username=LordOfTrident&theme=nord&border_radius=5&layout=compact&bg_color=ffffff00&title_color=000000&icon_color=4d5862&text_color=000000&border_color=ffffff00");
+	--img-github-stats: url("https://github-readme-stats.vercel.app/api/?username=LordOfTrident&theme=nord&border_radius=5&show_icons=true&layout=compact&bg_color=ffffff00&title_color=000000&icon_color=e43aae&text_color=000000&border_color=ffffff00");
 }
 
 body {
@@ -150,13 +153,15 @@ div.title {
 header {
 	margin:     0px;
 	margin-top: 57px;
+
+	position:   relative;
+	z-index:    1;
+	box-shadow: 0px 2px 20px #00000055;
 }
 
 div#intro {
 	padding: 0px;
-	z-index: -1;
-
-	height: calc(100vh - 57px);
+	height:  calc(100vh - 57px);
 
 	background-position: center;
 	background-image:    var(--img-bg);
@@ -164,8 +169,6 @@ div#intro {
 
 	-webkit-transition: all 0.25s ease-out;
 	transition:         all 0.25s ease-out;
-
-	box-shadow: 0px 2px 8px #00000088;
 }
 
 .prompt {
@@ -210,7 +213,7 @@ h1#intro-label {
 	transform:         translateY(-50%);
 
 	font-size:   8vw;
-	text-shadow: 0px 0px 15px var(--color-terminal-glow);
+	text-shadow: 0px 0px 0.15em var(--color-terminal-glow);
 	color:       var(--color-fg);
 
 	white-space: nowrap;
@@ -223,6 +226,10 @@ h1#intro-label {
 }
 
 .no-underline {
+	text-decoration: none;
+}
+
+.no-underline:hover {
 	text-decoration: none;
 }
 
@@ -284,12 +291,20 @@ div.tools h1 {
 	text-align: center;
 }
 
-.light div.tools img, div.tools img {
+div.tools img {
 	width: 55px;
 }
 
-.dark div.tools img {
+.dark div.tools img.white-tool-icon {
 	filter: invert(100%) brightness(1000%);
+}
+
+.dark div.tools img.tool-icon {
+	filter: brightness(150%) saturate(70%);
+}
+
+.dark div.tools img.bright-tool-icon {
+	filter: invert(80%) hue-rotate(140deg) brightness(70%) saturate(200%);
 }
 
 div.tools a:link {
@@ -362,6 +377,10 @@ main {
 	width:  100%;
 
 	background-color: var(--color-bg);
+
+	background-position: center;
+	background-image:    var(--img-content-bg);
+	background-size:     cover;
 }
 
 .content {
@@ -381,6 +400,10 @@ footer {
 	text-align: center;
 
 	background-color: var(--color-footer);
+
+	position:   relative;
+	z-index:    1;
+	box-shadow: 0px -2px 20px #00000011;
 }
 
 div.footer-content {
@@ -478,6 +501,19 @@ button:hover {
 	display: none;
 }
 
+#trident-icon {
+	padding-right: 5px;
+	padding-left:  10px;
+}
+
+#trident-icon img {
+	margin:  0px;
+	padding: 0px;
+	height:  52px;
+
+	border-radius: 30%;
+}
+
 #back-to-top {
 	padding: 0px;
 	opacity: 0;
@@ -495,7 +531,7 @@ button:hover {
 	z-index: 1023;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
 	ul.nav.left li {
 		display: none;
 	}
@@ -523,7 +559,9 @@ button:hover {
 		color:            var(--color-drop-down-select-fg);
 		background-color: var(--color-drop-down-select-bg);
 	}
+}
 
+@media screen and (max-width: 600px) {
 	h1 {
 		font-size: 30px;
 	}
@@ -561,12 +599,8 @@ button:hover {
 		height: calc(100vh - 37px);
 	}
 
-	.light div.tools img, div.tools img {
+	div.tools img {
 		width: 30px;
-	}
-
-	.dark div.tools img {
-		filter: invert(100%) brightness(1000%);
 	}
 
 	img.github-card {

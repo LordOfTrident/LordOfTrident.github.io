@@ -4,6 +4,13 @@ let buttonLightTheme = document.getElementById("light-theme")
 
 let menu = document.getElementById("menu")
 
+function getCookie(name) {
+	let value = `; ${document.cookie}`
+	let parts = value.split(`; ${name}=`)
+	if (parts.length === 2)
+		return parts.pop().split(';').shift()
+}
+
 function backToTop() {
 	window.scrollTo({
 		top: 0,
@@ -14,12 +21,14 @@ function backToTop() {
 function setTheme(name) {
 	switch (name) {
 	case "light":
+		document.cookie = "theme=light"
 		document.documentElement.className = "light"
 		buttonLightTheme.style.display = "none"
 		buttonDarkTheme.style.display  = "block"
 		break
 
 	case "dark":
+		document.cookie = "theme=dark"
 		document.documentElement.className = "dark"
 		buttonDarkTheme.style.display  = "none"
 		buttonLightTheme.style.display = "block"
@@ -40,3 +49,7 @@ window.onscroll = () => {
 	else
 		buttonBackToTop.style.opacity = 0
 }
+
+let theme = getCookie("theme")
+if (theme)
+	setTheme(theme)
