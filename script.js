@@ -21,14 +21,14 @@ function backToTop() {
 function setTheme(name) {
 	switch (name) {
 	case "light":
-		document.cookie = "theme=light"
+		document.cookie = "theme=light; path=/"
 		document.documentElement.className = "light"
 		buttonLightTheme.style.display = "none"
 		buttonDarkTheme.style.display  = "block"
 		break
 
 	case "dark":
-		document.cookie = "theme=dark"
+		document.cookie = "theme=dark; path=/"
 		document.documentElement.className = "dark"
 		buttonDarkTheme.style.display  = "none"
 		buttonLightTheme.style.display = "block"
@@ -50,6 +50,8 @@ window.onscroll = () => {
 		buttonBackToTop.style.opacity = 0
 }
 
-let theme = getCookie("theme")
-if (theme)
-	setTheme(theme)
+window.onload = () => {
+	let theme = getCookie("theme")
+	if (theme)
+		setTheme(theme)
+}

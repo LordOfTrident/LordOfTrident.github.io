@@ -1,4 +1,6 @@
 :root.dark {
+	--color-body: #101014;
+
 	--color-fg:         #ffffff;
 	--color-bg:         #32343a; /* 212328 */
 	--color-accent:     #bb3e93;
@@ -39,6 +41,8 @@
 }
 
 :root.light, :root {
+	--color-body: #aaaaaa;
+
 	--color-fg:         #000000;
 	--color-bg:         #ffffff;
 	--color-accent:     #bb3e93;
@@ -84,7 +88,7 @@ body {
 
 	font-family: Open Sans, sans-serif;
 
-	background-color: var(--color-footer);
+	background-color: var(--color-body);
 }
 
 * {
