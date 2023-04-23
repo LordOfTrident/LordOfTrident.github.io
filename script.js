@@ -50,8 +50,6 @@ window.onscroll = () => {
 		buttonBackToTop.style.opacity = 0
 }
 
-window.onload = () => {
-	let theme = getCookie("theme")
-	if (theme)
-		setTheme(theme)
-}
+let theme = getCookie("theme")
+if (theme)
+	setTheme(theme)
