@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Arial+Black:400,600,300' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -19,18 +20,38 @@
 		<i class="icon fa fa-arrow-up fa-sm"></i>
 	</button>
 
-	<nav>
-		<ul class="nav left">
-			<li id="trident-icon">
-				<img src="/res/icon.png">
+	<div id="top">
+		<ul id="path">
+			<li>
+				<h4>Home / Projects /</h4>
 			</li>
+		</ul>
+		<ul id="links">
+			<li>
+				<a href="https://github.com/LordOfTrident" target="_blank">
+					<i class="icon icon-margin fa fa-github fa-sm"></i>Github
+				</a>
+			</li>
+			<li>
+				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+					<i class="icon icon-margin fa fa-youtube-play fa-sm"></i>Youtube
+				</a>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<nav>
+		<ul class="left">
+			<li id="trident-icon"><img></li>
+
 			<li id="open-menu">
 				<a href="javascript:void(0);" onclick="openMenu()">
 					<i class="icon fa fa-bars fa-sm"></i>
 				</a>
 			</li>
 		</ul>
-		<ul class="nav right">
+		<ul class="right">
 			<li id="light-theme">
 				<a href="javascript:void(0);" onclick="setTheme('light')">
 					<i class="icon fa fa-sun-o fa-sm"></i>
@@ -41,18 +62,8 @@
 					<i class="icon fa fa-moon-o fa-sm"></i>
 				</a>
 			</li>
-			<li>
-				<a href="https://github.com/LordOfTrident" target="_blank">
-					<i class="icon fa fa-github fa-sm"></i>
-				</a>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
-					<i class="icon fa fa-youtube-play fa-sm"></i>
-				</a>
-			</li>
 		</ul>
-		<ul id="menu" class="nav left">
+		<ul id="menu" class="left">
 			<li>
 				<a href="/">
 					<i class="icon icon-margin fa fa-home fa-sm"></i>Home
@@ -65,21 +76,21 @@
 				<a href="/ads/">Ads</a>
 			</li>
 		</ul>
+		<div class="clearfix"></div>
 	</nav>
 
 	<header>
 	</header>
 
 	<main>
-		<div class="content">
-			<div class="paragraphs">
-				<div class="paragraph">
-					<h1><span class="accent">></span> Unfinished</h1>
+		<section>
+			<div class="content">
+				<div class="center-content">
+					<h1>Unfinished</h1>
 					<p>This page is unfinished</p>
 				</div>
 			</div>
-			<div class="clearfix"></div>
-		</div>
+		</section>
 	</main>
 
 	<footer>

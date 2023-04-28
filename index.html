@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Arial+Black:400,600,300' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -19,18 +20,38 @@
 		<i class="icon fa fa-arrow-up fa-sm"></i>
 	</button>
 
-	<nav>
-		<ul class="nav left">
-			<li id="trident-icon">
-				<img src="/res/icon.png">
+	<div id="top">
+		<ul id="path">
+			<li>
+				<h4>Home /</h4>
 			</li>
+		</ul>
+		<ul id="links">
+			<li>
+				<a href="https://github.com/LordOfTrident" target="_blank">
+					<i class="icon icon-margin fa fa-github fa-sm"></i>Github
+				</a>
+			</li>
+			<li>
+				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+					<i class="icon icon-margin fa fa-youtube-play fa-sm"></i>Youtube
+				</a>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<nav>
+		<ul class="left">
+			<li id="trident-icon"><img></li>
+
 			<li id="open-menu">
 				<a href="javascript:void(0);" onclick="openMenu()">
 					<i class="icon fa fa-bars fa-sm"></i>
 				</a>
 			</li>
 		</ul>
-		<ul class="nav right">
+		<ul class="right">
 			<li id="light-theme">
 				<a href="javascript:void(0);" onclick="setTheme('light')">
 					<i class="icon fa fa-sun-o fa-sm"></i>
@@ -41,18 +62,8 @@
 					<i class="icon fa fa-moon-o fa-sm"></i>
 				</a>
 			</li>
-			<li>
-				<a href="https://github.com/LordOfTrident" target="_blank">
-					<i class="icon fa fa-github fa-sm"></i>
-				</a>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
-					<i class="icon fa fa-youtube-play fa-sm"></i>
-				</a>
-			</li>
 		</ul>
-		<ul id="menu" class="nav left">
+		<ul id="menu" class="left">
 			<li>
 				<a href="/">
 					<i class="icon icon-margin fa fa-home fa-sm"></i>Home
@@ -65,6 +76,7 @@
 				<a href="/ads/">Ads</a>
 			</li>
 		</ul>
+		<div class="clearfix"></div>
 	</nav>
 
 	<header>
@@ -78,81 +90,91 @@
 	</header>
 
 	<main>
-		<div class="content">
-			<div class="paragraphs">
-				<div class="paragraph" id="hello-there">
-					<h1><span class="accent">></span> Hello there</h1>
-					<p>I'm <b>LordOfTrident</b>, a teen hobbyist programmer</p>
-					<ul>
-						<li>
-							<p>I'm a male</p>
-						</li>
-						<li>
-							<p>I enjoy low level programming and computer graphics</p>
-						</li>
-						<li>
-							<p>My favorite programming language is <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a></p>
-						</li>
-						<li>
-							<p>My main OS is <a href="https://ubuntu.com/" target="_blank">Ubuntu</a> 20.04 with i3wm</p>
-						</li>
-					</ul>
-				</div>
+		<section id="about">
+			<div class="content">
+				<div class="center-content">
+					<div id="about-me">
+						<h1>Hello there</h1>
+						<p>I'm <b>LordOfTrident</b>, a teen hobbyist programmer</p>
+						<ul>
+							<li>
+								<p>I'm a male</p>
+							</li>
+							<li>
+								<p>I enjoy low level programming and computer graphics</p>
+							</li>
+							<li>
+								<p>My favorite programming language is <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a></p>
+							</li>
+							<li>
+								<p>My main OS is <a href="https://ubuntu.com/" target="_blank">Ubuntu</a> 20.04 with i3wm</p>
+							</li>
+						</ul>
+					</div>
 
-				<div class="paragraph" id="active-projects">
-					<h1><span class="accent">></span> Active projects</h1>
-					<p>Projects i work on sometimes</p>
-					<ul>
-						<li>
-							<p><a href="https://github.com/LordOfTrident/chol" target="_blank">chol</a> - C Header-only libraries</p>
-						</li>
-						<li>
-							<p><a href="https://github.com/LordOfTrident/reicaster" target="_blank">reicaster</a> - A 3D raycaster using C++/SDL2</p>
-						</li>
-					</ul>
+					<div id="active-projects">
+						<h1>Active projects</h1>
+						<p>Projects i work on sometimes</p>
+						<ul>
+							<li>
+								<p><a href="https://github.com/LordOfTrident/chol" target="_blank">chol</a> - C Header-only libraries</p>
+							</li>
+							<li>
+								<p><a href="https://github.com/LordOfTrident/reicaster" target="_blank">reicaster</a> - A 3D raycaster using C++/SDL2</p>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
+		</section>
 
-			<div class="tools">
-				<h1>Tools<div class="underline"></div></h1>
-				<a href="https://en.wikipedia.org/wiki/Linux" target="_blank">
-					<img class="white-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-plain.svg">
-				</a>
-				<a href="https://micro-editor.github.io/" target="_blank">
-					<img class="bright-tool-icon" src="https://micro-editor.github.io/micro_files/micro-logo-mark.svg">
-				</a>
-				<a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">
-					<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-plain.svg">
-				</a>
-				<a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">
-					<img class="bright-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-plain.svg">
-				</a>
-				<a href="https://go.dev/" target="_blank">
-					<img class="white-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-plain.svg">
-				</a>
-				<a href="https://www.lua.org/" target="_blank">
-					<img class="bright-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/lua/lua-plain.svg">
-				</a>
-				<a href="https://en.wikipedia.org/wiki/HTML5" target="_blank">
-					<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg">
-				</a>
-				<a href="https://en.wikipedia.org/wiki/CSS" target="_blank">
-					<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg">
-				</a>
+		<section id="tools">
+			<div class="content">
+				<div class="center-content center-text">
+					<h1>Tools</h1>
+					<a href="https://en.wikipedia.org/wiki/Linux" target="_blank">
+						<img class="white-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-plain.svg">
+					</a>
+					<a href="https://micro-editor.github.io/" target="_blank">
+						<img class="bright-tool-icon" src="https://micro-editor.github.io/micro_files/micro-logo-mark.svg">
+					</a>
+					<a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">
+						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-plain.svg">
+					</a>
+					<a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">
+						<img class="bright-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-plain.svg">
+					</a>
+					<a href="https://go.dev/" target="_blank">
+						<img class="white-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-plain.svg">
+					</a>
+					<a href="https://www.lua.org/" target="_blank">
+						<img class="bright-tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/lua/lua-plain.svg">
+					</a>
+					<a href="https://en.wikipedia.org/wiki/HTML5" target="_blank">
+						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg">
+					</a>
+					<a href="https://en.wikipedia.org/wiki/CSS" target="_blank">
+						<img class="tool-icon" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg">
+					</a>
+				</div>
 			</div>
+		</section>
 
-			<div class="github">
-				<h1>Github stats<div class="underline"></div></h1>
-				<a class="no-underline" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img class="github-card github-langs">
-				</a>
+		<section id="github">
+			<div class="content">
+				<div class="center-content center-text">
+					<h1>Github stats</h1>
+					<a class="no-underline" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+						<img class="github-card github-langs">
+					</a>
 
-				<a class="no-underline" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img class="github-card github-stats">
-				</a>
+					<a class="no-underline" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+						<img class="github-card github-stats">
+					</a>
+				</div>
 			</div>
-		</div>
+		</section>
 	</main>
 
 	<footer>

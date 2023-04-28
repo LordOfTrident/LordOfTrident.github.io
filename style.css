@@ -4,11 +4,12 @@
 	--color-fg:         #ffffff;
 	--color-bg:         #32343a; /* 212328 */
 	--color-accent:     #bb3e93;
+	--color-accent-fg:  #eb6ec3;
 	--color-alt-accent: #e94831;
 	--color-footer:     #212328; /* 101014 */
 
 	--color-tab-fg:        #ffffff;
-	--color-tab-bg:        var(--color-accent);
+	--color-tab-bg:        #ffffff00;
 	--color-tab-select-fg: #000000;
 	--color-tab-select-bg: #ffffff;
 
@@ -25,13 +26,19 @@
 	--color-terminal-glow:       #ffffffaa;
 	--color-terminal-glow-green: #07ca81aa;
 
-	--color-link:         #7aaafd;
-	--color-link-visited: #ed77ee;
+	--color-link:         #fdaa7a;
+	--color-link-visited: #7aaafd;
 
 	--color-heart: #f45874;
 
-	--color-tool:        #383b4255; /* 32343a */
-	--color-tool-select: var(--color-footer);
+	--color-tool:        #32343a; /* 32343a */
+	--color-tool-select: #484b52;
+
+	--img-nav-bg: linear-gradient(120deg, #bb3e93fe, #bb3e93e0);
+
+	/*--img-tools-bg:  linear-gradient(120deg, #ffd1f110, #a7bcea55);*/
+	--img-tools-bg:  linear-gradient(120deg, #5164c0ee, #e6477aee);
+	--img-github-bg: url("/res/github.png");
 
 	--img-bg:         url("/res/bg-dark.png");
 	--img-content-bg: url("/res/content-bg-dark.png");
@@ -46,11 +53,12 @@
 	--color-fg:         #000000;
 	--color-bg:         #ffffff;
 	--color-accent:     #bb3e93;
+	--color-accent-fg:  #bb3e93;
 	--color-alt-accent: #e94831;
 	--color-footer:     #dddddd;
 
 	--color-tab-fg:        #ffffff;
-	--color-tab-bg:        var(--color-accent);
+	--color-tab-bg:        #ffffff00;
 	--color-tab-select-fg: #000000;
 	--color-tab-select-bg: #ffffff;
 
@@ -73,7 +81,15 @@
 	--color-heart: #e93555;
 
 	--color-tool:        #ffffff;
-	--color-tool-select: var(--color-footer);
+	--color-tool-select: #eeeeee;
+
+	/*--img-nav-bg: linear-gradient(120deg, #212328aa, #000000aa);*/
+	--img-nav-bg: linear-gradient(120deg, #bb3e93fe, #bb3e93e0);
+
+	/*--img-tools-bg:  linear-gradient(120deg, #0000000a, #00000011);
+	--img-tools-bg:  linear-gradient(120deg, #a7bcea, #ffd1f1);*/
+	--img-tools-bg:  linear-gradient(120deg, #3dddff, #a554bc);
+	--img-github-bg: url("/res/github.png"), linear-gradient(120deg, #ffffff, #eeeeee);
 
 	--img-bg:         url("/res/bg-light.png");
 	--img-content-bg: url("/res/content-bg-light.png");
@@ -83,55 +99,79 @@
 }
 
 body {
-	margin:  0px;
-	padding: 0px;
-
 	font-family: Open Sans, sans-serif;
 
 	background-color: var(--color-body);
 }
 
-* {
+html, body, * {
 	margin:  0px;
 	padding: 0px;
+}
+
+#top {
+	transition: 0.2s;
+
+	background-color: var(--color-bg);
+	color:            var(--color-fg);
+
+	width: 100%;
+}
+
+ul#path {
+	float: left;
 }
 
 nav {
 	transition: 0.2s;
 
-	background-color: var(--color-accent);
+	background-color: #ffffff00;
+	background-image: var(--img-nav-bg);
+
+	backdrop-filter: blur(7px);
+
+	margin:  0px;
+	padding: 0px;
 
 	width:    100%;
 	z-index:  1024;
-	position: fixed;
+	position: sticky;
 	top:      0px;
 
 	box-shadow: 0px 2px 8px #00000088;
 }
 
-ul.nav {
+nav ul, #top ul {
+	margin:  0px;
+	padding: 0px;
+
+	background-color: #ffffff00;
+}
+
+nav li, #top li {
 	margin:  0px;
 	padding: 0px;
 
 	display: inline-block;
 }
 
-ul.nav li {
-	margin:  0px;
-	padding: 0px;
-
-	display: inline-block;
-	float:   left;
+#top li {
+	font-size: 1em;
 }
 
-ul.nav a {
+nav li {
+	font-size: 1.12em;
+	float:     left;
+}
+
+nav a, nav a:link {
+	font-weight: bold;
+
 	transition: 0.2s;
 	display:    block;
 
 	text-decoration: none;
 	padding:         15px 25px;
-
-	font-size: 20px;
 
 	border: 0px;
 
@@ -139,9 +179,30 @@ ul.nav a {
 	background-color: var(--color-tab-bg);
 }
 
-ul.nav a:hover {
+nav a:hover {
 	color:            var(--color-tab-select-fg);
 	background-color: var(--color-tab-select-bg);
+}
+
+#top a, #top h4, #top a:link {
+	font-weight: bold;
+
+	transition: 0.2s;
+	display:    block;
+
+	text-decoration: none;
+	padding:         8px 25px;
+
+	border: 0px;
+
+	color:            var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+#top a:hover {
+	text-decoration: underline;
+
+	color: var(--color-accent-fg);
 }
 
 #open-menu {
@@ -155,8 +216,7 @@ div.title {
 }
 
 header {
-	margin:     0px;
-	margin-top: 57px;
+	margin: 0px;
 
 	position:   relative;
 	z-index:    1;
@@ -165,7 +225,7 @@ header {
 
 div#intro {
 	padding: 0px;
-	height:  calc(100vh - 57px);
+	height:  calc(100vh - 5.6em);
 
 	background-position: center;
 	background-image:    var(--img-bg);
@@ -204,6 +264,7 @@ div#intro-center {
 }
 
 h1#intro-label {
+	font-weight: bold;
 	font-family: monospace;
 
 	text-align: center;
@@ -249,20 +310,70 @@ img.github-card {
 	width: 45%;
 }
 
-div.paragraphs {
+.ad-github-card {
+	width: 45%;
+}
+
+section.ad {
+	padding-left:   2em;
+	padding-right:  2em;
+	padding-top:    6em;
+	padding-bottom: 6em;
+}
+
+section.ad p {
+	width: 60%;
+	font-weight:   bold;
+	margin-bottom: 40px;
+}
+
+section.ad:nth-child(even) {
+	background-color: #ffffff00;
+	background-image: linear-gradient(120deg, #a554bcdd, #42a7ebdd);
+}
+
+section.ad:nth-child(even) p, section.ad:nth-child(even) h1 {
+	color: #000000;
+}
+
+section.ad img.logo {
+	float: right;
+	width: 30%;
+
+	border-radius: 100%;
+}
+
+div.center-text {
+	text-align: center;
+}
+
+div.center-content {
 	width:        fit-content;
 	display:      block;
 	margin-left:  auto;
 	margin-right: auto;
 }
 
-div.paragraph {
-	margin-top:    4em;
-	margin-bottom: 4em;
+section {
+	padding-bottom: 6em;
+	padding-top:    6em;
+}
+
+section#about {
+}
+
+section#tools {
+	background-image: var(--img-tools-bg);
+}
+
+section#github {
+	background-repeat:   no-repeat;
+	background-position: 50%, 0 0;
+	background-image:    var(--img-github-bg);
 }
 
 @media screen and (min-width: 930px) {
-	#hello-there {
+	#about-me {
 		float: left;
 		width: calc(50% - 20px);
 	}
@@ -273,52 +384,36 @@ div.paragraph {
 	}
 }
 
-div.github {
-	text-align:    center;
-	margin-top:    4em;
-	margin-bottom: 4em;
+@media screen and (max-width: 930px) {
+	#about-me {
+		margin-bottom: 4em;
+	}
 }
 
-div.tools {
-	margin-top:    4em;
-	margin-bottom: 6em;
-	width:         fit-content;
-
-   	display:      block;
-	margin-left:  auto;
-	margin-right: auto;
-
-	text-align: center;
-}
-
-div.tools h1 {
-	text-align: center;
-}
-
-div.tools img {
+section#tools img {
 	width: 55px;
 }
 
-.dark div.tools img.white-tool-icon {
+.dark section#tools img.white-tool-icon {
 	filter: invert(100%) brightness(1000%);
 }
 
-.dark div.tools img.tool-icon {
+.dark section#tools img.tool-icon {
 	filter: brightness(150%) saturate(70%);
 }
 
-.dark div.tools img.bright-tool-icon {
+.dark section#tools img.bright-tool-icon {
 	filter: invert(80%) hue-rotate(140deg) brightness(70%) saturate(200%);
 }
 
-div.tools a:link {
+section#tools a:link {
 	display: inline-block;
 
 	padding:       15px;
 	padding-right: 40px;
 	padding-left:  40px;
 
-	box-shadow: 1px 3px 10px #00000044;
+	box-shadow: 1px 2px 5px #00000022;
 	border-radius: 5px;
 
 	margin: 5px;
@@ -326,18 +421,10 @@ div.tools a:link {
 	background-color: var(--color-tool);
 }
 
-div.tools a:hover {
+section#tools a:hover {
+	box-shadow: 1px 2px 7px #00000044;
+
 	background-color: var(--color-tool-select);
-}
-
-div.underline {
-	height: 5px;
-	width: 300px;
-
-	margin-left:  auto;
-	margin-right: auto;
-
-	background-color: var(--color-accent);
 }
 
 div.clearfix {
@@ -346,7 +433,7 @@ div.clearfix {
 
 a {
 	color:           var(--color-link);
-	text-decoration: underline;
+	text-decoration: none;
 	font-weight:     bold;
 }
 
@@ -360,8 +447,9 @@ p, h1, h2, h3, li {
 }
 
 h1 {
-	font-weight: bold;
-	font-size:   50px;
+	font-weight: normal;
+	font-size:   45px;
+	font-family: arial black;
 
 	margin-top:    0px;
 	margin-bottom: 1em;
@@ -389,9 +477,8 @@ main {
 
 .content {
 	margin:  0px;
-	padding: 4em 1.1em;
 
-	max-width: 1200px;
+	max-width: 1000px;
 
 	margin-left:  auto;
 	margin-right: auto;
@@ -453,13 +540,6 @@ i.icon-margin {
 	margin-right: 10px;
 }
 
-.center {
-	background-color: #000000;
-	display:      block;
-	margin-left:  auto;
-	margin-right: auto;
-}
-
 .left {
 	float: left;
 }
@@ -511,9 +591,9 @@ button:hover {
 }
 
 #trident-icon img {
+	content: url("/res/icon.png");
 	margin:  0px;
 	padding: 0px;
-	height:  52px;
 
 	border-radius: 30%;
 }
@@ -522,8 +602,8 @@ button:hover {
 	padding: 0px;
 	opacity: 0;
 
-	width:  2.5em;
-	height: 2.5em;
+	width:  3rem;
+	height: 3rem;
 
 	position:  fixed;
 	transform: translate(-100%, -100%);
@@ -536,50 +616,86 @@ button:hover {
 }
 
 @media screen and (max-width: 650px) {
-	ul.nav.left li {
+	nav ul.left li {
 		display: none;
 	}
 
-	#open-menu {
+	#open-menu, #trident-icon {
 		display: block;
 	}
 
-	ul.nav.menu-responsive {
+	nav ul.menu-responsive {
 		position: relative;
 		width:    100%;
 	}
 
-	ul.nav.menu-responsive li {
+	nav ul.menu-responsive li {
 		display: block;
 		float:   none;
 	}
 
-	ul.nav.menu-responsive a {
+	nav ul.menu-responsive a {
 		color:            var(--color-drop-down-fg);
 		background-color: var(--color-drop-down-bg);
 	}
 
-	ul.nav.menu-responsive a:hover {
+	nav ul.menu-responsive a:hover {
 		color:            var(--color-drop-down-select-fg);
 		background-color: var(--color-drop-down-select-bg);
+	}
+
+	#trident-icon img {
+		height: 2.3em;
+	}
+}
+
+@media screen and (min-width: 650px) {
+	#trident-icon img {
+		height: 2.7em;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	ul#path {
+		position: absolute;
+	}
+
+	ul#links {
+		text-align: center;
+	}
+
+	section#github {
+		background-size: 50em, 100%;
 	}
 }
 
 @media screen and (max-width: 600px) {
-	h1 {
-		font-size: 30px;
+	section#github {
+		background-size: 30em, 100%;
 	}
 
-	div.underline {
-		width: 220px;
+	h1 {
+		font-size: 30px;
 	}
 
 	p {
 		font-size: 12px;
 	}
 
-	ul.nav a, button, i.icon {
+	ul#path {
+		position: relative;
+	}
+
+	ul#links {
+		float: right;
+	}
+
+	nav a, button, nav i.icon {
 		font-size: 12px;
+	}
+
+	#top a, #top i.icon, #top h4 {
+		font-size: 10px;
 	}
 
 	h2 {
@@ -590,20 +706,15 @@ button:hover {
 		font-size: 13px;
 	}
 
-	ul.nav a {
+	nav a {
 		padding: 10px 20px;
 	}
 
-	header {
-		margin:     0px;
-		margin-top: 37px;
-	}
-
 	div#intro {
-		height: calc(100vh - 37px);
+		height: calc(100vh - 4.8em);
 	}
 
-	div.tools img {
+	section#tools img {
 		width: 30px;
 	}
 
@@ -615,7 +726,7 @@ button:hover {
 		margin-right: auto;
 	}
 
-	div.tools a:link {
+	section#tools a:link {
 		display: inline-block;
 
 		padding:       10px;
