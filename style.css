@@ -795,6 +795,8 @@ img.cats { /* Temporary */
 }
 
 button#back-to-top {
+	outline: none;
+
 	transition: 0.3s;
 	opacity:    0;
 
@@ -860,7 +862,9 @@ div#site-top .docs:hover {
 	color: var(--color-high-contrast-bg);
 }
 
-div#site-top .theme-changer {
+div#site-top button.theme-changer {
+	outline: none;
+
 	opacity:    0.6;
 	transition: 0.3s;
 
@@ -886,7 +890,7 @@ div#site-top .theme-changer {
 	border: 0;
 }
 
-div#site-top .theme-changer:hover {
+div#site-top button.theme-changer:hover {
 	opacity: 1;
 
 	color:            #000000;
