@@ -1,153 +1,209 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ads | LordOfTrident's website</title>
-	<meta name="description" content="My website">
+	<title>Ads | LordOfTrident</title>
+	<meta name="description" content="Paid advertisements">
 	<meta name="keywords" content="LordOfTrident, Trident, TR-ED, Trident Editor">
 	<meta name="author" content="LordOfTrident">
-	<meta property="og:image" content="https://avatars.githubusercontent.com/u/80625541?v=4">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="/res/imgs/site-icon.png">
 
-	<title>LordOfTrident</title>
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="My website">
+	<meta property="og:image" content="/res/imgs/card.png">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:description" content="My website">
+	<meta property="twitter:image" content="/res/imgs/card.png">
+
 	<link rel="stylesheet" href="/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Arial+Black:400,600,300' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-	<button class="right" onclick="backToTop()" id="back-to-top">
+	<button id="back-to-top" onclick="backToTop()">
 		<i class="icon fa fa-arrow-up fa-sm"></i>
 	</button>
 
-	<div id="top">
-		<ul id="path">
-			<li>
-				<h4>Home / Ads /</h4>
-			</li>
-		</ul>
-		<ul id="links">
-			<li>
-				<a href="https://github.com/LordOfTrident" target="_blank">
-					<i class="icon icon-margin fa fa-github fa-sm"></i>Github
-				</a>
-			</li>
-			<li>
-				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
-					<i class="icon icon-margin fa fa-youtube-play fa-sm"></i>Youtube
-				</a>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
-	</div>
+	<header id="site-header">
+		<div id="site-top">
+			<a class="docs" href="/docs/">Docs</a>
 
-	<nav>
-		<ul class="left">
-			<li id="trident-icon"><img></li>
-
-			<li id="open-menu">
-				<a href="javascript:void(0);" onclick="openMenu()">
-					<i class="icon fa fa-bars fa-sm"></i>
-				</a>
-			</li>
-		</ul>
-		<ul class="right">
-			<li id="light-theme">
-				<a href="javascript:void(0);" onclick="setTheme('light')">
-					<i class="icon fa fa-sun-o fa-sm"></i>
-				</a>
-			</li>
-			<li id="dark-theme">
-				<a href="javascript:void(0);" onclick="setTheme('dark')">
-					<i class="icon fa fa-moon-o fa-sm"></i>
-				</a>
-			</li>
-		</ul>
-		<ul id="menu" class="left">
-			<li>
-				<a href="/">
-					<i class="icon icon-margin fa fa-home fa-sm"></i>Home
-				</a>
-			</li>
-			<li>
-				<a href="/projects/">Projects</a>
-			</li>
-			<li>
-				<a href="/ads/">Ads</a>
-			</li>
-		</ul>
-		<div class="clearfix"></div>
-	</nav>
-
-	<header>
+			<button class="theme-changer" id="dark-theme" href="javascript:void(0);" onclick="setTheme('dark')">
+				<i class="icon fa fa-moon-o fa-sm"></i>
+			</button>
+			<button class="theme-changer" id="light-theme" href="javascript:void(0);" onclick="setTheme('light')">
+				<i class="icon fa fa-sun-o fa-sm"></i>
+			</button>
+			<img>
+		</div>
+		<nav id="site-nav">
+			<ul>
+				<li>
+					<a class="orange" href="/">Home</a>
+				</li>
+				<li>
+					<a class="red" href="/projects/">Projects</a>
+				</li>
+				<li class="active">
+					<a class="blue" href="/ads/">Ads</a>
+				</li>
+			</ul>
+		</nav>
 	</header>
 
 	<main>
-		<section class="ad">
-			<div class="content">
-				<img class="logo" src="https://avatars.githubusercontent.com/u/52859743?v=4">
-				<h1>Paid advertisement #1</h1>
-				<p>This is a paid advertisement of the user <a href="https://github.com/yeti0904" target="_blank">yeti0904 (mesyeti)</a> (very cool person)</p>
+		<section>
+			<div class="container">
+				<header class="section-header">
+					<h1>Paid ads</h1>
+					<p class="desc"><i>(I do not actually get paid for them)</i></p>
+				</header>
 
-				<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yeti0904&theme=nord&border_radius=5&layout=compact&bg_color=444444&title_color=efefef&icon_color=4d5862&text_color=cfcfcf&border_color=21232800"/>
-				</a>
+				<div>
+					<div class="ad">
+						<div class="ad-side">
+							<img class="ad-img circle-border" src="https://avatars.githubusercontent.com/u/52859743?v=4">
+						</div>
+						<div class="ad-main">
+							<header class="ad-header">
+								<h1>mesyeti</h1>
+								<p class="desc">(yeti0904)</p>
+
+								<div class="ad-links">
+									<a class="ad-link github-link" href="https://github.com/yeti0904" target="_blank"><i class="icon-margin fa fa-github fa-sm"></i></a>
+								</div>
+							</header>
+
+							<p>This is a paid advertisement of this very cool person who makes cool programs in the <a href="https://dlang.org/" target="_blank">D programming language</a></p>
+							<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+								<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yeti0904&theme=nord&border_radius=5&layout=compact&bg_color=ffffff&title_color=000000&icon_color=d24da5&text_color=000000&border_color=21232800"/>
+							</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					<div class="ad">
+						<div class="ad-side">
+							<img class="ad-img circle-border" src="https://gentstore.sk/wp-content/uploads/2018/10/oilcanangelsshare-.png">
+						</div>
+						<div class="ad-main">
+							<header class="ad-header">
+								<h1>oilcans</h1>
+								<p class="desc">(apladi)</p>
+
+								<div class="ad-links">
+									<a class="ad-link github-link" href="https://github.com/apladi" target="_blank"><i class="icon-margin fa fa-github fa-sm"></i></a>
+									<a class="ad-link youtube-link" href="https://www.youtube.com/@oilcans" target="_blank"><i class="icon-margin fa fa-youtube-play fa-sm"></i></a>
+								</div>
+							</header>
+
+							<p>This is a paid advertisement of this very col(umn) racist person who tries making programs in the <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C programming language</a></p>
+							<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+								<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=apladi&theme=nord&border_radius=5&layout=compact&bg_color=ffffff&title_color=000000&icon_color=d24da5&text_color=000000&border_color=21232800"/>
+							</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					<div class="ad">
+						<div class="ad-side">
+							<img class="ad-img circle-border" src="https://avatars.githubusercontent.com/u/75248238?v=4">
+						</div>
+						<div class="ad-main">
+							<header class="ad-header">
+								<h1>Myth</h1>
+								<p class="desc">(MrMyth152346)</p>
+
+								<div class="ad-links">
+									<a class="ad-link github-link" href="https://github.com/MrMyth152346" target="_blank"><i class="icon-margin fa fa-github fa-sm"></i></a>
+									<a class="ad-link youtube-link" href="https://www.youtube.com/channel/UCpGpuRpS9Ru1YE3j_gB7Zwg" target="_blank"><i class="icon-margin fa fa-youtube-play fa-sm"></i></a>
+								</div>
+							</header>
+
+							<p>This is a paid advertisement of this very pro person who makes epic stuff in the <a href="https://www.lua.org/" target="_blank">Lua programming language</a> (and also C sometimes)</p>
+							<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+								<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MrMyth152346&theme=nord&border_radius=5&layout=compact&bg_color=ffffff&title_color=000000&icon_color=d24da5&text_color=000000&border_color=21232800"/>
+							</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					<div class="ad">
+						<div class="ad-side">
+							<img class="ad-img circle-border" src="https://avatars.githubusercontent.com/u/81387799?v=4">
+						</div>
+						<div class="ad-main">
+							<header class="ad-header">
+								<h1>yourfriend</h1>
+								<p class="desc">(yourfriendoss)</p>
+
+								<div class="ad-links">
+									<a class="ad-link github-link" href="https://github.com/yourfriendoss" target="_blank"><i class="icon-margin fa fa-github fa-sm"></i></a>
+									<a class="ad-link youtube-link" href="https://youtube.com/@yourfriendoss" target="_blank"><i class="icon-margin fa fa-youtube-play fa-sm"></i></a>
+								</div>
+							</header>
+
+							<p>This is a paid advertisement of this extremely smart intellectual who for some reason uses the <a href="https://www.typescriptlang.org/" target="_blank">Typescript programming language</a> and some other web dev langs</p>
+							<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+								<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourfriendoss&theme=nord&border_radius=5&layout=compact&bg_color=ffffff&title_color=000000&icon_color=d24da5&text_color=000000&border_color=21232800"/>
+							</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					<div class="ad">
+						<div class="ad-side">
+							<img class="ad-img circle-border" src="https://avatars.githubusercontent.com/u/80845089?v=4">
+						</div>
+						<div class="ad-main">
+							<header class="ad-header">
+								<h1>msbebep</h1>
+								<p class="desc">(NinjaRacc)</p>
+
+								<div class="ad-links">
+									<a class="ad-link github-link" href="https://github.com/NinjaRacc" target="_blank"><i class="icon-margin fa fa-github fa-sm"></i></a>
+								</div>
+							</header>
+
+							<p>This is a paid advertisement of this not loser person who cant actually program</p>
+							<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
+								<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=NinjaRacc&theme=nord&border_radius=5&layout=compact&bg_color=ffffff&title_color=000000&icon_color=d24da5&text_color=000000&border_color=21232800"/>
+							</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
 			</div>
-			<div class="clearfix"></div>
-		</section>
-
-		<section class="ad">
-			<div class="content">
-				<img class="logo" src="https://gentstore.sk/wp-content/uploads/2018/10/oilcanangelsshare-.png">
-				<h1>Paid advertisement #2</h1>
-				<p>This is a paid advertisement of the user <a href="https://github.com/apladi" target="_blank">apladi (oilcans)</a> (very col(umn) person)</p>
-
-				<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=apladi&theme=nord&border_radius=5&layout=compact&bg_color=444444&title_color=efefef&icon_color=4d5862&text_color=cfcfcf&border_color=21232800"/>
-				</a>
-			</div>
-			<div class="clearfix"></div>
-		</section>
-
-		<section class="ad">
-			<div class="content">
-				<img class="logo" src="https://avatars.githubusercontent.com/u/75248238?v=4">
-				<h1>Paid advertisement #3</h1>
-				<p>This is a paid advertisement of the user <a href="https://github.com/MrMyth152346" target="_blank">MrMyth152346 (Myth)</a> (very pro person)</p>
-
-				<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MrMyth152346&theme=nord&border_radius=5&layout=compact&bg_color=444444&title_color=efefef&icon_color=4d5862&text_color=cfcfcf&border_color=21232800"/>
-				</a>
-			</div>
-			<div class="clearfix"></div>
-		</section>
-
-		<section class="ad">
-			<div class="content">
-				<img class="logo" src="https://avatars.githubusercontent.com/u/81387799?v=4">
-				<h1>Paid advertisement #4</h1>
-				<p>This is a paid advertisement of the user <a href="https://github.com/yourfriendoss" target="_blank">yourfriendoss (friend)</a> (extremely smart intellectual)</p>
-
-				<a href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img class="ad-github-card" src="https://github-readme-stats.vercel.app/api/top-langs/?username=yourfriendoss&theme=nord&border_radius=5&layout=compact&bg_color=444444&title_color=efefef&icon_color=4d5862&text_color=cfcfcf&border_color=21232800"/>
-				</a>
-			</div>
-			<div class="clearfix"></div>
 		</section>
 	</main>
 
-	<footer>
+	<footer id="site-footer">
 		<div class="footer-content">
-			<div class="right">
-				<img class="right" src="/res/logo.png">
+			<div class="footer-socials">
+				<a href="https://github.com/LordOfTrident" target="_blank">
+					<i class="icon fa fa-github fa-sm"></i>
+				</a>
+				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+					<i class="icon fa fa-youtube-play fa-sm"></i>
+				</a>
 			</div>
-			<div class="left">
-				<h3>Made with <span class="heart"><3</span> by LordOfTrident</h3>
-				<p>This page is licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL v3</a></p>
-				<p>You can find the source code <a href="https://github.com/LordOfTrident/LordOfTrident.github.io" target="_blank">here</a></p>
+
+			<h2>Made with <span class="heart"><3</span> by LordOfTrident</h2>
+			<hr>
+
+			<div class="footer-links">
+				<a href="https://github.com/LordOfTrident" target="_blank">
+					Source code
+				</a>
+				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+					License (GPL v3)
+				</a>
 			</div>
 		</div>
-		<div class="clearfix"></div>
 	</footer>
 </body>
 

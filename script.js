@@ -1,8 +1,10 @@
 let buttonBackToTop  = document.getElementById("back-to-top")
 let buttonDarkTheme  = document.getElementById("dark-theme")
 let buttonLightTheme = document.getElementById("light-theme")
-
-let menu = document.getElementById("menu")
+let siteNav          = document.getElementById("site-nav")
+let shadowBegin      = 0
+if (siteNav)
+	shadowBegin = siteNav.getBoundingClientRect().top
 
 function getCookie(name) {
 	let value = `; ${document.cookie}`
@@ -18,38 +20,36 @@ function backToTop() {
 	});
 }
 
+window.onscroll = () => {
+	if (document.body.scrollTop > shadowBegin || document.documentElement.scrollTop > shadowBegin) {
+		if (siteNav)
+			siteNav.classList.add("shadow")
+
+		buttonBackToTop.style.opacity = 1
+	} else {
+		if (siteNav)
+			siteNav.classList.remove("shadow")
+
+		buttonBackToTop.style.opacity = 0
+	}
+}
+
 function setTheme(name) {
 	switch (name) {
 	case "light":
 		document.cookie = "theme=light; path=/"
 		document.documentElement.className = "light"
-		buttonLightTheme.style.display = "none"
-		buttonDarkTheme.style.display  = "block"
 		break
 
 	case "dark":
 		document.cookie = "theme=dark; path=/"
 		document.documentElement.className = "dark"
-		buttonDarkTheme.style.display  = "none"
-		buttonLightTheme.style.display = "block"
 		break
 	}
-}
-
-function openMenu() {
-	if (menu.classList.contains("menu-responsive"))
-		menu.classList.remove("menu-responsive")
-	else
-		menu.classList.add("menu-responsive")
-}
-
-window.onscroll = () => {
-	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
-		buttonBackToTop.style.opacity = 1
-	else
-		buttonBackToTop.style.opacity = 0
 }
 
 let theme = getCookie("theme")
 if (theme)
 	setTheme(theme)
+else
+	setTheme("light")

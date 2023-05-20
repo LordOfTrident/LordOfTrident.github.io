@@ -11,7 +11,7 @@
 	</a>
 	<br>
 	<a href="https://LordOfTrident.github.io/">
-		<img alt="GitHub pull requests" src="https://img.shields.io/badge/Hosted-here-e38426?style=for-the-badge">
+		<img alt="GitHub pull requests" src="https://img.shields.io/badge/Hosted-here-5947e5?style=for-the-badge">
 	</a>
 </p>
 
