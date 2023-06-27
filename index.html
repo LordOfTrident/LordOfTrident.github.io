@@ -2,10 +2,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="icon" type="image/png" href="/res/imgs/site-icon.png">
+	<link rel="icon" type="image/png" href="/res/imgs/favicon.png">
 
-	<title>Home | LordOfTrident's website</title>
-	<meta property="og:title" content="Home | LordOfTrident's website">
+	<title>Home | LordOfTrident</title>
+	<meta property="og:title" content="Home | LordOfTrident">
 
 	<meta name="description" content="My website">
 	<meta property="og:description" content="My website">
@@ -13,7 +13,7 @@
 	<meta name="keywords" content="LordOfTrident, Trident, TR-ED, Trident Editor">
 	<meta name="author" content="LordOfTrident">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#fe477f">
+	<meta name="theme-color" content="#3780e8">
 	<meta name="twitter:card" content="summary_large_image">
 
 	<meta property="og:type" content="website">
@@ -21,100 +21,169 @@
     <meta property="og:url" content="https://lordoftrident.github.io">
     <meta property="og:image" content="/res/imgs/card.png">
 
-	<link rel="stylesheet" href="/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 	<button id="back-to-top" onclick="backToTop()">
-		<i class="icon fa fa-arrow-up fa-sm"></i>
+		<i class="icon fa fa-chevron-up fa-sm"></i>
 	</button>
 
 	<header id="site-header">
-		<div id="site-top">
-			<a class="docs" href="/docs/">Docs</a>
-
-			<button class="top-button theme-changer" id="dark-theme" onclick="setTheme('dark')">
+		<div class="content">
+			<button class="theme" id="dark-theme" onclick="setTheme('dark')">
 				<i class="icon fa fa-moon-o fa-sm"></i>
 			</button>
-			<button class="top-button theme-changer" id="light-theme" onclick="setTheme('light')">
+			<button class="theme" id="light-theme" onclick="setTheme('light')">
 				<i class="icon fa fa-sun-o fa-sm"></i>
 			</button>
-			<img>
+
+			<a href="/" class="icon">
+				<img src="/res/imgs/icon.png">
+			</a>
+			<nav id="site-nav">
+				<ul>
+					<li class="active">
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/projects/">Projects</a>
+					</li>
+					<li>
+						<a href="/art/">Art</a>
+					</li>
+					<li>
+						<a href="/docs/">Docs</a>
+					</li>
+				</ul>
+			</nav>
+			<section id="page-title">
+				<h1 id="page-title-text"><span class="prompt">$</span></h1>
+				<p class="page-title-desc">To my small part of the internet ocean</p>
+
+				<hr class="gap">
+
+				<ul class="socials">
+					<li>
+						<a href="https://github.com/LordOfTrident" target="_blank">
+							<i class="icon fa fa-github fa-sm"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+							<i class="icon fa fa-youtube-play fa-sm"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://twitter.com/lordofcrwn0" target="_blank">
+							<i class="icon fa fa-twitter fa-sm"></i>
+						</a>
+					</li>
+				</ul>
+			</section>
 		</div>
-		<nav id="site-nav">
-			<ul>
-				<li class="active">
-					<a class="orange" href="/">Home</a>
-				</li>
-				<li>
-					<a class="red" href="/projects/">Projects</a>
-				</li>
-				<li>
-					<a class="blue" href="/ads/">Ads</a>
-				</li>
-			</ul>
-		</nav>
+
+		<img class="wave bottom-wave">
 	</header>
 
 	<main id="site-main">
-		<section id="welcome">
-			<header class="section-header">
-				<h1><span class="prompt">$</span> Welcome!</h1>
-			</header>
-		</section>
-
-		<section id="section-about" class="section-gradient">
-			<div class="container">
+		<section class="page-section">
+			<div class="content">
 				<header class="section-header">
-					<img src="/res/imgs/icon.png">
 					<h1>Hello there</h1>
 				</header>
-				<p>I'm <b>LordOfTrident</b>, a hobbyist male teen programmer. I enjoy low level programming and computer graphics. Currently my favorite programming language is probably <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a> and my main OS is <a href="https://ubuntu.com/" target="_blank">Ubuntu</a> 20.04 with <a href="https://i3wm.org/" target="_blank">i3wm</a>.</p>
+
+				<p>I'm <b>LordOfTrident</b>, a teen male hobbyist programmer. I enjoy low level programming and computer graphics. Currently my favorite programming language is probably <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a> and my main OS is <a href="https://ubuntu.com/" target="_blank">Ubuntu</a> 20.04 with <a href="https://i3wm.org/" target="_blank">i3wm</a>.</p>
+				<hr class="gap">
+				<p>I started programming batch files when i was younger. At around age 11 i was taught scratch and i really enjoyed it, so my dad bought me a <a href="https://www.freepascal.org/" target="_blank">Pascal</a> book. After Pascal i switched to <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">C++</a>.</p>
 			</div>
 		</section>
-		<section>
-			<div class="container">
+		<section class="page-section section-dark">
+			<img class="wave top-wave">
+
+			<div class="content">
 				<header class="section-header">
-					<h1>My tools</h1>
+					<h1>Tools</h1>
+					<p>(Languages, text editors, etc. that i use)</p>
 				</header>
 
-				<div class="tools">
-					<a id="tool-linux" title="Linux" href="https://en.wikipedia.org/wiki/Linux" target="_blank">
-						<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-plain.svg">
-					</a>
-					<a id="tool-micro" title="Micro text editor" href="https://micro-editor.github.io/" target="_blank">
-						<img src="https://micro-editor.github.io/micro_files/micro-logo-mark.svg">
-					</a>
-					<a id="tool-c" title="C programming language" href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">
-						<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-plain.svg">
-					</a>
-					<a id="tool-cxx" title="C++ programming language" href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">
-						<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-plain.svg">
-					</a>
-					<a id="tool-golang" title="Go programming language" href="https://go.dev/" target="_blank">
-						<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-plain.svg">
-					</a>
-					<a id="tool-lua" title="Lua programming language" href="https://www.lua.org/" target="_blank">
-						<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/lua/lua-plain.svg">
-					</a>
-					<a id="tool-html" title="HTML" href="https://en.wikipedia.org/wiki/HTML5" target="_blank">
-						<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg">
-					</a>
-					<a id="tool-css" title="CSS" href="https://en.wikipedia.org/wiki/CSS" target="_blank">
-						<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg">
-					</a>
-					<a id="tool-pascal" title="Pascal programming language" href="https://www.freepascal.org/" target="_blank">
-						<img src="/res/imgs/pascal.png">
-					</a>
+				<ul class="tools">
+					<li>
+						<div class="tool" id="tool-linux">
+							<img>
+							<p class="title"><a href="https://en.wikipedia.org/wiki/Linux" target="_blank">Linux</a></p>
+							<p>Operating systems</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool" id="tool-micro">
+							<img>
+							<p class="title"><a href="https://micro-editor.github.io/" target="_blank">Micro</a></p>
+							<p>Text editor</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool" id="tool-c">
+							<img>
+							<p class="title"><a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a></p>
+							<p>Programmming language</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool" id="tool-cxx">
+							<img>
+							<p class="title"><a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">C++</a></p>
+							<p>Programmming language</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool tool-light" id="tool-golang">
+							<img>
+							<p class="title"><a href="https://go.dev/" target="_blank">Go</a></p>
+							<p>Programmming language</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool" id="tool-lua">
+							<img>
+							<p class="title"><a href="https://www.lua.org/" target="_blank">Lua</a></p>
+							<p>Programmming language</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool" id="tool-html">
+							<img>
+							<p class="title"><a href="https://en.wikipedia.org/wiki/HTML5" target="_blank">HTML</a></p>
+							<p>Coding language</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool" id="tool-css">
+							<img>
+							<p class="title"><a href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS</a></p>
+							<p>Coding language</p>
+						</div>
+					</li>
+					<li>
+						<div class="tool tool-light" id="tool-pascal">
+							<img>
+							<p class="title"><a href="https://www.freepascal.org/" target="_blank">Pascal</a></p>
+							<p>Programming language</p>
+						</div>
+					</li>
 				</div>
 			</div>
 		</section>
-		<section id="section-active-projects" class="section-gradient">
-			<div class="container">
+		<section class="page-section section-light">
+			<img class="wave top-wave">
+
+			<div class="content">
 				<header class="section-header">
 					<h1>Active projects</h1>
+					<p>(Probably up to date)</p>
 				</header>
 
 				<ul>
@@ -126,60 +195,156 @@
 					</li>
 				</ul>
 			</div>
+
+			<img class="wave bottom-wave">
 		</section>
-		<section class="section-github">
-			<div class="container">
+		<section class="page-section">
+			<div class="content">
 				<header class="section-header">
-					<h1>Github stats</h1>
+					<h1>Badges</h1>
+					<p>(Classic 88x31 buttons)</p>
 				</header>
 
-				<a class="github-cards" href="https://github.com/anuraghazra/github-readme-stats" target="_blank">
-					<img class="github-card github-langs">
-					<img class="github-card github-stats">
-				</a>
-			</div>
-		</section>
-		<section class="section-badges">
-			<div class="container">
-				<div class="badges">
-					<a title="Viewable with any browser"><img src="/res/badges/anybrowser.png"></a>
-					<a title="Get Ubuntu" href="https://ubuntu.com" target="_blank"><img src="/res/badges/getubuntu.png"></a>
-					<a title="Linux Now" href="https://en.wikipedia.org/wiki/Linux" target="_blank"><img src="/res/badges/linuxnow.png"></a>
-					<a title="Penguin Computing"><img src="/res/badges/penguin.png"></a>
-					<a title="Brand New" href="https://en.wikipedia.org/wiki/Brand_New_(band)" target="_blank"><img src="/res/badges/brandnew.png"></a>
-					<a title="Neutral Milk Hotel" href="https://en.wikipedia.org/wiki/Neutral_Milk_Hotel" target="_blank"><img src="/res/badges/nmh.png"></a>
-					<a title="Graphics by Gimp" href="https://www.gimp.org" target="_blank"><img src="/res/badges/gimp.png"></a>
-					<a title="Made with Micro text editor" href="https://micro-editor.github.io" target="_blank"><img src="/res/badges/micro.png"></a>
+				<p>See the <a href="https://cyber.dabamos.de/88x31/index.html" target="_blank">collection of 88x31 buttons</a></p>
+
+				<div id="increment">
+					<iframe src="//incr.easrng.net/badge?key=lordoftrident" style="background: url(//incr.easrng.net/bg.gif)" title="increment badge" width="88" height="31" frameborder="0"></iframe>
 				</div>
+
+				<ul class="badges">
+					<li>
+						<a title="Viewable with any browser"><img src="/res/badges/anybrowser.png"></a>
+					</li>
+					<li>
+						<a title="Best viewed with eyes"><img src="/res/badges/eyes.gif"></a>
+					</li>
+					<li>
+						<a title="Get Ubuntu" href="https://ubuntu.com" target="_blank"><img src="/res/badges/getubuntu.png"></a>
+					</li>
+					<li>
+						<a title="Linux Now" href="https://en.wikipedia.org/wiki/Linux" target="_blank"><img src="/res/badges/linuxnow.png"></a>
+					</li>
+					<li>
+						<a title="Penguin Computing"><img src="/res/badges/penguin.png"></a>
+					</li>
+					<li>
+						<a title="LordOfTrident" href="https://lordoftrident.github.io" target="_blank"><img src="/res/badges/trident.png"></a>
+					</li>
+					<li>
+						<a title="Click here" href="https://www.youtube.com/watch?v=EpuQJahT0MA" target="_blank"><img src="/res/badges/click-here.gif"></a>
+					</li>
+					<li>
+						<a title="Brand New" href="https://en.wikipedia.org/wiki/Brand_New_(band)" target="_blank"><img src="/res/badges/brandnew.png"></a>
+					</li>
+					<li>
+						<a title="Neutral Milk Hotel" href="https://en.wikipedia.org/wiki/Neutral_Milk_Hotel" target="_blank"><img src="/res/badges/nmh.png"></a>
+					</li>
+					<li>
+						<a title="Worst Party Ever" href="https://worstpartyever.bandcamp.com/album/anthology" target="_blank"><img src="/res/badges/wpe.png"></a>
+					</li>
+					<li>
+						<a title="Gimp" href="https://www.gimp.org" target="_blank"><img src="/res/badges/gimp.png"></a>
+					</li>
+					<li>
+						<a title="Micro text editor" href="https://micro-editor.github.io" target="_blank"><img src="/res/badges/micro.png"></a>
+					</li>
+					<li>
+						<a title="C++" href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank"><img src="/res/badges/cpp.png"></a>
+					</li>
+					<li>
+						<a title="SDL" href="https://www.libsdl.org/" target="_blank"><img src="/res/badges/sdl.png"></a>
+					</li>
+					<li>
+						<a title="DOOM" target="_blank"><img src="/res/badges/doom.png"></a>
+					</li>
+					<li>
+						<a title="Devils" target="_blank"><img src="/res/badges/cat.gif"></a>
+					</li>
+					<li>
+						<a title="Smile" target="_blank"><img src="/res/badges/smile.png"></a>
+					</li>
+					<li>
+						<a title="Discord" href="https://discord.com/" target="_blank"><img src="/res/badges/discord.gif"></a>
+					</li>
+					<li>
+						<a title="My discord is 'lordoftrident'" target="_blank"><img src="/res/badges/lordoftrident-discord.png"></a>
+					</li>
+					<li>
+						<a title="HTML" href="https://www.w3schools.com/html/" target="_blank"><img src="/res/badges/html.png"></a>
+					</li>
+					<li>
+						<a title="CSS" href="https://en.wikipedia.org/wiki/CSS" target="_blank"><img src="/res/badges/css.gif"></a>
+					</li>
+					<li>
+						<a title="Rainbow" target="_blank"><img src="/res/badges/rainbow.png"></a>
+					</li>
+					<li>
+						<a title="Privacy" target="_blank"><img src="/res/badges/privacy.png"></a>
+					</li>
+					<li>
+						<a title="Cogs" target="_blank"><img src="/res/badges/cogs.gif"></a>
+					</li>
+					<li>
+						<a title="Lambda" target="_blank"><img src="/res/badges/lambda.png"></a>
+					</li>
+					<li>
+						<a title="Internet" target="_blank"><img src="/res/badges/internet.png"></a>
+					</li>
+				</ul>
 			</div>
 		</section>
 	</main>
 
 	<footer id="site-footer">
-		<div class="footer-content">
-			<div class="footer-socials">
-				<a href="https://github.com/LordOfTrident" target="_blank">
-					<i class="icon fa fa-github fa-sm"></i>
-				</a>
-				<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
-					<i class="icon fa fa-youtube-play fa-sm"></i>
-				</a>
-			</div>
+		<img class="wave top-wave">
 
-			<h2>Made with <span class="heart"><3</span> by LordOfTrident</h2>
-			<hr>
+		<div class="content">
+			<div class="footer-content">
+				<ul class="socials">
+					<li>
+						<a href="https://github.com/LordOfTrident" target="_blank">
+							<i class="icon fa fa-github fa-sm"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/channel/UC7G19TPPwfp1JVNYO8p3dwg" target="_blank">
+							<i class="icon fa fa-youtube-play fa-sm"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://twitter.com/lordofcrwn0" target="_blank">
+							<i class="icon fa fa-twitter fa-sm"></i>
+						</a>
+					</li>
+				</ul>
 
-			<div class="footer-links">
-				<a href="https://github.com/LordOfTrident/LordOfTrident.github.io" target="_blank">
-					Source code
-				</a>
-				<a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">
-					License (GPL v3)
-				</a>
+				<hr class="gap">
+
+				<p>Made with <span class="heart"><3</span> by LordOfTrident</p>
+
+				<hr class="gap">
+
+				<ul class="links">
+					<li>
+						<a href="https://github.com/LordOfTrident/LordOfTrident.github.io" target="_blank">
+							Source code
+						</a>
+					</li>
+					<li>
+						<a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">
+							License (GPL v3)
+						</a>
+					</li>
+					<li>
+						<a href="https://oceanservice.noaa.gov/ocean/help-our-ocean.html" target="_blank">
+							Help the ocean
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</footer>
-</body>
 
-<script src="/script.js"></script>
+	<script src="/script.js"></script>
+</body>
 </html>

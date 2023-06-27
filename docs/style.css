@@ -1,0 +1,5 @@
+@import url("/style.css");
+
+h1#page-title-text {
+	--title:"Docs";
+}

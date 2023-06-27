@@ -1,0 +1,24 @@
+@font-face {
+	font-family: "mont heavy";
+	src: url("/res/fonts/mont-heavy.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "encode sans black";
+	src: url("/res/fonts/encode-sans-black.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "encode sans semi expanded black";
+	src: url("/res/fonts/encode-sans-semi-expanded-black.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "sora";
+	src: url("/res/fonts/sora.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "sora bold";
+	src: url("/res/fonts/sora-bold.ttf") format("truetype");
+}
