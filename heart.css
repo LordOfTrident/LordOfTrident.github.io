@@ -1,0 +1,8 @@
+@import url("/fonts.css");
+
+.heart {
+	font-family: encode sans semi expanded black;
+	color:       #ff4480;
+	font-weight: bold;
+	font-size:   1.2rem;
+}

@@ -1,0 +1,32 @@
+:root {
+	--underline-thickness: 1px;
+	--underline-offset:    0.1rem;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+div.clearfix {
+	clear: both;
+}
+
+button {
+	cursor: pointer;
+}
+
+a {
+	transition: 0.1s;
+
+	text-decoration:           underline;
+	text-decoration-thickness: var(--underline-thickness);
+	text-underline-offset:     var(--underline-offset);
+}
+
+a:hover {
+	text-decoration: none;
+}

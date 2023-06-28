@@ -1,0 +1,6 @@
+@import url("../doc-site/theme.css");
+
+:root {
+	--color-accent-bg: #2d87e8; /* 257ad5, 4295ef */
+	--color-accent-fg: #ffffff;
+}
