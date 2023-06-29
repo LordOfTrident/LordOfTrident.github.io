@@ -28,7 +28,7 @@
 }
 
 html, body {
-	font-size:   1.05em; /* 17px */
+	font-size:   1em; /* 16px */
 	font-family: open sans, sans serif;
 
 	color:            var(--color-fg);
@@ -41,6 +41,8 @@ html, body, * {
 }
 
 div.doc-content button.theme {
+	z-index: 4096;
+
 	transition: 0.1s;
 
 	outline: none;
@@ -95,7 +97,6 @@ footer#site-footer {
 }
 
 main#site-main {
-	padding: 2rem;
 	display: flex;
 
 	background-color: var(--color-back);
@@ -107,13 +108,26 @@ section.doc-section:not(:first-child) {
 
 div.doc-sidebar {
 	box-sizing: border-box;
+	width:      var(--doc-sidebar-width);
 
-	width: var(--doc-sidebar-width);
+	background-color: var(--color-bg);
+}
+
+div.doc-sidebar-fixed {
+	box-sizing: border-box;
+	width:      var(--doc-sidebar-width);
+
+	position: fixed;
+
+	display: flex;
+	flex-direction: column;
 }
 
 nav.doc-nav {
 	color:            var(--color-fg);
 	background-color: transparent;
+
+	overflow-y: scroll;
 }
 
 nav.doc-nav ul {
@@ -121,7 +135,7 @@ nav.doc-nav ul {
 }
 
 ul.nav-doc-nest-1 {
-	margin: 1rem 0rem !important;
+	margin: 0.5rem 0rem !important;
 }
 
 ul.nav-doc-nest-2 a {
@@ -169,6 +183,14 @@ ul.nav-doc-nest-1 li:hover ul a {
 	border-left: 0;
 }
 
+ul.nav-doc-nest-1 li ul {
+	display: none;
+}
+
+ul.nav-doc-nest-1 li:hover ul {
+	display: block;
+}
+
 .doc-sidebar-title2 {
 	opacity: 0.7;
 }
@@ -180,15 +202,19 @@ ul.nav-doc-nest-1 li:hover ul a {
 	padding: 1.5rem;
 }
 
-div.doc-content {
+div.doc-page {
 	box-sizing: border-box;
 
+	width: calc(100% - var(--doc-sidebar-width));
+}
+
+div.doc-content {
 	background-color: var(--color-bg);
 
-	margin-left: 1rem;
-
-	width:   calc(100% - var(--doc-sidebar-width) - 1rem);
+	margin:  2rem;
 	padding: 2rem;
+
+	box-sizing: border-box;
 }
 
 div.doc-content div.container {
@@ -198,34 +224,132 @@ div.doc-content div.container {
 	max-width: 60rem;
 }
 
-@media screen and (max-width: 1030px) {
-	div.doc-sidebar, div.doc-content {
+@media screen and (max-width: 1100px) {
+	div.doc-sidebar, div.doc-page {
 		width: 100%;
 	}
 
 	div.doc-content {
-		margin-left: 0rem;
+		margin:     0;
+		margin-top: 2rem;
 	}
 
 	main#site-main {
 		flex-direction: column;
 	}
+
+	div.doc-sidebar-fixed {
+		width:    100%;
+		position: static;
+	}
 }
 
-header.doc-header {
-	margin-bottom: 1.2rem;
+@media screen and (min-width: 1100px) {
+	height: 100vh;
+}
+
+span.inline-code {
+	background-color: var(--color-back);
+	color:            var(--color-accent-bg);
+
+	font-family: monospace;
+
+	padding: 0.2rem;
+
+	border-radius: 0.3rem;
+}
+
+div.code:not(:last-child) {
+	margin-bottom: 2rem;
+}
+
+div.code span.code-line {
+	counter-increment: line;
+}
+
+div.code:before {
+	counter-reset: line;
+}
+
+div.code span.code-line:before {
+	content: counter(line);
+
+	display: inline-block;
+	padding-right: 1rem;
+	width: 2rem;
+	text-align: right;
+	color: var(--color-accent-bg);
+}
+
+div.code header.code-header {
+	padding:      0.3rem;
+	padding-left: 0.5rem;
+
+	background-color: var(--color-accent-bg);
+
+	border-radius: 0.3rem 0.3rem 0 0;
+}
+
+div.code header.code-header p {
+	color: var(--color-accent-fg);
+
+	font-weight: bold;
+}
+
+div.code header.code-header a {
+	color: var(--color-accent-fg);
+
+	font-weight: bold;
+}
+
+div.code pre.code-content {
+	font-family: monospace;
+
+	padding: 0.5rem;
+
+	background-color: var(--color-back);
+
+	border-radius: 0 0 0.3rem 0.3rem;
+}
+
+span.tok-preproc {
+	color: var(--color-tok-preproc);
+}
+
+span.tok-str {
+	color: var(--color-tok-str);
 }
 
 h1 {
 	font-size: 2rem;
 }
 
+h2 {
+	font-size: 1.6rem;
+}
+
+h3 {
+	font-size: 1.3rem;
+}
+
 section.doc-section p:not(:last-child) {
 	margin-bottom: 2rem;
 }
 
-section.doc-section h1, section.doc-section h2, section.doc-section h3 {
+section.doc-section h2, section.doc-section h3 {
 	padding-bottom: 0.5rem;
+	padding-top:    0.5rem;
+}
+
+section.doc-section h1 {
+	color:            var(--color-accent-fg);
+	background-color: var(--color-accent-bg);
+
+	width: max-content;
+
+	padding: 0.1rem 0.5rem;
+
+	margin-bottom: 1rem;
 }
 
 section.doc-section a {
@@ -237,4 +361,8 @@ section.doc-section a {
 section.doc-section a:hover {
 	color:            var(--color-accent-fg);
 	background-color: var(--color-accent-bg);
+}
+
+pre {
+	white-space: pre-wrap;
 }

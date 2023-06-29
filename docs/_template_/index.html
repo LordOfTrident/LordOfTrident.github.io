@@ -2,10 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="icon" type="image/png" href="/res/imgs/favicon.png">
 
-	<title>_template_ | LordOfTrident</title>
-	<meta property="og:title" content="_template_ | LordOfTrident">
+	<title>_template_ | Documentation</title>
+	<meta property="og:title" content="_template_ | Documentation">
 
 	<meta name="description" content="Documentation template">
 	<meta property="og:description" content="Documentation template">
@@ -42,80 +41,85 @@
 
 	<main id="site-main">
 		<div class="doc-sidebar">
-			<header class="doc-sidebar-header">
-				<h1 class="doc-sidebar-title1">Doc name</h1>
-				<p class="doc-sidebar-title2">Table of contents</p>
-			</header>
-			<nav class="doc-nav">
-				<ul class="nav-doc-nest-1">
-					<li>
-						<a href="#lorem">Lorem ipsum</a>
-					</li>
-					<li>
-						<a href="#lorem">Lorem ipsum</a>
-					</li>
-					<li>
-						<a href="#google">Google</a>
-						<ul class="nav-doc-nest-2">
-							<li>
-								<a href="#google">Google</a>
-							</li>
-							<li>
-								<a href="#google">Google</a>
-								<ul class="nav-doc-nest-3">
-									<li>
-										<a href="#google">Google</a>
-									</li>
-									<li>
-										<a href="#google">Google</a>
-									</li>
-									<li>
-										<a href="#google">Google</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="#google">Google</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="#lorem">Lorem ipsum</a>
-					</li>
-				</ul>
-			</nav>
+			<div class="doc-sidebar-fixed">
+				<header class="doc-sidebar-header">
+					<h1 class="doc-sidebar-title1">Doc name</h1>
+					<p class="doc-sidebar-title2">Table of contents</p>
+				</header>
+				<nav class="doc-nav">
+					<ul class="nav-doc-nest-1">
+						<li>
+							<a href="#lorem">Lorem ipsum</a>
+						</li>
+						<li>
+							<a href="#lorem">Lorem ipsum</a>
+						</li>
+						<li>
+							<a href="#google">Google</a>
+							<ul class="nav-doc-nest-2">
+								<li>
+									<a href="#google">Google</a>
+								</li>
+								<li>
+									<a href="#google">Google</a>
+									<ul class="nav-doc-nest-3">
+										<li>
+											<a href="#google">Google</a>
+										</li>
+										<li>
+											<a href="#google">Google</a>
+										</li>
+										<li>
+											<a href="#google">Google</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="#google">Google</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#lorem">Lorem ipsum</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
 		</div>
-		<div class="doc-content">
-			<button class="theme" id="dark-theme" onclick="setTheme('dark')">
-				<i class="icon fa fa-moon-o fa-sm"></i>
-			</button>
-			<button class="theme" id="light-theme" onclick="setTheme('light')">
-				<i class="icon fa fa-sun-o fa-sm"></i>
-			</button>
-			<div class="clearfix"></div>
 
-			<div class="container">
-				<section class="doc-section">
-					<h1 id="lorem">Lorem ipsum</h1>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-						sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</p>
-				</section>
-				<section class="doc-section">
-					<h1 id="google">Google</h1>
-					<p>
-						<a href="https://www.google.com" target="_blank">Google</a> is a search engine.
-					</p>
+		<div class="doc-page">
+			<div class="doc-content">
+				<button class="theme" id="dark-theme" onclick="setTheme('dark')">
+					<i class="icon fa fa-moon-o fa-sm"></i>
+				</button>
+				<button class="theme" id="light-theme" onclick="setTheme('light')">
+					<i class="icon fa fa-sun-o fa-sm"></i>
+				</button>
+				<div class="clearfix"></div>
 
-					<h2>Silly stuff</h2>
-					<p>
-						Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
-						Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
-						Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
-						Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
-					</p>
-				</section>
+				<div class="container">
+					<section class="doc-section">
+						<h1 id="lorem">Lorem ipsum</h1>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+							sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+					</section>
+					<section class="doc-section">
+						<h1 id="google">Google</h1>
+						<p>
+							<a href="https://www.google.com" target="_blank">Google</a> is a search engine.
+						</p>
+
+						<h2>Silly stuff</h2>
+						<p>
+							Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
+							Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
+							Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
+							Sillyness sillyness sillyness sillyness sillyness sillyness sillyness
+						</p>
+					</section>
+				</div>
 			</div>
 		</div>
 	</main>

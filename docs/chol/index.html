@@ -2,10 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="icon" type="image/png" href="/res/imgs/favicon.png">
 
-	<title>chol | LordOfTrident</title>
-	<meta property="og:title" content="chol | LordOfTrident">
+	<title>chol | Documentation</title>
+	<meta property="og:title" content="chol | Documentation">
 
 	<meta name="description" content="Documentation template">
 	<meta property="og:description" content="Documentation template">
@@ -42,51 +41,206 @@
 
 	<main id="site-main">
 		<div class="doc-sidebar">
-			<header class="doc-sidebar-header">
-				<h1 class="doc-sidebar-title1">chol</h1>
-				<p class="doc-sidebar-title2">Table of contents</p>
-			</header>
-			<nav class="doc-nav">
-				<ul class="nav-doc-nest-1">
-					<li>
-						<a href="#google">Coming</a>
-						<ul class="nav-doc-nest-2">
-							<li>
-								<a href="#google">soon</a>
-								<ul class="nav-doc-nest-3">
-									<li>
-										<a href="#google">!</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</div>
-		<div class="doc-content">
-			<button class="theme" id="dark-theme" onclick="setTheme('dark')">
-				<i class="icon fa fa-moon-o fa-sm"></i>
-			</button>
-			<button class="theme" id="light-theme" onclick="setTheme('light')">
-				<i class="icon fa fa-sun-o fa-sm"></i>
-			</button>
-			<div class="clearfix"></div>
-
-			<div class="container">
-				<section class="doc-section">
-					<h1 id="lorem">Unfinished</h1>
-					<p>
-						Documentation coming soon
-					</p>
-				</section>
+			<div class="doc-sidebar-fixed">
+				<header class="doc-sidebar-header">
+					<h1 class="doc-sidebar-title1">chol</h1>
+					<p class="doc-sidebar-title2">Table of contents</p>
+				</header>
+				<nav class="doc-nav">
+					<ul class="nav-doc-nest-1">
+						<li>
+							<a href="#chol">chol</a>
+							<ul class="nav-doc-nest-2">
+								<li>
+									<a href="#chol-introduction">Introduction</a>
+								</li>
+								<li>
+									<a href="#chol-usage">Usage</a>
+								</li>
+								<li>
+									<a href="#chol-global-config-macros">Global config macros</a>
+									<ul class="nav-doc-nest-3">
+										<li>
+											<a href="#chol-CHOL_DEF">CHOL_DEF</a>
+										</li>
+										<li>
+											<a href="#chol-CHOL_ASSERT">CHOL_ASSERT</a>
+										</li>
+										<li>
+											<a href="#chol-CHOL_ALLOC">CHOL_ALLOC</a>
+										</li>
+										<li>
+											<a href="#chol-CHOL_REALLOC">CHOL_REALLOC</a>
+										</li>
+										<li>
+											<a href="#chol-CHOL_FREE">CHOL_FREE</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#args-h">args.h</a>
+							<ul class="nav-doc-nest-2">
+								<li>
+									<a href="#args-h-introduction">Introduction</a>
+								</li>
+								<li>
+									<a href="#args-h-functions">Functions</a>
+								</li>
+								<li>
+									<a href="#args-h-types">Types</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
 			</div>
 		</div>
-	</main>
 
-	<footer id="site-footer">
-		<p>Made with <span class="heart"><3</span> by LordOfTrident</p>
-	</footer>
+		<div class="doc-page">
+			<div class="doc-content">
+				<button class="theme" id="dark-theme" onclick="setTheme('dark')">
+					<i class="icon fa fa-moon-o fa-sm"></i>
+				</button>
+				<button class="theme" id="light-theme" onclick="setTheme('light')">
+					<i class="icon fa fa-sun-o fa-sm"></i>
+				</button>
+				<div class="clearfix"></div>
+
+				<div class="container">
+					<section class="doc-section">
+						<h1 id="chol">chol</h1>
+						<p>
+							<b>!THIS DOCUMENTATION IS A WORK IN PROGRESS!</b>
+						</p>
+
+						<h2 id="chol-introduction">Introduction</h2>
+						<p>
+							<b>chol</b> is a collection of <a href="https://en.wikipedia.org/wiki/Header-only" target="_blank">header-only</a>
+							<a href="https://github.com/nothings/stb" target="_blank">STB-style</a> <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a>
+							libraries which include useful things like command line argument parsing, filesystem functions etc.
+						</p>
+
+						<h2 id="chol-usage">Usage</h2>
+						<p>
+							Since chol is an STB-style library, all you have to do is define the <span class="inline-code">CHOL_IMPLEMENTATION</span>
+							macro and then include the header file(s) that you want to use.
+						</p>
+
+						<p>
+							You can alternatively include the header files in a .h file and then include the implementations in a .c file. Example:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p>example.h</p>
+							</header>
+							<pre class="code-content"><span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">&lt;chol/args.h></span></span>
+<span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">&lt;chol/log.h></span></span>
+<span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">&lt;chol/fs.h></span></span></pre>
+						</div>
+
+						<div class="code">
+							<header class="code-header">
+								<p>example.c</p>
+							</header>
+							<pre class="code-content"><span class="code-line"><span class="tok-preproc">#define</span> CHOL_IMPLEMENTATION</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">"example.h"</span></span></pre>
+						</div>
+
+						<h2 id="chol-global-config-macros">Global config macros</h2>
+						<p>
+							chol has global config macros to allow for more flexibility. Some headers also have
+							their own config macros.
+						</p>
+
+						<h3 id="chol-CHOL_DEF"><span class="inline-code">CHOL_DEF</span></h3>
+						<p>
+							This macro is included in front of chol function definitions. On default,
+							its defined like so:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/def.h" target="_blank">internal/def.h</a></p>
+							</header>
+							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_DEF</pre>
+						</div>
+
+						<p>
+							You can define it before including the headers and implementations to change
+							how the functions will be defined.
+						</p>
+
+						<h3 id="chol-CHOL_ASSERT"><span class="inline-code">CHOL_ASSERT</span></h3>
+						<p>
+							This macro is used for assert statements in the chol implementations. On default, it includes
+													<span class="inline-code">assert.h</span> and is defined like so:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/assert.h" target="_blank">internal/assert.h</a></p>
+							</header>
+							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_ASSERT(EXPR) assert(EXPR)</pre>
+						</div>
+
+						<h3 id="chol-CHOL_ALLOC"><span class="inline-code">CHOL_ALLOC</span></h3>
+						<p>
+							This macro is used to allocate memory in the chol implementations. On default, it includes
+							<span class="inline-code">stdlib.h</span> and is defined like so:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a></p>
+							</header>
+							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_ALLOC(SIZE) malloc(SIZE)</pre>
+						</div>
+
+						<h3 id="chol-CHOL_REALLOC"><span class="inline-code">CHOL_REALLOC</span></h3>
+						<p>
+							This macro is used to reallocate memory. On default, it includes
+							<span class="inline-code">stdlib.h</span> and is defined like so:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a></p>
+							</header>
+							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_REALLOC(PTR, SIZE) realloc(SIZE)</pre>
+						</div>
+
+						<h3 id="chol-CHOL_FREE"><span class="inline-code">CHOL_FREE</span></h3>
+						<p>
+							This macro is used to free memory. On default, it includes
+							<span class="inline-code">stdlib.h</span> and is defined like so:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a></p>
+							</header>
+							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_FREE(PTR) free(PTR)</pre>
+						</div>
+					</section>
+					<section class="doc-section">
+						<h1 id="args-h">args.h</h1>
+						<h2 id="args-h-introduction">Introduction</h2>
+						<p>
+							<b>args.h</b> is a library for parsing the command line arguments and flags.
+						</p>
+					</section>
+				</div>
+			</div>
+
+			<footer id="site-footer">
+				<p>Made with <span class="heart"><3</span> by LordOfTrident</p>
+			</footer>
+		</div>
+	</main>
 
 	<script src="../doc-site/script.js"></script>
 </body>

@@ -30,3 +30,9 @@ a {
 a:hover {
 	text-decoration: none;
 }
+
+@media screen and (max-width: 760px) {
+	html, body {
+		font-size: 0.9em !important; /* 15px */
+	}
+}

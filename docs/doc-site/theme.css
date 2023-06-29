@@ -1,10 +1,11 @@
+:root {
+	--color-tok-preproc: #d17621;
+	--color-tok-str:     #77b04c;
+}
+
 :root.light, :root {
 	--color-high-contrast-bg: #ffffff;
 	--color-high-contrast-fg: #000000;
-
-	--color-scrollbar-track:       #eeeeee;
-	--color-scrollbar-thumb:       #bbbbbb;
-	--color-scrollbar-thumb-hover: #aaaaaa;
 
 	--color-bg: #ffffff;
 	--color-fg: #000000;
@@ -14,15 +15,15 @@
 
 	--color-back:     #f3f3f3;
 	--color-back-alt: #d0d0d0;
+
+	--color-scrollbar-track:       var(--color-bg);
+	--color-scrollbar-thumb:       #bbbbbb;
+	--color-scrollbar-thumb-hover: #aaaaaa;
 }
 
 :root.dark {
 	--color-high-contrast-bg: #000000;
 	--color-high-contrast-fg: #ffffff;
-
-	--color-scrollbar-track:       #000000;
-	--color-scrollbar-thumb:       #999999;
-	--color-scrollbar-thumb-hover: #aaaaaa;
 
 	--color-bg: #222429; /* 242528, 191a1d */
 	--color-fg: #ffffff;
@@ -32,4 +33,8 @@
 
 	--color-back:     #1d1e21; /* 1d1d20, 131315 */
 	--color-back-alt: #2d2f33; /* 242528 */
+
+	--color-scrollbar-track:       var(--color-bg);
+	--color-scrollbar-thumb:       #999999;
+	--color-scrollbar-thumb-hover: #aaaaaa;
 }

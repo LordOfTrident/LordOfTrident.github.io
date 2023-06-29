@@ -89,12 +89,6 @@ i.icon-prefix {
 	margin-right: 0.5em;
 }
 
-@media screen and (max-width: 760px) {
-	html, body {
-		font-size: 0.9em; /* 15px */
-	}
-}
-
 @media screen and (max-width: 500px) {
 	:root {
 		--font-size-page-title: 3rem;
