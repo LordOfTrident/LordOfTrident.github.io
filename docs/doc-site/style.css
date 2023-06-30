@@ -111,6 +111,8 @@ div.doc-sidebar {
 	width:      var(--doc-sidebar-width);
 
 	background-color: var(--color-bg);
+
+	box-shadow: 0 0.1rem 1rem #0000000a;
 }
 
 div.doc-sidebar-fixed {
@@ -161,11 +163,21 @@ nav.doc-nav a {
 	padding-left: 1.5rem;
 }
 
+nav.doc-nav a span.inline-code {
+	color:   var(--color-fg);
+	padding: 0.1rem;
+}
+
 nav.doc-nav a:hover {
 	font-weight: bold;
 
 	color: var(--color-accent-bg);
 }
+
+nav.doc-nav a:hover span.inline-code {
+	color: var(--color-accent-bg);
+}
+
 
 nav.doc-nav a {
 	border-top: dashed 1px var(--color-back-alt);
@@ -214,6 +226,7 @@ div.doc-content {
 	margin:  2rem;
 	padding: 2rem;
 
+	box-shadow: 0 0.1rem 1rem #0000000a;
 	box-sizing: border-box;
 }
 
@@ -249,6 +262,8 @@ div.doc-content div.container {
 }
 
 span.inline-code {
+	font-weight: bold;
+
 	background-color: var(--color-back);
 	color:            var(--color-accent-bg);
 
@@ -312,12 +327,32 @@ div.code pre.code-content {
 	border-radius: 0 0 0.3rem 0.3rem;
 }
 
+span.tok {
+	font-weight: bold;
+}
+
 span.tok-preproc {
 	color: var(--color-tok-preproc);
 }
 
 span.tok-str {
 	color: var(--color-tok-str);
+}
+
+span.tok-num {
+	color: var(--color-tok-num);
+}
+
+span.tok-keyword {
+	color: var(--color-tok-keyword);
+}
+
+span.tok-escape {
+	color: var(--color-tok-escape);
+}
+
+span.tok-comment {
+	color: var(--color-tok-comment);
 }
 
 h1 {
@@ -329,14 +364,22 @@ h2 {
 }
 
 h3 {
-	font-size: 1.3rem;
+	font-size: 1.4rem;
 }
 
-section.doc-section p:not(:last-child) {
+h4 {
+	font-size: 1.2rem;
+}
+
+section.doc-section ul {
+	margin-left: 1.5rem;
+}
+
+section.doc-section p:not(:last-child), section.doc-section ul:not(:last-child) {
 	margin-bottom: 2rem;
 }
 
-section.doc-section h2, section.doc-section h3 {
+section.doc-section h2, section.doc-section h3, section.doc-section h4 {
 	padding-bottom: 0.5rem;
 	padding-top:    0.5rem;
 }

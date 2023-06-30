@@ -6,7 +6,7 @@
 	<title>chol | Documentation</title>
 	<meta property="og:title" content="chol | Documentation">
 
-	<meta name="description" content="Documentation template">
+	<meta name="description" content="chol documentation ">
 	<meta property="og:description" content="Documentation template">
 
 	<meta name="keywords" content="LordOfTrident, Trident, TR-ED, Trident Editor">
@@ -61,19 +61,42 @@
 									<a href="#chol-global-config-macros">Global config macros</a>
 									<ul class="nav-doc-nest-3">
 										<li>
-											<a href="#chol-CHOL_DEF">CHOL_DEF</a>
+											<a href="#chol-CHOL_DEF"><span class="inline-code">CHOL_DEF</span></a>
 										</li>
 										<li>
-											<a href="#chol-CHOL_ASSERT">CHOL_ASSERT</a>
+											<a href="#chol-CHOL_ASSERT"><span class="inline-code">CHOL_ASSERT</span></a>
 										</li>
 										<li>
-											<a href="#chol-CHOL_ALLOC">CHOL_ALLOC</a>
+											<a href="#chol-CHOL_ALLOC"><span class="inline-code">CHOL_ALLOC</span></a>
 										</li>
 										<li>
-											<a href="#chol-CHOL_REALLOC">CHOL_REALLOC</a>
+											<a href="#chol-CHOL_REALLOC"><span class="inline-code">CHOL_REALLOC</span></a>
 										</li>
 										<li>
-											<a href="#chol-CHOL_FREE">CHOL_FREE</a>
+											<a href="#chol-CHOL_FREE"><span class="inline-code">CHOL_FREE</span></a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="#chol-rules">Code rules</a>
+									<ul class="nav-doc-nest-3">
+										<li>
+											<a href="#chol-rules-structure">Structure</a>
+										</li>
+										<li>
+											<a href="#chol-rules-naming">Naming</a>
+										</li>
+										<li>
+											<a href="#chol-rules-funcs">Functions</a>
+										</li>
+										<li>
+											<a href="#chol-rules-comments">Comments</a>
+										</li>
+										<li>
+											<a href="#chol-rules-preproc">Pre-processor</a>
+										</li>
+										<li>
+											<a href="#chol-rules-formatting">Formatting</a>
 										</li>
 									</ul>
 								</li>
@@ -136,95 +159,289 @@
 							<header class="code-header">
 								<p>example.h</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">&lt;chol/args.h></span></span>
-<span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">&lt;chol/log.h></span></span>
-<span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">&lt;chol/fs.h></span></span></pre>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;chol/args.h></span></span>
+<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;chol/log.h></span></span>
+<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;chol/fs.h></span></span></pre>
 						</div>
 
 						<div class="code">
 							<header class="code-header">
 								<p>example.c</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok-preproc">#define</span> CHOL_IMPLEMENTATION</span>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#define</span> CHOL_IMPLEMENTATION</span>
 <span class="code-line"></span>
-<span class="code-line"><span class="tok-preproc">#include</span> <span class="tok-str">"example.h"</span></span></pre>
+<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">"example.h"</span></span></pre>
 						</div>
 
 						<h2 id="chol-global-config-macros">Global config macros</h2>
 						<p>
 							chol has global config macros to allow for more flexibility. Some headers also have
-							their own config macros.
-						</p>
-
-						<h3 id="chol-CHOL_DEF"><span class="inline-code">CHOL_DEF</span></h3>
-						<p>
-							This macro is included in front of chol function definitions. On default,
-							its defined like so:
+							their own config macros. These macros can be defined before including chol libraries to configure chol. For example, you can define
+							the <span class="inline-code">CHOL_ASSERT</span> like so:
 						</p>
 
 						<div class="code">
 							<header class="code-header">
-								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/def.h" target="_blank">internal/def.h</a></p>
+								<p>Example</p>
 							</header>
-							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_DEF</pre>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;stdlib.h></span></span>
+<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;stdio.h></span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok tok-preproc">#define</span> CHOL_ASSERT(EXPR) \</span>
+<span class="code-line">    <span class="tok tok-keyword">if</span> (!(EXPR)) { \</span>
+<span class="code-line">        fprintf(stderr, <span class="tok tok-str">"Assertion failed: <span class="tok tok-escape">%s\n</span>"</span>, #EXPR); \</span>
+<span class="code-line">        exit(<span class="tok tok-num">1</span>); \</span>
+<span class="code-line">    }</span></pre>
 						</div>
 
 						<p>
-							You can define it before including the headers and implementations to change
-							how the functions will be defined.
+							And now the entire chol library will use this assert instead of the default standard library one.
 						</p>
 
-						<h3 id="chol-CHOL_ASSERT"><span class="inline-code">CHOL_ASSERT</span></h3>
+						<h3 id="chol-CHOL_DEF">Macro <span class="inline-code">CHOL_DEF</span></h3>
 						<p>
-							This macro is used for assert statements in the chol implementations. On default, it includes
-													<span class="inline-code">assert.h</span> and is defined like so:
-						</p>
-
-						<div class="code">
-							<header class="code-header">
-								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/assert.h" target="_blank">internal/assert.h</a></p>
-							</header>
-							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_ASSERT(EXPR) assert(EXPR)</pre>
-						</div>
-
-						<h3 id="chol-CHOL_ALLOC"><span class="inline-code">CHOL_ALLOC</span></h3>
-						<p>
-							This macro is used to allocate memory in the chol implementations. On default, it includes
-							<span class="inline-code">stdlib.h</span> and is defined like so:
+							Included in front of chol function definitions.
 						</p>
 
 						<div class="code">
 							<header class="code-header">
-								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a></p>
+								<p>Default definition (in <a href="https://github.com/LordOfTrident/chol/tree/main/internal/def.h" target="_blank">internal/def.h</a>)</p>
 							</header>
-							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_ALLOC(SIZE) malloc(SIZE)</pre>
+							<pre class="code-content"><span class="tok tok-preproc">#define</span> CHOL_DEF</pre>
 						</div>
 
-						<h3 id="chol-CHOL_REALLOC"><span class="inline-code">CHOL_REALLOC</span></h3>
+						<h3 id="chol-CHOL_ASSERT">Macro <span class="inline-code">CHOL_ASSERT</span></h3>
 						<p>
-							This macro is used to reallocate memory. On default, it includes
-							<span class="inline-code">stdlib.h</span> and is defined like so:
+							Used for assert statements in the chol implementations. On default, it includes
+							<span class="inline-code">assert.h</span>.
 						</p>
 
 						<div class="code">
 							<header class="code-header">
-								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a></p>
+								<p>Default definition (in <a href="https://github.com/LordOfTrident/chol/tree/main/internal/assert.h" target="_blank">internal/assert.h</a>)</p>
 							</header>
-							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_REALLOC(PTR, SIZE) realloc(SIZE)</pre>
+							<pre class="code-content"><span class="tok tok-preproc">#define</span> CHOL_ASSERT(EXPR) assert(EXPR)</pre>
 						</div>
 
-						<h3 id="chol-CHOL_FREE"><span class="inline-code">CHOL_FREE</span></h3>
+						<h3 id="chol-CHOL_ALLOC">Macro <span class="inline-code">CHOL_ALLOC</span></h3>
 						<p>
-							This macro is used to free memory. On default, it includes
-							<span class="inline-code">stdlib.h</span> and is defined like so:
+							Used to allocate memory in the chol implementations. On default, it includes
+							<span class="inline-code">stdlib.h</span>.
 						</p>
 
 						<div class="code">
 							<header class="code-header">
-								<p><a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a></p>
+								<p>Default definition (in <a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a>)</p>
 							</header>
-							<pre class="code-content"><span class="tok-preproc">#define</span> CHOL_FREE(PTR) free(PTR)</pre>
+							<pre class="code-content"><span class="tok tok-preproc">#define</span> CHOL_ALLOC(SIZE) malloc(SIZE)</pre>
 						</div>
+
+						<h3 id="chol-CHOL_REALLOC">Macro <span class="inline-code">CHOL_REALLOC</span></h3>
+						<p>
+							Used to reallocate memory. On default, it includes
+							<span class="inline-code">stdlib.h</span>.
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p>Default definition (in <a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a>)</p>
+							</header>
+							<pre class="code-content"><span class="tok tok-preproc">#define</span> CHOL_REALLOC(PTR, SIZE) realloc(SIZE)</pre>
+						</div>
+
+						<h3 id="chol-CHOL_FREE">Macro <span class="inline-code">CHOL_FREE</span></h3>
+						<p>
+							Used to free memory. On default, it includes
+							<span class="inline-code">stdlib.h</span>.
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p>Default definition (in <a href="https://github.com/LordOfTrident/chol/tree/main/internal/alloc.h" target="_blank">internal/alloc.h</a>)</p>
+							</header>
+							<pre class="code-content"><span class="tok tok-preproc">#define</span> CHOL_FREE(PTR) free(PTR)</pre>
+						</div>
+
+						<h2 id="chol-rules">Code rules</h2>
+						<ul>
+							<li><p>
+								Always make sure the code does not give warnings and is valid in C++.
+							</p></li>
+							<li><p>
+								Never use integers for booleans, instead include <span class="inline-code">stdbool.h</span>. See the <a href="#chol-rules-structure">structure example</a> for how to include <span class="inline-code">stdbool.h</span>.
+							</p></li>
+						</ul>
+
+						<h3 id="chol-rules-structure">Structure</h3>
+						<p>
+							chol library headers have 2 sections; header section and implementation section. The header
+							section has declarations of types, functions and macros that are supposed to be used by the
+							users of the library. The implementation section has the implementation (definition) of the
+							functions declared in the header section, and all the other stuff thats not supposed to be used
+							by the library users.
+						</p>
+
+						<p>
+							The library also requires some pre-processor guards and stuff. See the example:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p>Example</p>
+							</header>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#ifndef</span> CHOL_LIBNAME_H_HEADER_GUARD</span>
+<span class="code-line"><span class="tok tok-preproc">#define</span> CHOL_LIBNAME_H_HEADER_GUARD</span>
+<span class="code-line"><span class="tok tok-preproc">#ifndef</span> __cplusplus</span>
+<span class="code-line"><span class="tok tok-keyword">extern</span> <span class="tok tok-str">"C"</span> {</span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok tok-comment">/* Only include this if the library uses bools */</span></span>
+<span class="code-line"><span class="tok tok-preproc">#ifdef</span> __cplusplus</span>
+<span class="code-line"><span class="tok tok-preproc">#    include</span> <span class="tok tok-str">&lt;stdbool.h></span> <span class="tok tok-comment">/* bool, true, false */</span></span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok tok-comment">/* Header section */</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok tok-preproc">#ifndef</span> __cplusplus</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok tok-preproc">#ifdef</span> CHOL_IMPLEMENTATION</span>
+<span class="code-line"><span class="tok tok-preproc">#ifndef</span> CHOL_LIBNAME_H_IMPLEMENTATION_GUARD</span>
+<span class="code-line"><span class="tok tok-preproc">#define</span> CHOL_LIBNAME_H_IMPLEMENTATION_GUARD</span>
+<span class="code-line"><span class="tok tok-preproc">#ifndef</span> __cplusplus</span>
+<span class="code-line"><span class="tok tok-keyword">extern</span> <span class="tok tok-str">"C"</span> {</span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok tok-comment">/* Implementation section */</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="tok tok-preproc">#ifndef</span> __cplusplus</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span></pre>
+						</div>
+
+						<p>
+							Replace <span class="inline-code">LIBNAME</span> in the macros with the name of the library
+							in upper case. Notice that almost none of the preprocessor is indented, that is because this preprocessor
+							is everywhere anyways, so it would just bring the indentation up everywhere and that would be annoying.
+						</p>
+
+						<h3 id="chol-rules-naming">Naming</h3>
+						<ul>
+							<li><p>
+								chol uses <a href="https://en.wikipedia.org/wiki/Snake_case" target="_blank">snake_case</a> for all variable, function, type, macro and file names.
+							</p></li>
+							<li><p>
+								Types have a <span class="inline-code">_t</span> suffix.
+							</p></li>
+							<li><p>
+								Macros are <b>always</b> upper case.
+							</p></li>
+							<li><p>
+								Variables, functions and types are prefixed with <span class="inline-code">chol_</span> while macros are prefixed with <span class="inline-code">CHOL_</span>.
+							</p></li>
+							<li><p>
+								Implementation macros, functions etc. that are not supposed to be used by the library users have one more underscore added to the prefix, e.g. <span class="inline-code">chol__my_func</span>.
+							</p></li>
+						</ul>
+
+						<h3 id="chol-rules-funcs">Functions</h3>
+						<p>
+							All functions must be defined with <span class="inline-code">CHOL_DEF</span> at the start, unless they are
+							implementation-only functions that are not supposed to be used by the library users. In that case, the function must
+							be defined as static. These functions are also only defined in the implementation section of the library header file.
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p>Example in implementation section</p>
+							</header>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-keyword">static void</span> chol__my_implementation_func(<span class="tok tok-keyword">void</span>) {</span>
+<span class="code-line">    printf(<span class="tok tok-str">"Hello, world!<span class="tok tok-escape">\n</span>"</span>);</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line">CHOL_DEF <span class="tok tok-keyword">void</span> chol_my_func(<span class="tok tok-keyword">void</span>) {</span>
+<span class="code-line">    chol__my_implementation_func();</span>
+<span class="code-line">}</span></pre>
+						</div>
+
+						<p>
+							If there is a structure and a function that returns a new instance of it,
+							the function must be prefixed with the name of the structure type, excluding
+							the <span class="inline-code">_t</span> suffix, like so:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p>Example in header section</p>
+							</header>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-keyword">typedef struct</span> {</span>
+<span class="code-line">    <span class="tok tok-keyword">int</span> x, y;</span>
+<span class="code-line">} vec2_t;</span>
+<span class="code-line"></span>
+<span class="code-line">CHOL_DEF vec2_t chol_vec2_new(<span class="tok tok-keyword">int</span> x, <span class="tok tok-keyword">int</span> y);</span></pre>
+						</div>
+
+						<p>
+							The same applies if there is a function that in an object oriented language would be a method of the class
+							(so takes a pointer to the structure and works with it, for example with the <span class="inline-code">vec2_t</span> structure it could be
+							<span class="inline-code">float chol_vec2_mag(vec2_t *vec2)</span> for the magnitude of the vector).
+						</p>
+
+						<h3 id="chol-rules-comments">Comments</h3>
+						<p>
+							The implementation code should be explained in comments, but only in parts that are not obvious. Always use C-style
+							comments (<span class="inline-code">/* */</span>), not C++ ones (<span class="inline-code">//</span>)
+						</p>
+
+						<h3 id="chol-rules-preproc">Pre-processor</h3>
+						<p>
+							Pre-processor indentation should go after the hash:
+						</p>
+
+						<div class="code">
+							<header class="code-header">
+								<p>Example</p>
+							</header>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#ifdef</span> __cplusplus</span>
+<span class="code-line"><span class="tok tok-preproc">#    define</span> CPP</span>
+<span class="code-line"><span class="tok tok-preproc">#endif</span></span></pre>
+						</div>
+
+						<h3 id="chol-rules-formatting">Formatting</h3>
+						<ul>
+							<li><p>
+								Always use tab indentation with the width of 4 spaces.
+							</p></li>
+							<li><p>
+								Do not put <span class="inline-code">{</span> on a new line.
+							</p></li>
+							<li><p>
+								Lines are limited to 100 characters max (indentation counts as 4 characters).
+							</p></li>
+							<li><p>
+								If a line exceeds this limit and its caused by a long function/type name, consider making the name shorter, but not too short.
+								If that is not possible, wrap the line.</a>
+
+							</p></li>
+						</ul>
+
+						<div class="code">
+							<header class="code-header">
+								<p>Line wrapping example</p>
+							</header>
+							<pre class="code-content"><span class="code-line"><span class="tok tok-comment">/* Pretend that these wrapped lines exceed the 100 chars limit */</span></span>
+<span class="code-line">CHOL_DEF <span class="tok tok-keyword">int</span> chol_func(<span class="tok tok-keyword">int</span> a, <span class="tok tok-keyword">long long</span> b, </span>
+<span class="code-line">                       <span class="tok tok-keyword">long long</span> d) {</span>
+<span class="code-line">    <span class="tok tok-keyword">long long</span> ret = (<span class="tok tok-keyword">long long</span>)a *</span>
+<span class="code-line">                    ((<span class="tok tok-keyword">long long</span>)b + d);</span>
+<span class="code-line">    <span class="tok tok-keyword">return</span> ret;</span>
+<span class="code-line">}</span>
+</pre>
+						</div>
+
 					</section>
 					<section class="doc-section">
 						<h1 id="args-h">args.h</h1>
