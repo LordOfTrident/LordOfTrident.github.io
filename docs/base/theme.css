@@ -5,11 +5,11 @@
 	--color-bg: #ffffff;
 	--color-fg: #000000;
 
-	--color-footer-bg: #3a3e46; /* 323337 */
-	--color-footer-fg: #ffffff;
-
 	--color-back:     #f3f3f3;
 	--color-back-alt: #d0d0d0;
+
+	--color-footer-bg: #3a3e46; /* 323337 */
+	--color-footer-fg: #ffffff;
 
 	--color-scrollbar-track:       var(--color-bg);
 	--color-scrollbar-thumb:       #bbbbbb;
@@ -23,11 +23,11 @@
 	--color-bg: #222429; /* 242528, 191a1d */
 	--color-fg: #ffffff;
 
-	--color-footer-bg: #0c0c0c;
-	--color-footer-fg: #ffffff;
-
 	--color-back:     #1d1e21; /* 1d1d20, 131315 */
 	--color-back-alt: #2d2f33; /* 242528 */
+
+	--color-footer-bg: #0c0c0c;
+	--color-footer-fg: #ffffff;
 
 	--color-scrollbar-track:       var(--color-bg);
 	--color-scrollbar-thumb:       #999999;

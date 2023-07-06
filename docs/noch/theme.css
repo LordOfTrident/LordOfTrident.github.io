@@ -1,7 +1,6 @@
 @import url("/docs/base/theme.css");
 
 :root {
-	--color-accent-bg: #9883d0; /* 257ad5, 4295ef */
 	--color-accent-fg: #ffffff;
 
 	--color-tok-preproc: #d17621;
@@ -10,4 +9,16 @@
 	--color-tok-keyword: #fc4798; /* f54091 */
 	--color-tok-escape:  #be68fc;
 	--color-tok-comment: #828282;
+}
+
+:root.light {
+	--color-accent-bg: #9883d0; /* 257ad5, 4295ef */
+}
+
+:root.dark {
+	--color-accent-bg: #d57366;
+
+	--color-bg:       #0a1e2f;
+	--color-back:     #001a28;
+	--color-back-alt: #1c2c42;
 }
