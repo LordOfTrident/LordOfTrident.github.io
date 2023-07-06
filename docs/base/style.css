@@ -123,6 +123,8 @@ div.doc-sidebar-fixed {
 
 	display: flex;
 	flex-direction: column;
+
+	height: 100vh;
 }
 
 nav.doc-nav {
@@ -203,11 +205,29 @@ ul.nav-doc-nest-1 li:hover ul {
 	display: block;
 }
 
-.doc-sidebar-title2 {
+a.doc-sidebar-back {
 	opacity: 0.7;
+
+	text-decoration: none;
+
+	color: var(--color-accent-fg);
 }
 
-.doc-sidebar-header {
+a.doc-sidebar-back i.icon {
+	margin-right: 0.5rem;
+}
+
+h1.doc-sidebar-title {
+	margin-top: 0.5rem;
+}
+
+p.doc-sidebar-desc {
+	opacity: 0.7;
+
+	margin-top: 0.5rem;
+}
+
+header.doc-sidebar-header {
 	color:            var(--color-accent-fg);
 	background-color: var(--color-accent-bg);
 
@@ -254,6 +274,8 @@ div.doc-content div.container {
 	div.doc-sidebar-fixed {
 		width:    100%;
 		position: static;
+
+		height: auto;
 	}
 }
 
@@ -271,7 +293,11 @@ span.inline-code {
 
 	padding: 0.2rem;
 
-	border-radius: 0.3rem;
+	border-radius: 0.2rem;
+}
+
+h1 span.inline-code, h2 span.inline-code, h3 span.inline-code, h4 span.inline-code {
+	background-color: transparent !important;
 }
 
 div.code:not(:last-child) {
@@ -325,6 +351,10 @@ div.code pre.code-content {
 	background-color: var(--color-back);
 
 	border-radius: 0 0 0.3rem 0.3rem;
+}
+
+div.code.no-header pre.code-content {
+	border-radius: 0.3rem !important;
 }
 
 span.tok {
@@ -408,4 +438,41 @@ section.doc-section a:hover {
 
 pre {
 	white-space: pre-wrap;
+}
+
+section.doc-section table {
+	border-collapse: collapse;
+
+	width: 100%;
+}
+
+section.doc-section table:not(:last-child) {
+	margin-bottom: 2rem;
+}
+
+section.doc-section table tr:nth-child(odd) {
+	background-color: var(--color-back);
+}
+
+section.doc-section table tr:first-child {
+	font-weight: bold;
+
+	color:            var(--color-accent-fg);
+	background-color: var(--color-accent-bg);
+}
+
+section.doc-section table td {
+	border: solid 1px var(--color-back-alt);
+
+	padding: 0.4rem 0.5rem;
+}
+
+section.doc-section table tr:first-child td {
+	border: solid 1px var(--color-accent-bg);
+}
+
+@media screen and (max-width: 350px) {
+	html, body {
+		font-size: 3.5vw !important;
+	}
 }

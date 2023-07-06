@@ -1,12 +1,3 @@
-:root {
-	--color-tok-preproc: #d17621;
-	--color-tok-str:     #77b04c;
-	--color-tok-num:     #2e9af0;
-	--color-tok-keyword: #fc4798; /* f54091 */
-	--color-tok-escape:  #be68fc;
-	--color-tok-comment: #828282;
-}
-
 :root.light, :root {
 	--color-high-contrast-bg: #ffffff;
 	--color-high-contrast-fg: #000000;

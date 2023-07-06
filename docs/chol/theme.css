@@ -1,6 +1,13 @@
-@import url("../doc-site/theme.css");
+@import url("/docs/base/theme.css");
 
 :root {
 	--color-accent-bg: #9883d0; /* 257ad5, 4295ef */
 	--color-accent-fg: #ffffff;
+
+	--color-tok-preproc: #d17621;
+	--color-tok-str:     #77b04c;
+	--color-tok-num:     #2e9af0;
+	--color-tok-keyword: #fc4798; /* f54091 */
+	--color-tok-escape:  #be68fc;
+	--color-tok-comment: #828282;
 }
