@@ -23,8 +23,8 @@ function findDirective(lexeme) {
 }
 
 function findKeyword(lexeme) {
-    if(!cKeywords.includes(lexeme)) return;
-    
+    if(!cKeywords.includes(lexeme.trimStart())) return;
+
     return lexeme;
 }
 
