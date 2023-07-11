@@ -69,7 +69,7 @@ function createToken(parentID, lexeme) {
         break;
     default:
         if(!findKeyword(lexeme)) {
-            if(isDigit(lexeme[0])) {
+            if(isDigit(lexeme[0]) || ((lexeme[0] == ".") && (isDigit(lexeme[1])))) {
                 createNumber(parentID, lexeme);
                 break;
             }
