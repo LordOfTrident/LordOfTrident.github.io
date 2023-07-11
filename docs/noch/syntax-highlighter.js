@@ -14,3 +14,43 @@ const cKeywords = [
     "struct", "switch",	"typedef", "union",
     "unsigned",	"void",	"volatile", "while"
 ];
+
+function findDirective(lexeme) {
+    let i = 1;
+    for(; lexeme[i] == ' '; i++) {}
+
+    return lexeme.slice(i);
+}
+
+function findKeyword(lexeme) {
+    return (!cKeywords.includes(lexeme))? undefined: lexeme;
+}
+
+function createDirective(parentID, lexeme) {
+    if(lexeme === undefined) return;
+    
+    let directive = document.createElement("span");
+    directive.classList.add("tok", "tok-preproc");
+    directive.innerText = "#" + lexeme;
+    document.getElementById(parentID).appendChild(directive);
+}
+
+function createKeyword(parentID, lexeme) {
+    if(lexeme === undefined) return;
+
+    let keyword = document.createElement("span");
+    keyword.classList.add("tok", "tok-keyword");
+    keyword.innerText = lexeme;
+    document.getElementById(parentID).appendChild(keyword);
+}
+
+function createToken(parentID, lexeme) {
+    switch(lexeme[0]) {
+    case "#":
+        createDirective(parentID, findDirective(lexeme));
+        break;
+    default:
+        createKeyword(parentID, findKeyword(lexeme));
+        break;
+    }
+}
