@@ -23,7 +23,9 @@ function findDirective(lexeme) {
 }
 
 function findKeyword(lexeme) {
-    return (!cKeywords.includes(lexeme))? undefined: lexeme;
+    if(!cKeywords.includes(lexeme)) return;
+    
+    return lexeme;
 }
 
 function createDirective(parentID, lexeme) {
@@ -36,12 +38,17 @@ function createDirective(parentID, lexeme) {
 }
 
 function createKeyword(parentID, lexeme) {
-    if(lexeme === undefined) return;
-
     let keyword = document.createElement("span");
     keyword.classList.add("tok", "tok-keyword");
     keyword.innerText = lexeme;
     document.getElementById(parentID).appendChild(keyword);
+}
+
+function createText(parentID, lexeme) {
+    let text = document.createElement("span");
+    text.className = "tok";
+    text.innerText = lexeme;
+    document.getElementById(parentID).appendChild(text);
 }
 
 function createToken(parentID, lexeme) {
@@ -50,7 +57,12 @@ function createToken(parentID, lexeme) {
         createDirective(parentID, findDirective(lexeme));
         break;
     default:
-        createKeyword(parentID, findKeyword(lexeme));
+        if(!findKeyword(lexeme)) {
+            createText(parentID, lexeme);
+            break;
+        }
+
+        createKeyword(parentID, lexeme);
         break;
     }
 }
