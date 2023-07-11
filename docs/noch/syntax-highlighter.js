@@ -54,3 +54,16 @@ function createToken(parentID, lexeme) {
         break;
     }
 }
+
+function createLine(parentID, ID) {
+    let parent = document.getElementById(parentID);
+    parent.innerHTML += "<br>";
+    if(parent.firstElementChild.nodeName == "BR") {
+        parent.removeChild(parent.firstElementChild);
+    }
+
+    let line = document.createElement("span");
+    line.id = ID;
+    line.className = "code-line";
+    parent.appendChild(line);
+}
