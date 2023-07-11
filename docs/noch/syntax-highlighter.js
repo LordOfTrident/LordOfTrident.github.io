@@ -15,6 +15,10 @@ const cKeywords = [
     "unsigned",	"void",	"volatile", "while"
 ];
 
+function isDigit(c) {
+    return ((c >= "0") && (c <= "9"));
+}
+
 function findDirective(lexeme) {
     let i = 1;
     for(; lexeme[i] == ' '; i++) {}
@@ -51,6 +55,13 @@ function createText(parentID, lexeme) {
     document.getElementById(parentID).appendChild(text);
 }
 
+function createNumber(parentID, lexeme) {
+    let num = document.createElement("span");
+    num.classList.add("tok", "tok-num");
+    num.innerText = lexeme;
+    document.getElementById(parentID).appendChild(num);
+}
+
 function createToken(parentID, lexeme) {
     switch(lexeme[0]) {
     case "#":
@@ -58,6 +69,11 @@ function createToken(parentID, lexeme) {
         break;
     default:
         if(!findKeyword(lexeme)) {
+            if(isDigit(lexeme[0])) {
+                createNumber(parentID, lexeme);
+                break;
+            }
+
             createText(parentID, lexeme);
             break;
         }
