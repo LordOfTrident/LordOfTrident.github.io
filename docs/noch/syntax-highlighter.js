@@ -15,6 +15,15 @@ const cKeywords = [
     "unsigned",	"void",	"volatile", "while"
 ];
 
+const tokenType = Object.freeze({
+    text: Symbol(0),
+    identifier: Symbol(1),
+    keyword: Symbol(2),
+    directive: Symbol(3),
+    number: Symbol(4)
+});
+
+
 function isUpcase(c) {
     return ((c >= "A") && (c <= "Z"));
 }
@@ -44,7 +53,7 @@ function isWhitespace(c) {
 
 function findDirective(lexeme) {
     let i = 1;
-    for(; lexeme[i] == ' '; i++) {}
+    for(; lexeme[i] == " "; i++) {}
 
     return lexeme.slice(i);
 }
@@ -56,8 +65,6 @@ function findKeyword(lexeme) {
 }
 
 function createDirective(parentID, lexeme) {
-    if(lexeme === undefined) return;
-    
     let directive = document.createElement("span");
     directive.classList.add("tok", "tok-preproc");
     directive.innerText = "#" + lexeme;
@@ -117,4 +124,63 @@ function createLine(parentID, ID) {
     line.id = ID;
     line.className = "code-line";
     parent.appendChild(line);
+}
+
+function collectDirective(lexer) {
+    collectWhitespace(lexer);
+    const start = lexer.offset;
+    do {
+        if(!isLocase(lexerCurr(lexer))) break;
+    } while(lexerAdvance(lexer));
+    return {
+        type: tokenType.directive,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
+function collectIdentifier(lexer) {
+    const start = lexer.offset;
+    do {
+        if(!isIdentifier(lexerCurr(lexer))) break;
+    } while(lexerAdvance(lexer));
+    return {
+        type: tokenType.identifier,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
+function collectNumber(lexer) {
+    const start = lexer.offset;
+    let float = false;
+
+    do {
+        if(!isDigit(lexerCurr(lexer))) {
+            if(lexerCurr(lexer) == ".") float = true;
+            if(float) break;
+
+            return {
+                type: tokenType.number,
+                lexeme: lexer.buffer.substr(start, lexer.offset - start)
+            };
+        }
+    } while(lexerAdvance(lexer));
+
+    do {
+        if(!isDigit(lexerCurr(lexer))) break;
+    } while(lexerAdvance(lexer));
+    return {
+        type: tokenType.number,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
+function collectWhitespace(lexer) {
+    const start = lexer.offset;
+    do {
+        if(!isWhitespace(lexerCurr(lexer))) break;
+    } while(lexerAdvance(lexer));
+    return {
+        type: tokenType.text,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
 }
