@@ -71,6 +71,13 @@ function createDirective(parentID, lexeme) {
     document.getElementById(parentID).appendChild(directive);
 }
 
+function createIdentifier(parentID, lexeme) {
+    let id = document.createElement("span");
+    id.classList.add("tok", "tok-id");
+    id.innerText = lexeme;
+    document.getElementById(parentID).appendChild(id);
+}
+
 function createKeyword(parentID, lexeme) {
     let keyword = document.createElement("span");
     keyword.classList.add("tok", "tok-keyword");
