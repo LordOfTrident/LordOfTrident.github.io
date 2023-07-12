@@ -92,25 +92,17 @@ function createNumber(parentID, lexeme) {
     document.getElementById(parentID).appendChild(num);
 }
 
-function createToken(parentID, lexeme) {
-    switch(lexeme[0]) {
-    case "#":
-        createDirective(parentID, findDirective(lexeme));
-        break;
-    default:
-        if(!findKeyword(lexeme)) {
-            if(isDigit(lexeme[0]) || ((lexeme[0] == ".") && (isDigit(lexeme[1])))) {
-                createNumber(parentID, lexeme);
-                break;
-            }
-
-            createText(parentID, lexeme);
-            break;
-        }
-
-        createKeyword(parentID, lexeme);
-        break;
+function createToken(parentID, token) {
+    switch(token.type) {
+    case tokenType.identifier:    createIdentifier(parentID, token.lexeme); return true;
+    case tokenType.number:        createNumber(parentID, token.lexeme); return true;
+    case tokenType.text:          createText(parentID, token.lexeme); return true;
+    case tokenType.keyword:       createKeyword(parentID, token.lexeme); return true;
+    case tokenType.directive:     createDirective(parentID, token.lexeme); return true;
+    default: break;
     }
+
+    return false;
 }
 
 function createLine(parentID, ID) {
