@@ -118,8 +118,18 @@ function createLine(parentID, ID) {
     parent.appendChild(line);
 }
 
+function lexerCurr(lexer) {
+    return lexer.buffer[lexer.offset];
+}
+
+function lexerAdvance(lexer) {
+    if(lexer.offset == lexer.buffer.length) return false;
+
+    lexer.offset++;
+    return true;
+}
+
 function collectDirective(lexer) {
-    collectWhitespace(lexer);
     const start = lexer.offset;
     do {
         if(!isLocase(lexerCurr(lexer))) break;
@@ -175,4 +185,35 @@ function collectWhitespace(lexer) {
         type: tokenType.text,
         lexeme: lexer.buffer.substr(start, lexer.offset - start)
     };
+}
+function lexerLex(lexer) {
+    if(isWhitespace(lexerCurr(lexer))) return collectWhitespace(lexer);
+    if(isDigit(lexerCurr(lexer))) return collectNumber(lexer);
+    let token = {
+        type: tokenType.text,
+        lexeme: ""
+    };
+    
+    if(lexerCurr(lexer) == "#") {
+        lexerAdvance(lexer);
+        token.lexeme = "#";
+        if(isWhitespace(lexerCurr(lexer))) {
+            token.lexeme += collectWhitespace(lexer).lexeme;
+        }
+
+        const directiveLexeme = collectDirective(lexer).lexeme;
+        token.lexeme += directiveLexeme;
+        if(cDirectives.includes(directiveLexeme)) {
+            token.type = tokenType.directive;
+        }
+
+        return token;
+    }
+    
+    if(isIdentifier(lexerCurr(lexer))) {
+        token = collectIdentifier(lexer);
+        if(cKeywords.includes(token.lexeme)) token.type = tokenType.keyword;
+    }
+
+    return token; 
 }
