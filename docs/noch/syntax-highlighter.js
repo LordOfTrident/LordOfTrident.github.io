@@ -67,7 +67,7 @@ function findKeyword(lexeme) {
 function createDirective(parentID, lexeme) {
     let directive = document.createElement("span");
     directive.classList.add("tok", "tok-preproc");
-    directive.innerText = "#" + lexeme;
+    directive.innerText = lexeme;
     document.getElementById(parentID).appendChild(directive);
 }
 
