@@ -15,8 +15,31 @@ const cKeywords = [
     "unsigned",	"void",	"volatile", "while"
 ];
 
+function isUpcase(c) {
+    return ((c >= "A") && (c <= "Z"));
+}
+
+function isLocase(c) {
+    return ((c >= "a") && (c <= "z"));
+}
+
+function isLetter(c) {
+    return (isLocase(c) || isUpcase(c));
+}
+
 function isDigit(c) {
     return ((c >= "0") && (c <= "9"));
+}
+
+function isIdentifier(c) {
+    return ((c == "_") || isDigit(c) || isLetter(c));
+}
+
+function isWhitespace(c) {
+    return (
+        (c == "\t") || (c == "\r") || (c == "\n") ||
+        (c == ' ')
+    );
 }
 
 function findDirective(lexeme) {
