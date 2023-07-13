@@ -21,7 +21,8 @@ const tokenType = Object.freeze({
     keyword: Symbol(2),
     directive: Symbol(3),
     number: Symbol(4),
-    string: Symbol(5)
+    string: Symbol(5),
+    newline: Symbol(6)
 });
 
 
@@ -100,13 +101,28 @@ function createString(parentID, lexeme) {
 
 function createToken(parentID, token) {
     switch(token.type) {
-    case tokenType.identifier:  createIdentifier(parentID, token.lexeme); return true;
-    case tokenType.number:      createNumber(parentID, token.lexeme); return true;
-    case tokenType.text:        createText(parentID, token.lexeme); return true;
-    case tokenType.keyword:     createKeyword(parentID, token.lexeme); return true;
-    case tokenType.directive:   createDirective(parentID, token.lexeme); return true;
-    case tokenType.string:      createString(parentID, token.lexeme); return true;
-    default: break;
+    case tokenType.identifier:
+        createIdentifier(parentID, token.lexeme);
+        return true;
+    case tokenType.number:
+        createNumber(parentID, token.lexeme);
+        return true;
+    case tokenType.text:
+        createText(parentID, token.lexeme);
+        return true;
+    case tokenType.keyword:
+        createKeyword(parentID, token.lexeme);
+        return true;
+    case tokenType.directive:
+        createDirective(parentID, token.lexeme);
+        return true;
+    case tokenType.string:
+        createString(parentID, token.lexeme);
+        return true;
+    case tokenType.newline:
+        return true;
+    default:
+        break;
     }
 
     return false;
@@ -185,13 +201,22 @@ function collectNumber(lexer) {
 
 function collectWhitespace(lexer) {
     const start = lexer.offset;
+    let token = {
+        type: tokenType.text,
+        lexeme: ""
+    };
+
     do {
         if(!isWhitespace(lexerCurr(lexer))) break;
+        if(lexerCurr(lexer) == "\n") {
+            lexerAdvance(lexer);
+            token.type = tokenType.newline,
+            token.lexeme = lexer.buffer.substr(start, lexer.offset - start)
+            return token;
+        };
     } while(lexerAdvance(lexer));
-    return {
-        type: tokenType.text,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    token.lexeme = lexer.buffer.substr(start, lexer.offset - start);
+    return token;
 }
 
 function collectString(lexer) {
