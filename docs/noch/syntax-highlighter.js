@@ -299,6 +299,5 @@ function createCodeBlock(parentID, lexer) {
         lineID = `${parentID}-line-${line++}`
         createLine(parentID, lineID);
         populateCodeLine(lineID, collectLineTokens(lexer));
-        console.log(line);
     } while(lexer.offset < lexer.buffer.length);
 }
