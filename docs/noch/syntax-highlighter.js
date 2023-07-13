@@ -273,6 +273,20 @@ function collectLineComment(lexer) {
 }
 
 function collectMultiLineComment(lexer) {
+    const start = lexer.offset;
+    lexerAdvance(lexer);
+
+    do {
+        if((lexerCurr(lexer) == "*") && (lexerNext(lexer) == "/")) {
+            lexerAdvance(lexer);
+            lexerAdvance(lexer);
+            break;
+        }
+    } while(lexerAdvance(lexer));
+    return {
+        type: tokenType.comment,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
 }
 
 function lexerLex(lexer) {
