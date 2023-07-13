@@ -20,7 +20,8 @@ const tokenType = Object.freeze({
     identifier: Symbol(1),
     keyword: Symbol(2),
     directive: Symbol(3),
-    number: Symbol(4)
+    number: Symbol(4),
+    string: Symbol(5)
 });
 
 
@@ -47,8 +48,12 @@ function isIdentifier(c) {
 function isWhitespace(c) {
     return (
         (c == "\t") || (c == "\r") || (c == "\n") ||
-        (c == ' ')
+        (c == " ")
     );
+}
+
+function isString(c) {
+    return ((c == "\"") || (c == "\'") || (c == "<"));
 }
 
 function findDirective(lexeme) {
@@ -99,13 +104,21 @@ function createNumber(parentID, lexeme) {
     document.getElementById(parentID).appendChild(num);
 }
 
+function createString(parentID, lexeme) {
+    let string = document.createElement("span");
+    string.classList.add("tok", "tok-str");
+    string.innerText = lexeme;
+    document.getElementById(parentID).appendChild(string);
+}
+
 function createToken(parentID, token) {
     switch(token.type) {
-    case tokenType.identifier:    createIdentifier(parentID, token.lexeme); return true;
-    case tokenType.number:        createNumber(parentID, token.lexeme); return true;
-    case tokenType.text:          createText(parentID, token.lexeme); return true;
-    case tokenType.keyword:       createKeyword(parentID, token.lexeme); return true;
-    case tokenType.directive:     createDirective(parentID, token.lexeme); return true;
+    case tokenType.identifier:  createIdentifier(parentID, token.lexeme); return true;
+    case tokenType.number:      createNumber(parentID, token.lexeme); return true;
+    case tokenType.text:        createText(parentID, token.lexeme); return true;
+    case tokenType.keyword:     createKeyword(parentID, token.lexeme); return true;
+    case tokenType.directive:   createDirective(parentID, token.lexeme); return true;
+    case tokenType.string:      createString(parentID, token.lexeme); return true;
     default: break;
     }
 
@@ -193,14 +206,34 @@ function collectWhitespace(lexer) {
         lexeme: lexer.buffer.substr(start, lexer.offset - start)
     };
 }
+
+function collectString(lexer) {
+    const start = lexer.offset;
+    const opening = lexerCurr(lexer);
+    const closing = (opening == "<")? ">" : lexerCurr(lexer);
+    lexerAdvance(lexer);
+    do {
+        if(lexerCurr(lexer) == closing) break;
+    } while(lexerAdvance(lexer));
+    lexerAdvance(lexer);
+    return {
+        type: tokenType.string,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
 function lexerLex(lexer) {
     if(isWhitespace(lexerCurr(lexer))) return collectWhitespace(lexer);
     if(isDigit(lexerCurr(lexer))) return collectNumber(lexer);
+    if(isString(lexerCurr(lexer))) {
+        return collectString(lexer);
+    }
+
     let token = {
         type: tokenType.text,
         lexeme: ""
     };
-    
+
     if(lexerCurr(lexer) == "#") {
         lexerAdvance(lexer);
         token.lexeme = "#";
