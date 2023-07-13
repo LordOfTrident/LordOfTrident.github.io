@@ -269,3 +269,36 @@ function lexerLex(lexer) {
 
     return token; 
 }
+
+function populateCodeLine(parentID, tokens) {
+    let token;
+    for(let i = 0; i < tokens.length; i++) {
+        token = tokens[i];
+        if(token.type == tokenType.newline) return;
+        if(!createToken(parentID, token)) return;
+    }
+}
+
+function collectLineTokens(lexer) {
+    let tokens = [];
+    let token;
+    do {
+        token = lexerLex(lexer);
+        if(token.type == tokenType.newline) return tokens;
+
+        tokens.push(token);
+    } while(lexer.offset < lexer.buffer.length);
+
+    return tokens;
+}
+
+function createCodeBlock(parentID, lexer) {
+    let line = 1;
+    let lineID;
+    do {
+        lineID = `${parentID}-line-${line++}`
+        createLine(parentID, lineID);
+        populateCodeLine(lineID, collectLineTokens(lexer));
+        console.log(line);
+    } while(lexer.offset < lexer.buffer.length);
+}
