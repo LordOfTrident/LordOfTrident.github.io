@@ -17,12 +17,13 @@ const cKeywords = [
 
 const tokenType = Object.freeze({
     text: Symbol(0),
-    identifier: Symbol(1),
-    keyword: Symbol(2),
-    directive: Symbol(3),
-    number: Symbol(4),
-    string: Symbol(5),
-    newline: Symbol(6)
+    comment: Symbol(1),
+    identifier: Symbol(2),
+    keyword: Symbol(3),
+    directive: Symbol(4),
+    number: Symbol(5),
+    string: Symbol(6),
+    newline: Symbol(7)
 });
 
 
@@ -55,6 +56,10 @@ function isWhitespace(c) {
 
 function isString(c) {
     return ((c == "\"") || (c == "\'") || (c == "<"));
+}
+
+function isComment(c1, c2) {
+    return ((c1 == "/") && ((c2 == "/") || (c2 == "*")));
 }
 
 function createDirective(parentID, lexeme) {
@@ -99,10 +104,33 @@ function createString(parentID, lexeme) {
     document.getElementById(parentID).appendChild(string);
 }
 
+function createComment(parentID, lexeme) {
+    let comment = document.createElement("span");
+    comment.classList.add("tok", "tok-comment");
+    comment.innerText = lexeme;
+    document.getElementById(parentID).appendChild(comment);
+}
+
+function createLine(parentID, ID) {
+    let parent = document.getElementById(parentID);
+    parent.innerHTML += "<br>";
+    if(parent.firstElementChild.nodeName == "BR") {
+        parent.removeChild(parent.firstElementChild);
+    }
+
+    let line = document.createElement("span");
+    line.id = ID;
+    line.className = "code-line";
+    parent.appendChild(line);
+}
+
 function createToken(parentID, token) {
     switch(token.type) {
     case tokenType.identifier:
         createIdentifier(parentID, token.lexeme);
+        return true;
+    case tokenType.comment:
+        createComment(parentID, token.lexeme);
         return true;
     case tokenType.number:
         createNumber(parentID, token.lexeme);
@@ -128,21 +156,12 @@ function createToken(parentID, token) {
     return false;
 }
 
-function createLine(parentID, ID) {
-    let parent = document.getElementById(parentID);
-    parent.innerHTML += "<br>";
-    if(parent.firstElementChild.nodeName == "BR") {
-        parent.removeChild(parent.firstElementChild);
-    }
-
-    let line = document.createElement("span");
-    line.id = ID;
-    line.className = "code-line";
-    parent.appendChild(line);
-}
-
 function lexerCurr(lexer) {
     return lexer.buffer[lexer.offset];
+}
+
+function lexerNext(lexer) {
+    return lexer.buffer[lexer.offset + 1];
 }
 
 function lexerAdvance(lexer) {
@@ -234,6 +253,28 @@ function collectString(lexer) {
     };
 }
 
+function collectComment(lexer) {
+    return (lexerNext(lexer) == "/")?
+        collectLineComment(lexer):
+        collectMultiLineComment(lexer);
+}
+
+function collectLineComment(lexer) {
+    const start = lexer.offset;
+    lexerAdvance(lexer);
+
+    do {
+        if(lexerCurr(lexer) == "\n") break;
+    } while(lexerAdvance(lexer));
+    return {
+        type: tokenType.comment,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
+function collectMultiLineComment(lexer) {
+}
+
 function lexerLex(lexer) {
     if(isWhitespace(lexerCurr(lexer))) return collectWhitespace(lexer);
     if(isDigit(lexerCurr(lexer))) return collectNumber(lexer);
@@ -261,10 +302,14 @@ function lexerLex(lexer) {
 
         return token;
     }
-    
+
     if(isIdentifier(lexerCurr(lexer))) {
         token = collectIdentifier(lexer);
         if(cKeywords.includes(token.lexeme)) token.type = tokenType.keyword;
+    }
+
+    if(isComment(lexerCurr(lexer), lexerNext(lexer))) {
+        return collectComment(lexer);
     }
 
     return token; 
