@@ -175,20 +175,14 @@
 							<header class="code-header">
 								<p>example.h</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;noch/args.h></span></span>
-<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;noch/log.h></span></span>
-<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;noch/fs.h></span></span></pre>
+							<pre id="usage-example-header" class="code-content"></pre>
 						</div>
 
 						<div class="code">
 							<header class="code-header">
 								<p>example.c</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">"example.h"</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;noch/args.c></span></span>
-<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;noch/log.c></span></span>
-<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;noch/fs.c></span></span></pre>
+							<pre id="usage-example-source" class="code-content"></pre>
 						</div>
 
 					</section>
@@ -212,14 +206,7 @@
 							<header class="code-header">
 								<p>Example</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;stdlib.h></span></span>
-<span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">&lt;stdio.h></span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-preproc">#define</span> NOCH_ASSERT(EXPR) \</span>
-<span class="code-line">    <span class="tok tok-keyword">if</span> (!(EXPR)) { \</span>
-<span class="code-line">        fprintf(stderr, <span class="tok tok-str">"Assertion failed: <span class="tok tok-escape">%s\n</span>"</span>, #EXPR); \</span>
-<span class="code-line">        exit(<span class="tok tok-num">1</span>); \</span>
-<span class="code-line">    }</span></pre>
+							<pre id="config-example-header" class="code-content"></pre>
 						</div>
 
 						<p>
@@ -356,23 +343,7 @@
 							<header class="code-header">
 								<p>example.h</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#ifndef</span> NOCH_EXAMPLE_H_HEADER_GUARD</span>
-<span class="code-line"><span class="tok tok-preproc">#define</span> NOCH_EXAMPLE_H_HEADER_GUARD</span>
-<span class="code-line"><span class="tok tok-preproc">#ifdef</span> __cplusplus</span>
-<span class="code-line"><span class="tok tok-keyword">extern</span> <span class="tok tok-str">"C"</span> {</span>
-<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-comment">/* Only add these 3 lines if the library uses bools */</span></span>
-<span class="code-line"><span class="tok tok-preproc">#ifndef</span> __cplusplus</span>
-<span class="code-line"><span class="tok tok-preproc">#    include</span> <span class="tok tok-str">&lt;stdbool.h></span> <span class="tok tok-comment">/* bool, true, false */</span></span>
-<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-comment">/* Library declarations etc. */</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-preproc">#ifdef</span> __cplusplus</span>
-<span class="code-line">}</span>
-<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
-<span class="code-line"><span class="tok tok-preproc">#endif</span></span></pre>
+							<pre id="structure-example-header" class="code-content"></pre>
 						</div>
 
 						<p>
@@ -383,17 +354,7 @@
 							<header class="code-header">
 								<p>example.c</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#include</span> <span class="tok tok-str">"example.h"</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-preproc">#ifdef</span> __cplusplus</span>
-<span class="code-line"><span class="tok tok-keyword">extern</span> <span class="tok tok-str">"C"</span> {</span>
-<span class="code-line"><span class="tok tok-preproc">#endif</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-comment">/* Library implementation */</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="tok tok-preproc">#ifdef</span> __cplusplus</span>
-<span class="code-line">}</span>
-<span class="code-line"><span class="tok tok-preproc">#endif</span></span></pre>
+							<pre id="structure-example-source" class="code-content"></pre>
 						</div>
 
 						<h2 id="rules-naming">Naming</h2>
@@ -426,13 +387,7 @@
 							<header class="code-header">
 								<p>example.c</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-keyword">static void</span> noch__my_implementation_func(<span class="tok tok-keyword">void</span>) {</span>
-<span class="code-line">    printf(<span class="tok tok-str">"Hello, world!<span class="tok tok-escape">\n</span>"</span>);</span>
-<span class="code-line">}</span>
-<span class="code-line"></span>
-<span class="code-line">NOCH_DEF <span class="tok tok-keyword">void</span> noch_my_func(<span class="tok tok-keyword">void</span>) {</span>
-<span class="code-line">    noch__my_implementation_func();</span>
-<span class="code-line">}</span></pre>
+							<pre id="functions-example-source" class="code-content"></pre>
 						</div>
 
 						<p>
@@ -445,11 +400,7 @@
 							<header class="code-header">
 								<p>example.h</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-keyword">typedef struct</span> {</span>
-<span class="code-line">    <span class="tok tok-keyword">int</span> x, y;</span>
-<span class="code-line">} <span class="tok tok-keyword">vec2_t</span>;</span>
-<span class="code-line"></span>
-<span class="code-line">NOCH_DEF <span class="tok tok-keyword">vec2_t</span> noch_vec2_new(<span class="tok tok-keyword">int</span> x, <span class="tok tok-keyword">int</span> y);</span></pre>
+							<pre class="code-content"></pre>
 						</div>
 
 						<p>
@@ -473,9 +424,7 @@
 							<header class="code-header">
 								<p>Example</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-preproc">#ifdef</span> __cplusplus</span>
-<span class="code-line"><span class="tok tok-preproc">#    define</span> CPP</span>
-<span class="code-line"><span class="tok tok-preproc">#endif</span></span></pre>
+							<pre id="preprocessor-examplpe-header" class="code-content"></pre>
 						</div>
 
 						<h2 id="rules-formatting">Formatting</h2>
@@ -505,14 +454,7 @@
 							<header class="code-header">
 								<p>Line wrapping example</p>
 							</header>
-							<pre class="code-content"><span class="code-line"><span class="tok tok-comment">/* Pretend that these wrapped lines exceed the 100 chars limit */</span></span>
-<span class="code-line">NOCH_DEF <span class="tok tok-keyword">int</span> noch_func(<span class="tok tok-keyword">int</span> a, <span class="tok tok-keyword">long long</span> b, </span>
-<span class="code-line">                       <span class="tok tok-keyword">long long</span> d) {</span>
-<span class="code-line">    <span class="tok tok-keyword">long long</span> ret = (<span class="tok tok-keyword">long long</span>)a *</span>
-<span class="code-line">                    ((<span class="tok tok-keyword">long long</span>)b + d);</span>
-<span class="code-line">    <span class="tok tok-keyword">return</span> ret;</span>
-<span class="code-line">}</span>
-</pre>
+							<pre id="wrapping-example-header" class="code-content"></pre>
 						</div>
 					</section>
 				</div>
@@ -525,5 +467,7 @@
 	</main>
 
 	<script src="/docs/base/script.js"></script>
+	<script src="./syntax-highlighter.js"></script>
+	<script src="./script.js"></script>
 </body>
 </html>
