@@ -102,6 +102,7 @@ function populateCodeBlocks() {
         buffer: usageExampleHeader,
         offset: 0
     };    
+    
     createCodeBlock("usage-example-header", lexer);
     lexer.buffer = usageExampleSource;
     lexer.offset = 0;
@@ -138,4 +139,13 @@ function populateCodeBlocks() {
     // lexer.offset = 0;
 }
 
-populateCodeBlocks();
+// populateCodeBlocks();
+
+// below is test run
+let lexer = {
+    buffer: `const int x /* TODO: add operators and terminators */ after comment // line comment
+next line`,
+    offset: 0
+};
+
+createCodeBlock("usage-example-header", lexer);
