@@ -95,3 +95,47 @@ NOCH_DEF int noch_func(int a, long long b,
                     ((long long)b + d);
     return ret;
 }`;
+
+
+function populateCodeBlocks() {
+    let lexer = {
+        buffer: usageExampleHeader,
+        offset: 0
+    };    
+    createCodeBlock("usage-example-header", lexer);
+    lexer.buffer = usageExampleSource;
+    lexer.offset = 0;
+    createCodeBlock("usage-example-source", lexer);
+
+    // broken due to unhandled characters
+
+    // lexer.buffer = configExampleHeader;
+    // lexer.offset = 0;
+    // createCodeBlock("config-example-header", lexer);
+
+    // lexer.buffer = structureExampleSource;
+    // lexer.offset = 0;
+    // createCodeBlock("structure-example-source", lexer);
+    // lexer.buffer = structureExampleSource;
+    // lexer.offset = 0;
+    // createCodeBlock("structure-example-header", lexer);
+    // lexer.buffer = structureExampleHeader;
+    // lexer.offset = 0;
+
+    // lexer.buffer = functionsExampleSource;
+    // lexer.offset = 0;
+    // createCodeBlock("functions-example-source", lexer);
+    // lexer.buffer = functionsExampleHeader;
+    // lexer.offset = 0;
+    // createCodeBlock("functions-example-header", lexer);
+
+    // createCodeBlock("preprocessor-example-header", lexer);
+    // lexer.buffer = preprocessorExampleHeader;
+    // lexer.offset = 0;
+
+    // createCodeBlock("wrapping-example-header", lexer);
+    // lexer.buffer = lineWrappingExampleHeader;
+    // lexer.offset = 0;
+}
+
+populateCodeBlocks();
