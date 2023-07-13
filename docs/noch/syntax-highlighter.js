@@ -56,19 +56,6 @@ function isString(c) {
     return ((c == "\"") || (c == "\'") || (c == "<"));
 }
 
-function findDirective(lexeme) {
-    let i = 1;
-    for(; lexeme[i] == " "; i++) {}
-
-    return lexeme.slice(i);
-}
-
-function findKeyword(lexeme) {
-    if(!cKeywords.includes(lexeme.trimStart())) return;
-
-    return lexeme;
-}
-
 function createDirective(parentID, lexeme) {
     let directive = document.createElement("span");
     directive.classList.add("tok", "tok-preproc");
