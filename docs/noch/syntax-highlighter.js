@@ -22,8 +22,9 @@ const tokenType = Object.freeze({
     keyword: Symbol(3),
     directive: Symbol(4),
     number: Symbol(5),
-    string: Symbol(6),
-    newline: Symbol(7)
+    operator: Symbol(6),
+    string: Symbol(7),
+    newline: Symbol(8)
 });
 
 
@@ -60,6 +61,15 @@ function isString(c) {
 
 function isComment(c1, c2) {
     return ((c1 == "/") && ((c2 == "/") || (c2 == "*")));
+}
+
+function isOperator(c) {
+    return (
+        (c == "+") || (c == "-") || (c == "*") || (c == "/") ||
+        (c == "%") || (c == ".") || (c == "?") || (c == "!") ||
+        (c == "~") || (c == "^") || (c == "&") || (c == "|") ||
+        (c == "<") || (c == ">") || (c == "=")
+    );
 }
 
 function createDirective(parentID, lexeme) {
@@ -111,6 +121,13 @@ function createComment(parentID, lexeme) {
     document.getElementById(parentID).appendChild(comment);
 }
 
+function createOperator(parentID, lexeme) {
+    let operator = document.createElement("span");
+    operator.classList.add("tok", "tok-operator");
+    operator.innerText = lexeme;
+    document.getElementById(parentID).appendChild(operator);
+}
+
 function createLine(parentID, ID) {
     let parent = document.getElementById(parentID);
     parent.innerHTML += "<br>";
@@ -134,6 +151,9 @@ function createToken(parentID, token) {
         return true;
     case tokenType.number:
         createNumber(parentID, token.lexeme);
+        return true;
+    case tokenType.operator:
+        createOperator(parentID, token.lexeme);
         return true;
     case tokenType.text:
         createText(parentID, token.lexeme);
@@ -289,9 +309,22 @@ function collectMultiLineComment(lexer) {
     };
 }
 
+function collectOperator(lexer) {
+    const start = lexer.offset;
+    lexerAdvance(lexer);
+
+    do {
+        if(!isOperator(lexerCurr(lexer))) break;
+    } while(lexerAdvance(lexer));
+    return {
+        type: tokenType.operator,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
 function lexerLex(lexer) {
     if(isWhitespace(lexerCurr(lexer))) return collectWhitespace(lexer);
     if(isDigit(lexerCurr(lexer))) return collectNumber(lexer);
+    if(isOperator(lexerCurr(lexer))) return collectOperator(lexer);
     if(isString(lexerCurr(lexer))) {
         return collectString(lexer);
     }
