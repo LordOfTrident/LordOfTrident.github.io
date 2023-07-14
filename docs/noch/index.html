@@ -200,11 +200,8 @@
 					<section class="doc-section">
 						<h1 id="config">Config</h1>
 						<p>
-							Noch has config macros to allow for more flexibility. Some libraries also have
-							their own config macros. These macros can be defined before including Noch libraries to configure noch. For example, you can define
-							the <span class="inline-code">NOCH_ASSERT</span> like so:
+							To allow for the most flexibility, Noch provides several macros that can be redefined to extend and/or alter functionality. These macros can be defined prior to or following any included Noch headers. Here is an example using the <span class="inline-code">NOCH_ASSERT</span> macro from <span class="inline-code">&lt;noch/internal/assert.h&gt;</span>:
 						</p>
-
 						<div class="code">
 							<header class="code-header">
 								<p>Example</p>
@@ -220,11 +217,7 @@
 						</div>
 
 						<p>
-							And now the entire Noch library will use this assert instead of the default standard library one.
-						</p>
-
-						<p>
-							You can find the definitions of these macros in the <a href="https://github.com/LordOfTrident/noch/tree/main/internal/" target="_blank">internal folder</a>
+							The entire Noch library will use this assert rather than the default. You can find the default definitions of this macro and others here in the <a href="https://github.com/LordOfTrident/noch/tree/main/internal/" target="_blank">internal folder</a>. By default, these macros use the C standard library.
 						</p>
 
 						<h2 id="NOCH_DEF">Macro <span class="inline-code">NOCH_DEF</span></h2>
@@ -242,8 +235,7 @@
 						</div>
 
 						<p>
-							Used for assert statements in the Noch implementations. On default, it includes
-							<span class="inline-code">assert.h</span>.
+							Used for assertions within Noch implementations.
 						</p>
 
 						<h3>Parameters</h3>
@@ -264,8 +256,7 @@
 						</div>
 
 						<p>
-							Used to allocate memory in the Noch implementations. On default, it includes
-							<span class="inline-code">stdlib.h</span>.
+							Used to allocate memory in the Noch implementations.
 						</p>
 
 						<h3>Parameters</h3>
@@ -286,8 +277,7 @@
 						</div>
 
 						<p>
-							Used to reallocate memory. On default, it includes
-							<span class="inline-code">stdlib.h</span>.
+							Used to reallocate memory.
 						</p>
 
 						<h3>Parameters</h3>
@@ -312,8 +302,7 @@
 						</div>
 
 						<p>
-							Used to free memory. On default, it includes
-							<span class="inline-code">stdlib.h</span>.
+							Used to free memory.
 						</p>
 
 						<h3>Parameters</h3>
