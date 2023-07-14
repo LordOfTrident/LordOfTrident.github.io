@@ -134,7 +134,7 @@
 					<section class="doc-section">
 						<h1 id="introduction">Introduction</h1>
 						<p>
-							<b>Noch</b> (Not Chol) is an ever-growing bundle of convenient <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a> libraries that enables developers to reduce code repetition. Noch addresses reoccurring cases like parsing command line arguments and abstracting filesystem functions, so you can get to what matters promptly.
+							<b>Noch</b> (Not <a href="https://github.com/lordoftrident/chol">Chol</a>) is an ever-growing bundle of convenient <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a> libraries that enables developers to reduce code repetition. Noch addresses reoccurring cases like parsing command line arguments and abstracting filesystem functions, so you can get to what matters promptly.
 						</p>
 						<p>
 							These libraries are designed to be included and compiled alongside your code. Because most header files have a single corresponding source file, if that, statically or dynamically linking such is merely overkill.
@@ -143,19 +143,8 @@
 					<section class="doc-section">
 						<h1 id="motivation">Motivation</h1>
 						<p>
-							The motivation behind Noch is that I find myself writing the same code for every C program. So instead of doing that, I decided to put
-							the functions in a few libraries.
+							The driving force behind Noch stems from the repetitive nature of coding in C programs. I found myself writing the same functions across multiple projects. After a while there came a point where continuing this pattern any further was no longer practical. It was time to encapsulate these various functions once and for all, so came the birth of Noch (successor to Chol).
 						</p>
-						<p>
-							But I didn't wanna have them as separate repos, because some of the libraries could use another library
-							for some features and stuff (for example log.h could use colorer.h for terminal output colors), but it would also introduce a lot of repos
-							for just single header libraries, more dependencies and more git submodules.
-						</p>
-
-						<p>
-							So I decided to pack those libraries in noch, using the same format and code rules.
-						</p>
-
 					</section>
 					<section class="doc-section">
 						<h1 id="usage">Usage</h1>
@@ -217,7 +206,7 @@
 						</div>
 
 						<p>
-							The entire Noch library will use this assert rather than the default. You can find the default definitions of this macro and others here in the <a href="https://github.com/LordOfTrident/noch/tree/main/internal/" target="_blank">internal folder</a>. By default, these macros use the C standard library.
+							The entire Noch library will use this assert rather than the default. You can find the default definitions of this macro and others here in the <a href="https://github.com/LordOfTrident/noch/tree/main/internal/" target="_blank">internal folder</a>. By default, these macros use functions from the C standard library.
 						</p>
 
 						<h2 id="NOCH_DEF">Macro <span class="inline-code">NOCH_DEF</span></h2>
