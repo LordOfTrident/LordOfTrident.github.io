@@ -23,8 +23,9 @@ const tokenType = Object.freeze({
     directive: Symbol(4),
     number: Symbol(5),
     operator: Symbol(6),
-    string: Symbol(7),
-    newline: Symbol(8)
+    separator: Symbol(7),
+    string: Symbol(8),
+    newline: Symbol(9)
 });
 
 
@@ -69,6 +70,13 @@ function isOperator(c) {
         (c == "%") || (c == ".") || (c == "?") || (c == "!") ||
         (c == "~") || (c == "^") || (c == "&") || (c == "|") ||
         (c == "<") || (c == ">") || (c == "=")
+    );
+}
+
+function isSeparator(c) {
+    return (
+        (c == ",") || (c == ":") || (c == "[") || (c == "]") ||
+        (c == "(") || (c == ")") || (c == "{") || (c == "}")
     );
 }
 
@@ -128,6 +136,13 @@ function createOperator(parentID, lexeme) {
     document.getElementById(parentID).appendChild(operator);
 }
 
+function createSeparator(parentID, lexeme) {
+    let separator = document.createElement("span");
+    separator.classList.add("tok", "tok-separator");
+    separator.innerText = lexeme;
+    document.getElementById(parentID).appendChild(separator);
+}
+
 function createLine(parentID, ID) {
     let parent = document.getElementById(parentID);
     parent.innerHTML += "<br>";
@@ -154,6 +169,9 @@ function createToken(parentID, token) {
         return true;
     case tokenType.operator:
         createOperator(parentID, token.lexeme);
+        return true;
+    case tokenType.separator:
+            createSeparator(parentID, token.lexeme);
         return true;
     case tokenType.text:
         createText(parentID, token.lexeme);
@@ -321,10 +339,21 @@ function collectOperator(lexer) {
         lexeme: lexer.buffer.substr(start, lexer.offset - start)
     };
 }
+
+function collectSeparator(lexer) {
+    const start = lexer.offset;
+    lexerAdvance(lexer);
+    return {
+        type: tokenType.operator,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
 function lexerLex(lexer) {
     if(isWhitespace(lexerCurr(lexer))) return collectWhitespace(lexer);
     if(isDigit(lexerCurr(lexer))) return collectNumber(lexer);
     if(isOperator(lexerCurr(lexer))) return collectOperator(lexer);
+    if(isSeparator(lexerCurr(lexer))) return collectSeparator(lexer);
     if(isString(lexerCurr(lexer))) {
         return collectString(lexer);
     }
