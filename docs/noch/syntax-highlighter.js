@@ -24,8 +24,9 @@ const tokenType = Object.freeze({
     number: Symbol(5),
     operator: Symbol(6),
     separator: Symbol(7),
-    string: Symbol(8),
-    newline: Symbol(9)
+    terminator: Symbol(8),
+    string: Symbol(9),
+    newline: Symbol(10)
 });
 
 
@@ -76,9 +77,12 @@ function isOperator(c) {
 function isSeparator(c) {
     return (
         (c == ",") || (c == ":") || (c == "[") || (c == "]") ||
-        (c == "(") || (c == ")") || (c == "{") || (c == "}") ||
-        (c == ";")
+        (c == "(") || (c == ")") || (c == "{") || (c == "}")
     );
+}
+
+function isTerminator(c) {
+    return (c == ";");
 }
 
 function createDirective(parentID, lexeme) {
@@ -132,16 +136,23 @@ function createComment(parentID, lexeme) {
 
 function createOperator(parentID, lexeme) {
     let operator = document.createElement("span");
-    operator.classList.add("tok", "tok-operator");
+    operator.classList.add("tok", "tok-op");
     operator.innerText = lexeme;
     document.getElementById(parentID).appendChild(operator);
 }
 
 function createSeparator(parentID, lexeme) {
     let separator = document.createElement("span");
-    separator.classList.add("tok", "tok-separator");
+    separator.classList.add("tok", "tok-sep");
     separator.innerText = lexeme;
     document.getElementById(parentID).appendChild(separator);
+}
+
+function collectTerminator(parentID, lexeme) {
+    let terminator = document.createElement("span");
+    terminator.classList.add("tok", "tok-term");
+    terminator.innerText = lexeme;
+    document.getElementById(parentID).appendChild(terminator);
 }
 
 function createLine(parentID, ID) {
@@ -172,7 +183,10 @@ function createToken(parentID, token) {
         createOperator(parentID, token.lexeme);
         return true;
     case tokenType.separator:
-            createSeparator(parentID, token.lexeme);
+        createSeparator(parentID, token.lexeme);
+        return true;
+    case tokenType.terminator:
+        createTerminator(parentID, token.lexeme);
         return true;
     case tokenType.text:
         createText(parentID, token.lexeme);
@@ -350,44 +364,55 @@ function collectSeparator(lexer) {
     };
 }
 
+function collectTerminator(lexer) {
+    const start = lexer.offset;
+    lexerAdvance(lexer);
+    return {
+        type: tokenType.operator,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
 function lexerLex(lexer) {
     if(isWhitespace(lexerCurr(lexer))) return collectWhitespace(lexer);
     if(isDigit(lexerCurr(lexer))) return collectNumber(lexer);
-    if(isOperator(lexerCurr(lexer))) return collectOperator(lexer);
+    if(isTerminator(lexerCurr(lexer))) return collectTerminator(lexer);
     if(isSeparator(lexerCurr(lexer))) return collectSeparator(lexer);
     if(isString(lexerCurr(lexer))) {
         return collectString(lexer);
     }
-
+    
     let token = {
         type: tokenType.text,
         lexeme: ""
     };
-
+    
     if(lexerCurr(lexer) == "#") {
         lexerAdvance(lexer);
         token.lexeme = "#";
         if(isWhitespace(lexerCurr(lexer))) {
             token.lexeme += collectWhitespace(lexer).lexeme;
         }
-
+        
         const directiveLexeme = collectDirective(lexer).lexeme;
         token.lexeme += directiveLexeme;
         if(cDirectives.includes(directiveLexeme)) {
             token.type = tokenType.directive;
         }
-
+        
         return token;
     }
-
+    
     if(isIdentifier(lexerCurr(lexer))) {
         token = collectIdentifier(lexer);
         if(cKeywords.includes(token.lexeme)) token.type = tokenType.keyword;
     }
-
+    
     if(isComment(lexerCurr(lexer), lexerNext(lexer))) {
         return collectComment(lexer);
     }
+    
+    if(isOperator(lexerCurr(lexer))) return collectOperator(lexer);
 
     return token; 
 }

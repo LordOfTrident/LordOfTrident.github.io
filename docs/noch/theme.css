@@ -9,6 +9,9 @@
 	--color-tok-keyword: #fc4798; /* f54091 */
 	--color-tok-escape:  #be68fc;
 	--color-tok-comment: #828282;
+	--color-tok-sep: #ffffff;
+	--color-tok-op: #ffffff;
+	--color-tok-term: #ffffff;
 }
 
 :root.light {
