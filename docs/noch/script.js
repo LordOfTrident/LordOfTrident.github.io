@@ -108,44 +108,32 @@ function populateCodeBlocks() {
     lexer.offset = 0;
     createCodeBlock("usage-example-source", lexer);
 
-    // broken due to unhandled characters
+    lexer.buffer = configExampleHeader;
+    lexer.offset = 0;
+    createCodeBlock("config-example-header", lexer);
 
-    // lexer.buffer = configExampleHeader;
-    // lexer.offset = 0;
-    // createCodeBlock("config-example-header", lexer);
+    lexer.buffer = structureExampleSource;
+    lexer.offset = 0;
+    createCodeBlock("structure-example-source", lexer);
+    lexer.buffer = structureExampleHeader;
+    lexer.offset = 0;
+    createCodeBlock("structure-example-header", lexer);
 
-    // lexer.buffer = structureExampleSource;
-    // lexer.offset = 0;
-    // createCodeBlock("structure-example-source", lexer);
-    // lexer.buffer = structureExampleSource;
-    // lexer.offset = 0;
-    // createCodeBlock("structure-example-header", lexer);
-    // lexer.buffer = structureExampleHeader;
-    // lexer.offset = 0;
-
-    // lexer.buffer = functionsExampleSource;
-    // lexer.offset = 0;
-    // createCodeBlock("functions-example-source", lexer);
+    lexer.buffer = functionsExampleSource;
+    lexer.offset = 0;
+    createCodeBlock("functions-example-source", lexer);
     // lexer.buffer = functionsExampleHeader;
-    // lexer.offset = 0;
-    // createCodeBlock("functions-example-header", lexer);
+    lexer.buffer = "\\ tlt";
+    lexer.offset = 0;
+    createCodeBlock("functions-example-header", lexer);
 
-    // createCodeBlock("preprocessor-example-header", lexer);
-    // lexer.buffer = preprocessorExampleHeader;
-    // lexer.offset = 0;
+    lexer.buffer = preprocessorExampleHeader;
+    lexer.offset = 0;
+    createCodeBlock("preprocessor-example-header", lexer);
 
-    // createCodeBlock("wrapping-example-header", lexer);
-    // lexer.buffer = lineWrappingExampleHeader;
-    // lexer.offset = 0;
+    lexer.buffer = lineWrappingExampleHeader;
+    lexer.offset = 0;
+    createCodeBlock("wrapping-example-header", lexer);
 }
 
-// populateCodeBlocks();
-
-// below is test run
-let lexer = {
-    buffer: `const int x /* TODO: add operators and terminators */ after comment // line comment
-next line`,
-    offset: 0
-};
-
-createCodeBlock("usage-example-header", lexer);
+populateCodeBlocks();
