@@ -16,7 +16,7 @@ const configExampleHeader = `\
 
 #define NOCH_ASSERT(EXPR) \\
     if (!(EXPR)) { \\
-        fprintf(stderr, \"Assertion failed: %s\n\", #EXPR); \\
+        fprintf(stderr, \"Assertion failed: %s\\n\", #EXPR); \\
         exit(1); \\
     }`;
 
@@ -54,7 +54,7 @@ extern \"C\" {
 
 const functionsExampleSource = `\
 static void noch__my_implementation_func(void) {
-    printf(\"Hello, world!\n\");
+    printf(\"Hello, world!\\n\");
 }
 
 NOCH_DEF void noch_my_func(void) {
@@ -101,8 +101,8 @@ function populateCodeBlocks() {
     let lexer = {
         buffer: usageExampleHeader,
         offset: 0
-    };    
-    
+    };
+
     createCodeBlock("usage-example-header", lexer);
     lexer.buffer = usageExampleSource;
     lexer.offset = 0;
