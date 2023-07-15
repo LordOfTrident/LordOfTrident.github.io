@@ -98,81 +98,14 @@ function isHex(c) {
     );
 }
 
-function createDirective(parentID, lexeme) {
-    let directive = document.createElement("span");
-    directive.classList.add("tok", "tok-preproc");
-    directive.innerText = lexeme;
-    document.getElementById(parentID).appendChild(directive);
-}
+function createElement(parentID, lexeme, classes) {
+    let elem = document.createElement("span");
+    classes.forEach(element => {
+        elem.classList.add(element);
+    });
 
-function createIdentifier(parentID, lexeme) {
-    let id = document.createElement("span");
-    id.classList.add("tok", "tok-id");
-    id.innerText = lexeme;
-    document.getElementById(parentID).appendChild(id);
-}
-
-function createKeyword(parentID, lexeme) {
-    let keyword = document.createElement("span");
-    keyword.classList.add("tok", "tok-keyword");
-    keyword.innerText = lexeme;
-    document.getElementById(parentID).appendChild(keyword);
-}
-
-function createText(parentID, lexeme) {
-    let text = document.createElement("span");
-    text.className = "tok";
-    text.innerText = lexeme;
-    document.getElementById(parentID).appendChild(text);
-}
-
-function createNumber(parentID, lexeme) {
-    let num = document.createElement("span");
-    num.classList.add("tok", "tok-num");
-    num.innerText = lexeme;
-    document.getElementById(parentID).appendChild(num);
-}
-
-function createString(parentID, lexeme) {
-    let string = document.createElement("span");
-    string.classList.add("tok", "tok-str");
-    string.innerText = lexeme;
-    document.getElementById(parentID).appendChild(string);
-}
-
-function createComment(parentID, lexeme) {
-    let comment = document.createElement("span");
-    comment.classList.add("tok", "tok-comment");
-    comment.innerText = lexeme;
-    document.getElementById(parentID).appendChild(comment);
-}
-
-function createOperator(parentID, lexeme) {
-    let operator = document.createElement("span");
-    operator.classList.add("tok", "tok-op");
-    operator.innerText = lexeme;
-    document.getElementById(parentID).appendChild(operator);
-}
-
-function createSeparator(parentID, lexeme) {
-    let separator = document.createElement("span");
-    separator.classList.add("tok", "tok-sep");
-    separator.innerText = lexeme;
-    document.getElementById(parentID).appendChild(separator);
-}
-
-function createTerminator(parentID, lexeme) {
-    let terminator = document.createElement("span");
-    terminator.classList.add("tok", "tok-term");
-    terminator.innerText = lexeme;
-    document.getElementById(parentID).appendChild(terminator);
-}
-
-function createEscaped(parentID, lexeme) {
-    let escaped = document.createElement("span");
-    escaped.classList.add("tok", "tok-escape");
-    escaped.innerText = lexeme;
-    document.getElementById(parentID).appendChild(escaped);
+    elem.innerText = lexeme;
+    document.getElementById(parentID).appendChild(elem);
 }
 
 function createLine(parentID, ID) {
@@ -191,37 +124,37 @@ function createLine(parentID, ID) {
 function createToken(parentID, token) {
     switch(token.type) {
     case tokenType.identifier:
-        createIdentifier(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-id"]);
         return true;
     case tokenType.comment:
-        createComment(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-comment"]);
         return true;
     case tokenType.number:
-        createNumber(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-num"]);
         return true;
     case tokenType.operator:
-        createOperator(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-op"]);
         return true;
     case tokenType.escaped:
-        createEscaped(parentID, token.lexeme);
-        return true;
-    case tokenType.separator:
-        createSeparator(parentID, token.lexeme);
-        return true;
-    case tokenType.terminator:
-        createTerminator(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-escape"]);
         return true;
     case tokenType.text:
-        createText(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok"]);
+        return true;
+    case tokenType.separator:
+        createElement(parentID, token.lexeme, ["tok", "tok-sep"]);
+        return true;
+    case tokenType.terminator:
+        createElement(parentID, token.lexeme, ["tok", "tok-term"]);
         return true;
     case tokenType.keyword:
-        createKeyword(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-keyword"]);
         return true;
     case tokenType.directive:
-        createDirective(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-preproc"]);
         return true;
     case tokenType.string:
-        createString(parentID, token.lexeme);
+        createElement(parentID, token.lexeme, ["tok", "tok-str"]);
         return true;
     case tokenType.newline:
         return true;
@@ -480,12 +413,12 @@ function lexerLex(lexer) {
         token = collectIdentifier(lexer);
         if(cKeywords.includes(token.lexeme)) token.type = tokenType.keyword;
     }
-    
+
     if(isComment(lexerCurr(lexer), lexerNext(lexer))) {
         return collectComment(lexer);
     }
     
-    if(isOperator(lexerCurr(lexer))) return collectOperator(lexer);
+    if(isOperator(lexerCurr(lexer))) return collectOperator(lexer);    
 
     return token; 
 }
