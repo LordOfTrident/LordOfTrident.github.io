@@ -25,8 +25,9 @@ const tokenType = Object.freeze({
     operator: Symbol(6),
     separator: Symbol(7),
     terminator: Symbol(8),
-    string: Symbol(9),
-    newline: Symbol(10)
+    escaped: Symbol(9),
+    string: Symbol(10),
+    newline: Symbol(11)
 });
 
 
@@ -83,6 +84,18 @@ function isSeparator(c) {
 
 function isTerminator(c) {
     return (c == ";");
+}
+
+function isEscaped(c) {
+    return (c == "\\");
+}
+
+function isHex(c) {
+    return (
+        ((c >= "a") && (c <= "f")) ||
+        ((c >= "A") && (c <= "F")) ||
+        ((c >= "0") && (c <= "9"))
+    );
 }
 
 function createDirective(parentID, lexeme) {
@@ -148,11 +161,18 @@ function createSeparator(parentID, lexeme) {
     document.getElementById(parentID).appendChild(separator);
 }
 
-function collectTerminator(parentID, lexeme) {
+function createTerminator(parentID, lexeme) {
     let terminator = document.createElement("span");
     terminator.classList.add("tok", "tok-term");
     terminator.innerText = lexeme;
     document.getElementById(parentID).appendChild(terminator);
+}
+
+function createEscaped(parentID, lexeme) {
+    let escaped = document.createElement("span");
+    escaped.classList.add("tok", "tok-escape");
+    escaped.innerText = lexeme;
+    document.getElementById(parentID).appendChild(escaped);
 }
 
 function createLine(parentID, ID) {
@@ -181,6 +201,9 @@ function createToken(parentID, token) {
         return true;
     case tokenType.operator:
         createOperator(parentID, token.lexeme);
+        return true;
+    case tokenType.escaped:
+        createEscaped(parentID, token.lexeme);
         return true;
     case tokenType.separator:
         createSeparator(parentID, token.lexeme);
@@ -359,7 +382,7 @@ function collectSeparator(lexer) {
     const start = lexer.offset;
     lexerAdvance(lexer);
     return {
-        type: tokenType.operator,
+        type: tokenType.separator,
         lexeme: lexer.buffer.substr(start, lexer.offset - start)
     };
 }
@@ -368,7 +391,56 @@ function collectTerminator(lexer) {
     const start = lexer.offset;
     lexerAdvance(lexer);
     return {
-        type: tokenType.operator,
+        type: tokenType.terminator,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    };
+}
+
+function collectEscaped(lexer) {
+    const start = lexer.offset;
+    lexerAdvance(lexer);
+
+    switch(lexerCurr(lexer)) {
+    case "a":
+    case "b":
+    case "e":
+    case "f":
+    case "n":
+    case "r":
+    case "t":
+    case "v":
+    case "\\":
+    case "\'":
+    case "\"":
+        lexerAdvance(lexer);
+        return {
+            type: tokenType.escaped,
+            lexeme: lexer.buffer.substr(start, lexer.offset - start)
+        };
+    case "x":
+        lexerAdvance(lexer);
+        do {
+            if(!isHex(lexerCurr(lexer))) break;
+        } while(lexerAdvance(lexer));
+        break;
+    case "u":
+    case "U":
+        let n = 0;
+        lexerAdvance(lexer);
+
+        do {
+            if(!isHex(lexerCurr(lexer))) break;
+
+            n++;
+            if(((n == 4) && (!isHex(lexerNext(lexer)))) || (n == 8)) break;
+        } while(lexerAdvance(lexer));
+        break;
+    default:
+        break;
+    }
+
+    return {
+        type: tokenType.escaped,
         lexeme: lexer.buffer.substr(start, lexer.offset - start)
     };
 }
@@ -378,6 +450,7 @@ function lexerLex(lexer) {
     if(isDigit(lexerCurr(lexer))) return collectNumber(lexer);
     if(isTerminator(lexerCurr(lexer))) return collectTerminator(lexer);
     if(isSeparator(lexerCurr(lexer))) return collectSeparator(lexer);
+    if(isEscaped(lexerCurr(lexer))) return collectEscaped(lexer);
     if(isString(lexerCurr(lexer))) {
         return collectString(lexer);
     }
