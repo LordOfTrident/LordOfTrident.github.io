@@ -122,8 +122,7 @@ function populateCodeBlocks() {
     lexer.buffer = functionsExampleSource;
     lexer.offset = 0;
     createCodeBlock("functions-example-source", lexer);
-    // lexer.buffer = functionsExampleHeader;
-    lexer.buffer = "\\ tlt";
+    lexer.buffer = functionsExampleHeader;
     lexer.offset = 0;
     createCodeBlock("functions-example-header", lexer);
 
