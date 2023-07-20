@@ -180,15 +180,19 @@ function lexerAdvance(lexer) {
     return true;
 }
 
+function lexerNewToken(lexer, type, start) {
+    return {
+        type: type,
+        lexeme: lexer.buffer.substr(start, lexer.offset - start)
+    }
+}
+
 function collectDirective(lexer) {
     const start = lexer.offset;
     do {
         if(!isLocase(lexerCurr(lexer))) break;
     } while(lexerAdvance(lexer));
-    return {
-        type: tokenType.directive,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.directive, start);
 }
 
 function collectIdentifier(lexer) {
@@ -196,10 +200,7 @@ function collectIdentifier(lexer) {
     do {
         if(!isIdentifier(lexerCurr(lexer))) break;
     } while(lexerAdvance(lexer));
-    return {
-        type: tokenType.identifier,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.identifier, start);
 }
 
 function collectNumber(lexer) {
@@ -211,55 +212,42 @@ function collectNumber(lexer) {
             if(lexerCurr(lexer) == ".") float = true;
             if(float) break;
 
-            return {
-                type: tokenType.number,
-                lexeme: lexer.buffer.substr(start, lexer.offset - start)
-            };
+            return lexerNewToken(lexer, tokenType.number, start, start);
         }
     } while(lexerAdvance(lexer));
 
     do {
         if(!isDigit(lexerCurr(lexer))) break;
     } while(lexerAdvance(lexer));
-    return {
-        type: tokenType.number,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.number, start);
 }
 
 function collectWhitespace(lexer) {
     const start = lexer.offset;
-    let token = {
-        type: tokenType.text,
-        lexeme: ""
-    };
 
     do {
         if(!isWhitespace(lexerCurr(lexer))) break;
         if(lexerCurr(lexer) == "\n") {
             lexerAdvance(lexer);
-            token.type = tokenType.newline,
-            token.lexeme = lexer.buffer.substr(start, lexer.offset - start)
-            return token;
+            return lexerNewToken(lexer, tokenType.newline, start);
         };
     } while(lexerAdvance(lexer));
-    token.lexeme = lexer.buffer.substr(start, lexer.offset - start);
-    return token;
+
+    return lexerNewToken(lexer, tokenType.text, start);
 }
 
 function collectString(lexer) {
     const start = lexer.offset;
     const opening = lexerCurr(lexer);
     const closing = (opening == "<")? ">" : lexerCurr(lexer);
+
     lexerAdvance(lexer);
+
     do {
         if(lexerCurr(lexer) == closing) break;
     } while(lexerAdvance(lexer));
     lexerAdvance(lexer);
-    return {
-        type: tokenType.string,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.string, start);
 }
 
 function collectComment(lexer) {
@@ -275,10 +263,7 @@ function collectLineComment(lexer) {
     do {
         if(lexerCurr(lexer) == "\n") break;
     } while(lexerAdvance(lexer));
-    return {
-        type: tokenType.comment,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.comment, start);
 }
 
 function collectMultiLineComment(lexer) {
@@ -292,10 +277,7 @@ function collectMultiLineComment(lexer) {
             break;
         }
     } while(lexerAdvance(lexer));
-    return {
-        type: tokenType.comment,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.comment, start);
 }
 
 function collectOperator(lexer) {
@@ -305,28 +287,19 @@ function collectOperator(lexer) {
     do {
         if(!isOperator(lexerCurr(lexer))) break;
     } while(lexerAdvance(lexer));
-    return {
-        type: tokenType.operator,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.operator, start);
 }
 
 function collectSeparator(lexer) {
     const start = lexer.offset;
     lexerAdvance(lexer);
-    return {
-        type: tokenType.separator,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.separator, start);
 }
 
 function collectTerminator(lexer) {
     const start = lexer.offset;
     lexerAdvance(lexer);
-    return {
-        type: tokenType.terminator,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.terminator, start);
 }
 
 function collectEscaped(lexer) {
@@ -346,10 +319,7 @@ function collectEscaped(lexer) {
     case "\'":
     case "\"":
         lexerAdvance(lexer);
-        return {
-            type: tokenType.escaped,
-            lexeme: lexer.buffer.substr(start, lexer.offset - start)
-        };
+        return lexerNewToken(lexer, tokenType.escaped, start);
     case "x":
         lexerAdvance(lexer);
         do {
@@ -372,10 +342,7 @@ function collectEscaped(lexer) {
         break;
     }
 
-    return {
-        type: tokenType.escaped,
-        lexeme: lexer.buffer.substr(start, lexer.offset - start)
-    };
+    return lexerNewToken(lexer, tokenType.escaped, start);
 }
 
 function lexerLex(lexer) {
