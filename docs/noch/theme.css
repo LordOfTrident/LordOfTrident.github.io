@@ -9,13 +9,14 @@
 	--color-tok-keyword: #fc4798; /* f54091 */
 	--color-tok-escape:  #be68fc;
 	--color-tok-comment: #828282;
-	--color-tok-sep: #ffffff;
-	--color-tok-op: #ffffff;
-	--color-tok-term: #ffffff;
 }
 
 :root.light {
 	--color-accent-bg: #9883d0; /* 257ad5, 4295ef */
+
+	--color-tok-sep:  #333333;
+	--color-tok-op:   #333333;
+	--color-tok-term: #333333;
 }
 
 :root.dark {
@@ -24,4 +25,8 @@
 	--color-bg:       #0a1e2f;
 	--color-back:     #001a28;
 	--color-back-alt: #1c2c42;
+
+	--color-tok-sep:  #dddddd;
+	--color-tok-op:   #dddddd;
+	--color-tok-term: #dddddd;
 }
