@@ -383,6 +383,22 @@ span.tok-comment {
 	color: var(--color-tok-comment);
 }
 
+span.tok-sep {
+	color: var(--color-tok-sep);
+}
+
+span.tok-op {
+	color: var(--color-tok-op);
+}
+
+span.tok-term {
+	color: var(--color-tok-term);
+}
+
+span.tok-text, span.tok-id {
+	font-weight: 400;
+}
+
 h1 {
 	font-size: 2rem;
 }
