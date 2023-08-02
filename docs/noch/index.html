@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>noch | Documentation</title>
-	<meta property="og:title" content="noch | Documentation">
+	<title>Noch | Documentation</title>
+	<meta property="og:title" content="Noch | Documentation">
 
-	<meta name="description" content="noch documentation ">
+	<meta name="description" content="Noch documentation">
 	<meta property="og:description" content="Documentation template">
 
 	<meta name="keywords" content="LordOfTrident, Trident, TR-ED, Trident Editor">
@@ -134,31 +134,17 @@
 					<section class="doc-section">
 						<h1 id="introduction">Introduction</h1>
 						<p>
-							<b>noch</b> is a collection of <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a>
-							libraries which contain useful things like command line argument parsing, filesystem functions etc.
+							<b>Noch</b> (Not <a href="https://github.com/lordoftrident/chol">Chol</a>) is an ever-growing bundle of convenient <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a> libraries that enables developers to reduce code repetition. Noch addresses reoccurring cases like parsing command line arguments and abstracting filesystem functions, so you can get to what matters promptly.
 						</p>
-
 						<p>
-							The libraries are not dynamically nor statically linked. Instead, they are supposed to be included into the source code and compiled with it.
+							These libraries are designed to be included and compiled alongside your code. Because most header files have a single corresponding source file, if that, statically or dynamically linking such is merely overkill.
 						</p>
-
 					</section>
 					<section class="doc-section">
 						<h1 id="motivation">Motivation</h1>
 						<p>
-							The motivation behind noch is that i find myself writing the same code for every C program. So instead of doing that, i decided to put
-							the functions in a few libraries.
+							The driving force behind Noch stems from the repetitive nature of coding in C programs. I found myself writing the same functions across multiple projects. After a while there came a point where continuing this pattern any further was no longer practical. It was time to encapsulate these various functions once and for all, so came the birth of Noch (successor to Chol).
 						</p>
-						<p>
-							But i didnt wanna have them as separate repos, because some of the libraries could use another library
-							for some features and stuff (for example log.h could use colorer.h for terminal output colors), but it would also introduce a lot of repos
-							for just single header libraries, more dependencies and more git submodules.
-						</p>
-
-						<p>
-							So i decided to pack those libraries in noch, using the same format and code rules.
-						</p>
-
 					</section>
 					<section class="doc-section">
 						<h1 id="usage">Usage</h1>
@@ -203,11 +189,8 @@
 					<section class="doc-section">
 						<h1 id="config">Config</h1>
 						<p>
-							noch has config macros to allow for more flexibility. Some libraries also have
-							their own config macros. These macros can be defined before including noch libraries to configure noch. For example, you can define
-							the <span class="inline-code">NOCH_ASSERT</span> like so:
+							To allow for the most flexibility, Noch provides several macros that can be redefined to extend and/or alter functionality. These macros can be defined prior to or following any included Noch headers. Here is an example using the <span class="inline-code">NOCH_ASSERT</span> macro from <span class="inline-code">&lt;noch/internal/assert.h&gt;</span>:
 						</p>
-
 						<div class="code">
 							<header class="code-header">
 								<p>Example</p>
@@ -223,11 +206,7 @@
 						</div>
 
 						<p>
-							And now the entire noch library will use this assert instead of the default standard library one.
-						</p>
-
-						<p>
-							You can find the definitions of these macros in the <a href="https://github.com/LordOfTrident/noch/tree/main/internal/" target="_blank">internal folder</a>
+							The entire Noch library will use this assert rather than the default. You can find the default definitions of this macro and others here in the <a href="https://github.com/LordOfTrident/noch/tree/main/internal/" target="_blank">internal folder</a>. By default, these macros use functions from the C standard library.
 						</p>
 
 						<h2 id="NOCH_DEF">Macro <span class="inline-code">NOCH_DEF</span></h2>
@@ -236,7 +215,7 @@
 						</div>
 
 						<p>
-							Included in front of noch function definitions.
+							Included in front of Noch function definitions.
 						</p>
 
 						<h2 id="NOCH_ASSERT">Macro <span class="inline-code">NOCH_ASSERT</span></h2>
@@ -245,8 +224,7 @@
 						</div>
 
 						<p>
-							Used for assert statements in the noch implementations. On default, it includes
-							<span class="inline-code">assert.h</span>.
+							Used for assertions within Noch implementations.
 						</p>
 
 						<h3>Parameters</h3>
@@ -267,8 +245,7 @@
 						</div>
 
 						<p>
-							Used to allocate memory in the noch implementations. On default, it includes
-							<span class="inline-code">stdlib.h</span>.
+							Used to allocate memory in the Noch implementations.
 						</p>
 
 						<h3>Parameters</h3>
@@ -289,8 +266,7 @@
 						</div>
 
 						<p>
-							Used to reallocate memory. On default, it includes
-							<span class="inline-code">stdlib.h</span>.
+							Used to reallocate memory.
 						</p>
 
 						<h3>Parameters</h3>
@@ -315,8 +291,7 @@
 						</div>
 
 						<p>
-							Used to free memory. On default, it includes
-							<span class="inline-code">stdlib.h</span>.
+							Used to free memory.
 						</p>
 
 						<h3>Parameters</h3>
@@ -348,7 +323,7 @@
 
 						<h2 id="rules-structure">Structure</h2>
 						<p>
-							Each noch library has a <span class="inline-code">.h</span> file and a <span class="inline-code">.c</span> file.
+							Each Noch library has a <span class="inline-code">.h</span> file and a <span class="inline-code">.c</span> file.
 							The <span class="inline-code">.h</span> contains declarations like a normal header file. See the template below.
 						</p>
 
