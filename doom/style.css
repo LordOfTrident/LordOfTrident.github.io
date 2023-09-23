@@ -1,0 +1,167 @@
+html, body {
+	margin:  0;
+	padding: 0;
+
+	font-size:   1em;
+	font-family: sans serif;
+}
+
+body {
+	background-image:    url("/res/imgs/doom-back.png");
+	background-size:     cover;
+	background-position: 50% 0%;
+}
+
+@media screen and (max-width: 760px) {
+	html, body {
+		font-size: 0.9em !important; /* 15px */
+	}
+}
+
+#logo {
+	width:   18rem;
+	margin:  0 auto;
+	display: block;
+}
+
+h1, h2 {
+	color:       #dd3322;
+	text-shadow: 0 0.2rem 0.5rem #00000055;
+}
+
+p {
+	color: #ffffff;
+}
+
+.note {
+	color:     #ffffff55;
+	font-size: 0.9rem;
+	text-align: center;
+
+	margin-top:    0;
+	margin-bottom: 0.8rem;
+}
+
+a {
+	color: #3388ff !important;
+
+	font-weight: bold;
+}
+
+#title {
+	margin-top: 0;
+	top:        -2rem;
+	position:   relative;
+	text-align: center;
+}
+
+ul.wads {
+	list-style-type:  none;
+	background-color: #00000044;
+
+	padding: 1rem;
+	display: flex;
+
+	flex-wrap:       wrap;
+	justify-content: center;
+
+	border-radius: 5px;
+
+	border: 3px solid #00000022;
+
+	width:  fit-content;
+	margin: 0 auto;
+
+	margin-bottom: 2rem;
+}
+
+ul.wads a {
+	display:       block;
+	margin-bottom: 0.8rem;
+}
+
+ul.wads img {
+	width: 5rem;
+}
+
+ul.wads li {
+	margin: 1rem 1rem;
+
+	text-align: center;
+}
+
+#footage {
+	margin:  0 auto;
+	display: block;
+	width:   80%;
+
+	margin-top:    4rem;
+	margin-bottom: 1rem;
+
+	border-radius: 5px;
+
+	box-shadow: 0 0.2rem 1rem #00000055;
+}
+
+.container {
+	padding: 1rem;
+
+	max-width: 800px;
+	margin:    0 auto;
+	display:   block;
+
+	box-shadow: 0 0.2rem 1rem #00000055;
+}
+
+main {
+	background-image: url("/res/imgs/slime.png");
+	background-size:  5rem 5rem;
+
+	border: 4px solid #221d18;
+}
+
+footer {
+	background-color: #000000;
+
+	border: 4px solid #0000;
+}
+
+footer p {
+	text-align: center;
+
+	color: #ffffffcc;
+}
+
+.love {
+	color: #ff4433;
+	font-weight: bold;
+}
+
+span.inline-code {
+	font-family: monospace;
+	color:       #ffcc44;
+	font-weight: bold;
+	background-color: #00000055;
+	padding: 0.2rem;
+}
+
+ul.badges {
+	display:         flex;
+	justify-content: center;
+	flex-wrap:       wrap;
+
+	padding: 0;
+
+	list-style: none;
+
+	margin-top:    4rem;
+	margin-bottom: 0;
+}
+
+ul.badges a:hover {
+	background-color: transparent !important;
+}
+
+ul.badges li {
+	padding: 0.2rem;
+}
