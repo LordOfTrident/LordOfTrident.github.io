@@ -48,11 +48,13 @@ html, body, * {
 	--color-tool-micro:  #2e3192;
 	--color-tool-c:      #03599c;
 	--color-tool-cxx:    #9c033a;
-	--color-tool-golang: #0cb2db;
+	--color-tool-golang: #0cb2db; /* #007d9c */
 	--color-tool-lua:    #000080;
 	--color-tool-html:   #e44d26;
 	--color-tool-css:    #1572b6;
 	--color-tool-pascal: #e7a51f;
+	--color-tool-elixir: #842db2;
+	--color-tool-nim:    #efc743;
 }
 
 .shadow {
@@ -621,6 +623,9 @@ div.tool img {
 	margin:  0 auto;
 
 	width:  3em;
+}
+
+div.tool:not(.no-filter) img {
 	filter: invert(100%) brightness(1000%);
 }
 
@@ -730,3 +735,18 @@ div.tool#tool-pascal {
 	background-color: var(--color-tool-pascal);
 }
 
+div.tool#tool-elixir img {
+	content: url("/res/imgs/elixir.png");
+}
+
+div.tool#tool-elixir {
+	background-color: var(--color-tool-elixir);
+}
+
+div.tool#tool-nim img {
+	content: url("/res/imgs/nim.png");
+}
+
+div.tool#tool-nim {
+	background-color: var(--color-tool-nim);
+}
