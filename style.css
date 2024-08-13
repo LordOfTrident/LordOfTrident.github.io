@@ -52,6 +52,7 @@ html, body, * {
 	--color-tool-lua:    #000080;
 	--color-tool-html:   #e44d26;
 	--color-tool-css:    #1572b6;
+	--color-tool-js:     #f0db4f;
 	--color-tool-pascal: #e7a51f;
 	--color-tool-elixir: #842db2;
 	--color-tool-nim:    #efc743;
@@ -629,6 +630,10 @@ div.tool:not(.no-filter) img {
 	filter: invert(100%) brightness(1000%);
 }
 
+div.tool.black-filter img {
+	filter: brightness(0%);
+}
+
 div.tool p {
 	color: #ffffff;
 }
@@ -725,6 +730,14 @@ div.tool#tool-css img {
 
 div.tool#tool-css {
 	background-color: var(--color-tool-css);
+}
+
+div.tool#tool-js img {
+	content: url("https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg");
+}
+
+div.tool#tool-js {
+	background-color: var(--color-tool-js);
 }
 
 div.tool#tool-pascal img {
