@@ -56,6 +56,7 @@ html, body, * {
 	--color-tool-pascal: #e7a51f;
 	--color-tool-elixir: #842db2;
 	--color-tool-nim:    #efc743;
+	--color-tool-ocaml:  #ef7f0a;
 }
 
 .shadow {
@@ -762,4 +763,12 @@ div.tool#tool-nim img {
 
 div.tool#tool-nim {
 	background-color: var(--color-tool-nim);
+}
+
+div.tool#tool-ocaml img {
+	content: url("https://raw.githubusercontent.com/devicons/devicon/master/icons/ocaml/ocaml-plain.svg");
+}
+
+div.tool#tool-ocaml {
+	background-color: var(--color-tool-ocaml);
 }
