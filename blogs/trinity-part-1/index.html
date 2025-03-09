@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+
+
+  <style> html{font-size:62.5%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;}body{font-size:1.8rem;line-height:1.618;max-width:38em;margin:auto;color:#4a4a4a;background-color:#f9f9f9;padding:13px;}@media (max-width:684px){body{font-size:1.53rem;}}@media (max-width:382px){body{font-size:1.35rem;}}h1,h2,h3,h4,h5,h6{line-height:1.1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;font-weight:700;margin-top:3rem;margin-bottom:1.5rem;overflow-wrap:break-word;word-wrap:break-word;-ms-word-break:break-all;word-break:break-word;}h1{font-size:2.35em;}h2{font-size:2em;}h3{font-size:1.75em;}h4{font-size:1.5em;}h5{font-size:1.25em;}h6{font-size:1em;}p{margin-top:0px;margin-bottom:2.5rem;}small,sub,sup{font-size:75%;}hr{border-color:#1d7484;}a{text-decoration:none;color:#1d7484;}a:visited{color:#144f5a;}a:hover{color:#982c61;border-bottom:2px solid #4a4a4a;}ul{padding-left:1.4em;margin-top:0px;margin-bottom:2.5rem;}li{margin-bottom:0.4em;}blockquote{margin-left:0px;margin-right:0px;padding-left:1em;padding-top:0.8em;padding-bottom:0.8em;padding-right:0.8em;border-left:5px solid #1d7484;margin-bottom:2.5rem;background-color:#f1f1f1;}blockquote p{margin-bottom:0;}img,video{height:auto;max-width:100%;margin-top:0px;margin-bottom:2.5rem;}pre{background-color:#f1f1f1;display:block;padding:1em;overflow-x:auto;margin-top:0px;margin-bottom:2.5rem;font-size:0.9em;}code,kbd,samp{font-size:0.9em;padding:0 0.5em;background-color:#f1f1f1;white-space:pre-wrap;}pre>code{padding:0;background-color:transparent;white-space:pre;font-size:1em;}table{text-align:justify;width:100%;border-collapse:collapse;}td,th{padding:0.5em;border-bottom:1px solid #f1f1f1;}input,textarea{border:1px solid #4a4a4a;}input:focus,textarea:focus{border:1px solid #1d7484;}textarea{width:100%;}.button,button,input[type=submit],input[type=reset],input[type=button]{display:inline-block;padding:5px 10px;text-align:center;text-decoration:none;white-space:nowrap;background-color:#1d7484;color:#f9f9f9;border-radius:1px;border:1px solid #1d7484;cursor:pointer;box-sizing:border-box;}.button[disabled],button[disabled],input[type=submit][disabled],input[type=reset][disabled],input[type=button][disabled]{cursor:default;opacity:0.5;}.button:focus:enabled,.button:hover:enabled,button:focus:enabled,button:hover:enabled,input[type=submit]:focus:enabled,input[type=submit]:hover:enabled,input[type=reset]:focus:enabled,input[type=reset]:hover:enabled,input[type=button]:focus:enabled,input[type=button]:hover:enabled{background-color:#982c61;border-color:#982c61;color:#f9f9f9;outline:0;}textarea,select,input{color:#4a4a4a;padding:6px 10px;margin-bottom:10px;background-color:#f1f1f1;border:1px solid #f1f1f1;border-radius:4px;box-shadow:none;box-sizing:border-box;}textarea:focus,select:focus,input:focus{border:1px solid #1d7484;outline:0;}input[type=checkbox]:focus{outline:1px dotted #1d7484;}label,legend,fieldset{display:block;margin-bottom:0.5rem;font-weight:600;}</style>
+
+  <title>Creating a Retro 2.5D Engine (Trinity Part 1)</title>
+</head>
+
+<body>
+  <main id="root" class="container">
+    <h1>Creating a Retro 2.5D Engine (Trinity Part 1)</h1>
+<div align="center">
+<p><a href="/">Home</a> · <a href="/blogs">Blogs</a> · <a href="/blogs/trinity-part-2">Part 2</a></p>
+</div>
+<details>
+	<summary>Table of contents</summary>
+	<ul>
+		<li>
+			<a href="#introduction">Introduction</a>
+			<ul>
+				<li><a href="#raycasters">Raycasters</a></li>
+				<li><a href="#raycasting-vs-doom-build-style">Raycasting vs Doom/Build-style</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#boilerplate-and-basic-functionality">Boilerplate and Basic Functionality</a>
+			<ul>
+				<li><a href="#defining-constants">Defining Constants</a></li>
+				<li><a href="#camera-setup-and-movement">Camera Setup and Movement</a></li>
+				<li><a href="#engine-setup-cleanup">Engine Setup/Cleanup</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#2d-visualization">2D Visualization</a>
+			<ul>
+				<li><a href="#transforming-world-space-to-camera-space">Transforming World Space to Camera Space</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#3d-projection">3D Projection</a>
+			<ul>
+				<li><a href="#line-clipping">Line Clipping</a></li>
+				<li><a href="#field-of-view">Field of View</a></li>
+				<li><a href="#wall-filling">Wall Filling</a></li>
+				<li><a href="#edge-case">Edge Case</a></li>
+			</ul>
+		</li>
+		<li><a href="#trinity">Trinity</a></li>
+		<li><a href="#full-code">Full Code</a></li>
+	</ul>
+</details>
+<h2 id="introduction">Introduction</h2>
+<p>I've always found software-rendering fascinating. The idea of manually drawing everything
+pixel-by-pixel and optimizing performance to make it work efficiently is just really fun - and so
+is building things yourself from scratch, and software rendering is about as close to &quot;ground zero&quot;
+as you can get when it comes to graphics programming.</p>
+<p>3D games, or, at least games that appear 3D, are also really fun. That's why old games like <a href="https://en.wikipedia.org/wiki/Doom_(1993_video_game)">Doom</a>,
+<a href="https://en.wikipedia.org/wiki/Quake_(video_game)">Quake</a> and even <a href="https://en.wikipedia.org/wiki/Half-Life_(video_game)">Half-Life</a>
+(with its software renderer enabled) appeal to people. Not just because they're fun to play, but
+also because of the technology behind them. Doom especially has seemed to always stand out, with its
+big and loving community constantly making new maps and mods. Its rough, pixelated, 256-color
+aesthetic is just really cool, and I've always wondered how it manages to render these complex,
+seemingly 3D levels so efficiently using software-rendering.</p>
+<h3 id="raycasters">Raycasters</h3>
+<p>To uncover this mystery, and satisfy my love of reinventing the wheel, I've made multiple attempts
+at writing a <a href="https://lodev.org/cgtutor/raycasting.html">raycaster</a>, which is a very basic
+software-rendering technique used in games such as <a href="https://en.wikipedia.org/wiki/Wolfenstein_3D">Wolfenstein 3D</a>.
+Raycasting turns a simple 2D tile-based map into a 3D-looking world. My very first attempts were
+mostly blind, using code and mathematics I really didn't understand. My earliest real attempt, where
+I tried to do it all by myself, was my <a href="https://www.youtube.com/watch?v=oISXIpo1p5M">3D Pascal raycaster using SDL2</a>,
+which I made over 4 years ago, when I was around 13. It felt really exciting, even though my code
+was terrible and my rendering method even worse. You can see the issues in the video - the weird
+&quot;staircase&quot; effect on the edges of walls. It's there because instead of using the proper <a href="https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/">DDA</a>
+method, I simply advanced the casted rays by tiny steps. Making those steps really short for
+precision would slow down rendering, so I had to find a balance, which led to the visible
+distortion.</p>
+<div align="center"><img src="img1.png" width="90%"></div>
+<p>I addressed this issue in the <a href="https://www.youtube.com/watch?v=1eSF2SF-pSI">follow-up version of the raycaster</a>,
+where I implemented the proper DDA technique, because I've taken the time to try to actually
+understand it. This fixed the staircase issue, however, it revealed a different issue - a
+perspective distortion effect, which was caused by my incorrect angle calculations for each ray. I
+was simply incrementing the ray angle by a fixed value in a for-loop without making sure it properly
+aligns with the current screen column.</p>
+<div align="center"><img src="img2.png" width="90%"></div>
+<blockquote>
+<p><em>If you want to read more about raycasting and its specifics, check out  <a href="https://lodev.org/cgtutor/raycasting.html">Lode's raycasting tutorial</a>.</em></p>
+</blockquote>
+<p>A couple of years later (around 2 years ago), I began making a 2.5D software-rendered raycasting
+game engine engine. I had attempted something similar shortly after my Pascal raycaster, but failed
+because I did not have enough experience and skill for such a big project. This time, however, I
+felt like I could take it further than before. The previous attempt was in <a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a>,
+but knowing how performance-sensitive raycasters are from experience, I decided to choose <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a>
+this time.</p>
+<p>I ended up rewriting the engine 3 times due to bad design choices and messy code. During the first
+rewrite, I named the engine Trinity. It's a cool-sounding word I remembered from some
+<a href="https://www.roblox.com/games/1600503/Apocalypse-Rising">post-apocalyptic Roblox game</a> (no shame).
+It could also be seen as a reference to the existing game engine <a href="https://unity.com/">Unity</a>. In
+this version, I played around with a map editor and angled walls. I wanted something more advanced
+than just the basic block-based raycaster seen in Wolfenstein 3D.</p>
+<p>In the second and third rewrites, I introduced floor and ceiling height (similar to Doom) using a
+concept I called &quot;sectors&quot;, since it shares similarities with Doom's sectors - a sector has a single
+floor and ceiling height. I also implemented a procedural water animation with 3D-looking waves.</p>
+<div align="center"><img src="img3.png" width="90%"></div>
+<blockquote>
+<p><em>If you're interested, you can read more about <a href="https://github.com/trinity-engine/.github/blob/main/profile/history.md">Trinity history</a>.</em></p>
+</blockquote>
+<h3 id="raycasting-vs-doom-build-style">Raycasting vs Doom/Build-style</h3>
+<p>However, I started running into performance issues, and I never managed to properly integrate angled
+walls with varying floor/ceiling height. I realised that making an advanced raycaster takes too much
+effort and it's not even worth it - it isn't very fast or flexible. This lead to the decision to
+scrap the raycasting idea entirely. A Doom-style engine would be faster and much more flexible.</p>
+<p>Unlike a raycaster, makes use of a 2D tile grid, a Doom-style engine uses sectors enclosed by lines
+on a 2D map. This naturally allows for walls at any angle, without any width or height limitations
+at all.</p>
+<div align="center"><img src="visual1.png" width="90%"></div>
+<p>With that decision, I started the fourth (and current) rewrite of Trinity a few months ago. This
+time, I avoided the mistakes of my previous rewrites by first developing the skeleton of the
+application and engine before geting into the actual 2.5D rendering. I made a software-rendered UI,
+a game file browser, a Lua-based build system and some basic file formats, getting to around 4000
+lines of code (measured with <a href="https://github.com/AlDanial/cloc">cloc</a>).</p>
+<p>Just a few days ago, I finally started working on the 2.5D renderer. Specifically, I decided to
+go for a <a href="https://en.wikipedia.org/wiki/Build_(game_engine)">Build</a>-style renderer rather than a
+Doom-style one, since it's simpler. I've never implemented a Build-style renderer before, so I
+thought it could be fun to document my journey as I figure it all out.</p>
+<p>So far, I've implemented basic 2.5D wall filling and clipping. That might not seem like much (and it
+really isn't), but it's enough to start off this blog series.</p>
+<div align="center"><img src="img4.png" width="90%"></div>
+<blockquote>
+<p><em>This is not supposed to be an actual tutorial for Build-style engines, I simply explain how I did
+things, and I can't guarantee that my solutions are 100% correct.</em></p>
+</blockquote>
+<h2 id="boilerplate-and-basic-functionality">Boilerplate and Basic Functionality</h2>
+<p>So, first things first, we need some boilerplate code. I assume anyone reading this already knows
+basic C well enough, so I won't explain basic syntax or other parts of the Trinity source code,
+which are not relevant. The main focus is the 2.5D renderer. Functions defined elsewhere in my code
+should be self-explanatory from their name.</p>
+<p>The 3 main structures we need to define are a point, a wall and a camera:</p>
+<pre><code class="language-c">typedef struct {
+	double x, y;
+} T_Point;
+
+#define T_NewPoint(X, Y) (T_Point){.x = X, .y = Y}
+
+typedef struct {
+	T_Point a, b;
+} T_Wall;
+
+typedef struct {
+	T_Point p;
+	double  z, fov, dir, sin, cos, plane;
+} T_Cam;
+
+static T_Cam t_cam;
+</code></pre>
+<ul>
+<li>The <code>z</code> member represents the z-height of the camera in 3D space (up/down).</li>
+<li><code>sin</code> and <code>cos</code> are pre-calculated from the camera's angle (<code>dir</code>).</li>
+<li><code>plane</code> is the length of the camera plane, calculated from the field of view (<code>fov</code>) using the
+tangent function:</li>
+</ul>
+<pre><code class="language-math math-display">\begin{aligned}
+\text{plane} = \tan\frac{\text{fov}}{2}
+\end{aligned}
+</code></pre>
+<p>Here's a visualization:</p>
+<div align="center"><img src="visual2.png" width="90%"></div>
+<p>In this image, the field of view is set to 90 degrees, which is the angle we'll use for now, until
+we add a proper field of view calculation into the projection.</p>
+<h3 id="defining-constants">Defining Constants</h3>
+<p>We'll need to define some constants for scaling (for a 2D visualization), the field of view, camera
+movement and rotation speed:</p>
+<pre><code class="language-c">#define T_SCALE      30
+#define T_PADDING    10
+#define T_FOV        T_DegToRad(90)
+#define T_MOVE_SPEED 0.003
+#define T_ROT_SPEED  0.001
+</code></pre>
+<p>For debugging purposes, we will render both a 2D and 3D visualization in 2 separate viewports.
+Let's define a struct for those:</p>
+<pre><code class="language-c">typedef struct {
+	T_Rect r;
+	int    cx, cy;
+} T_RenderArea;
+
+T_INLINE T_RenderArea T_NewRenderArea(T_Rect rect) {
+	return (T_RenderArea){
+		.r  = rect,
+		.cx = rect.w/2,
+		.cy = rect.h/2,
+	};
+}
+
+static T_RenderArea t_ra2d, t_ra3d;
+</code></pre>
+<p>Each <code>T_RenderArea</code> has a viewport rectangle (<code>r</code>) and its center coordinates (<code>cx</code>, <code>cy</code>) which
+makes it easier to work with.</p>
+<h3 id="camera-setup-and-movement">Camera Setup and Movement</h3>
+<p>Now, we need some functions to initialize, move, and rotate the camera:</p>
+<pre><code class="language-c">void T_SetupCam(T_Cam *cam, T_Point p, double z, double fov, double dir) {
+	*cam = (T_Cam){
+		.p     = p,
+		.z     = z,
+		.fov   = fov,
+		.plane = tan(fov/2),
+	};
+	T_RotateCam(cam, dir);
+}
+
+void T_RotateCam(T_Cam *cam, double angle) {
+	cam-&gt;dir += angle;
+	cam-&gt;sin  = sin(cam-&gt;dir);
+	cam-&gt;cos  = cos(cam-&gt;dir);
+}
+
+void T_MoveCamForward(T_Cam *cam, double step) {
+	cam-&gt;p.x += cam-&gt;cos * step;
+	cam-&gt;p.y += cam-&gt;sin * step;
+}
+
+void T_MoveCamBackward(T_Cam *cam, double step) {
+	cam-&gt;p.x -= cam-&gt;cos * step;
+	cam-&gt;p.y -= cam-&gt;sin * step;
+}
+
+void T_MoveCamLeft(T_Cam *cam, double step) {
+	cam-&gt;p.x -= cam-&gt;sin * step;
+	cam-&gt;p.y += cam-&gt;cos * step;
+}
+
+void T_MoveCamRight(T_Cam *cam, double step) {
+	cam-&gt;p.x += cam-&gt;sin * step;
+	cam-&gt;p.y -= cam-&gt;cos * step;
+}
+</code></pre>
+<p>These functions use simple trigonometry to turn the camera's direction (<code>dir</code>) into a 2D offset by
+which we move the camera's x and y positions. See the visualization:</p>
+<div align="center"><img src="visual3.png" width="90%"></div>
+<ul>
+<li><code class="language-math math-inline">\alpha</code> = camera angle</li>
+<li><code class="language-math math-inline">C_\text{cam}</code> = camera point (position)</li>
+<li><code class="language-math math-inline">\vec{v_\text{f}}</code>, <code class="language-math math-inline">\vec{v_\text{l}}</code>, <code class="language-math math-inline">\vec{v_\text{r}}</code>, <code class="language-math math-inline">\vec{v_\text{b}}</code> = forward, left,
+right and backward movement vectors, respectively</li>
+</ul>
+<p>According to the visualization, we can calculate forward movement like so:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+\vec{v_\text{f}} = C_\text{cam} + l_\text{step}\left(\cos\alpha,\sin\alpha\right)
+\end{aligned}
+</code></pre>
+<p>Backward movement is the opposite to forward movement, so we can subtract instead of adding:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+\vec{v_\text{b}} = C_\text{cam} - l_\text{step}\left(\cos\alpha,\sin\alpha\right)
+\end{aligned}
+</code></pre>
+<p>Left and right movement vectors are perpendicular to the camera angle, so we can add and subtract 90
+degrees (<code class="language-math math-inline">\pm\frac{\pi}{2}</code>) from the camera angle to calculate the movement:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+\vec{v_\text{l}} &amp;= C_\text{cam} + l_\text{step}\left(\cos\left(\alpha+\frac{\pi}{2}\right),\sin\left(\alpha+\frac{\pi}{2}\right)\right) \\
+\vec{v_\text{r}} &amp;= C_\text{cam} + l_\text{step}\left(\cos\left(\alpha-\frac{\pi}{2}\right),\sin\left(\alpha-\frac{\pi}{2}\right)\right)
+\end{aligned}
+</code></pre>
+<p>However, we know that cosine is just sine offset by <code class="language-math math-inline">\frac{\pi}{2}</code>. We can use this knowledge to
+simplify these 2 calculations:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+\vec{v_\text{l}} &amp;= C_\text{cam} + l_\text{step}\left(-\sin\alpha,\cos\alpha\right) \\
+\vec{v_\text{r}} &amp;= C_\text{cam} + l_\text{step}\left(\sin\alpha,-\cos\alpha\right)
+\end{aligned}
+</code></pre>
+<h3 id="engine-setup-cleanup">Engine Setup/Cleanup</h3>
+<p>Next, we define what to do on engine setup and cleanup:</p>
+<pre><code class="language-c">void T_SetupEngine(void) {
+	T_SetupCam(&amp;t_cam, T_NewPoint(0, 0), 0.5, T_FOV, 0);
+
+	int w = T_VideoWidth() / 2 - T_PADDING * 2, h = T_VideoHeight() - T_PADDING * 2;
+	t_ra2d = T_NewRenderArea(T_NewRect(T_PADDING, T_PADDING, w / 2, h));
+	t_ra3d = T_NewRenderArea(T_NewRect(T_PADDING * 3 + w / 2, T_PADDING, w * 1.5, h));
+}
+
+void T_CleanupEngine(void) {}
+</code></pre>
+<ul>
+<li>The camera starts at the center of the world (<code class="language-math math-inline">\left(0,0\right)</code>) with a z-height of 0.5, because
+the walls will start at z-height 0 and end at z-height 1.</li>
+<li>We initialize the 2D and 3D viewports.</li>
+<li>Nothing needs to be done for cleanup.</li>
+</ul>
+<h2 id="2d-visualization">2D Visualization</h2>
+<p>Now, let's visualize the viewports and draw a basic player in the center of the 2D viewport, facing
+up:</p>
+<pre><code class="language-c">static void T_RenderViewportBorder(void) {
+	T_DrawRect(T_RectWithPos(T_GetViewport(), 0, 0), 1, 2, 4);
+}
+
+static void T_Render2dPlayer(void) {
+	double fovSin = sin(T_FOV/2), fovCos = cos(T_FOV/2);
+	T_DrawVertLine(t_ra2d.cx, t_ra2d.cy, -10, 18);
+	T_DrawLine(t_ra2d.cx, t_ra2d.cy, t_ra2d.cx + fovSin * 10, t_ra2d.cy - fovCos * 10, 18);
+	T_DrawLine(t_ra2d.cx, t_ra2d.cy, t_ra2d.cx - fovSin * 10, t_ra2d.cy - fovCos * 10, 18);
+	T_DrawPoint(t_ra2d.cx, t_ra2d.cy, 7);
+}
+
+void T_RenderEngine(double dt) {
+	T_Unused(dt);
+	T_ClearVideo();
+
+	T_BeginViewport(t_ra2d.r);
+	T_RenderViewportBorder();
+	T_Render2dPlayer();
+	T_EndViewport();
+
+	T_BeginViewport(t_ra3d.r);
+	T_RenderViewportBorder();
+	T_EndViewport();
+}
+</code></pre>
+<ul>
+<li>Basic trigonometry is utilized to visualize the camera's field of view angle.</li>
+<li>The <code>T_DrawRect</code> function takes the rectangle's border thickness, border dash spacing, and color
+in order as its last 3 parameters - every <code>T_Draw...</code> function takes color as its last parameter.
+I use a 256-color palette, so the color is simply n index into the palette.</li>
+</ul>
+<p>When we run the code, it looks like this:</p>
+<div align="center"><img src="img5.png" width="90%"></div>
+<p>So far, so good... so what!</p>
+<p>We drew the camera at the center of the 2D viewport because it will remain fixed in that position.
+When rendering, instead of moving the camera around the world, we move the world around the camera -
+the <em>camera space</em>. It might seem strange, but it simplifies calculations.</p>
+<p>In camera space, the camera is at the center, <code class="language-math math-inline">\left(0,0\right)</code>. When converting world space
+coordinates into camera space, the y-coordinate becomes the distance from the camera's x-axis. Take,
+for example, this 2D wall with 2 points, A and B, visualized in camera space:</p>
+<div align="center"><img src="visual4.png" width="90%"></div>
+<p>We can determine how far each point is from the camera's x-axis by simply taking the y-position of
+the point. If the y-position is below 0, the point is below the camera's x-axis and therefore behind
+the camera. This will be useful for clipping.</p>
+<p>In camera space, the camera will always face upward, and the world rotates around it accordingly.
+You could make it face left, right or even down, if you want, but it makes the most sense to have it
+face up. That way, in 3D projection, the camera space x-axis corresponds to the screen's x-axis and
+the y-axis represents depth.</p>
+<p>And now, let's add a single wall:</p>
+<pre><code class="language-c">static T_Wall t_walls[] = {
+	{.a = {.x = 1, .y = -1}, .b = {.x = 1, .y = 1}},
+};
+</code></pre>
+<p>Next, we need to iterate through the walls array and render each one:</p>
+<pre><code class="language-c">void T_RenderEngine(double dt) {
+	T_Unused(dt);
+	T_ClearVideo();
+
+	for (size_t i = 0; i &lt; T_LenOf(t_walls); ++ i)
+		T_RenderWall(t_walls + i);
+
+	...
+}
+</code></pre>
+<p><code>T_LenOf</code> is a macro which calculates the number of elements in a static array.</p>
+<h3 id="transforming-world-space-to-camera-space">Transforming World Space to Camera Space</h3>
+<p>To render a wall, we first need to transform its points from world space into camera space. Let's
+define a simple function for that:</p>
+<pre><code class="language-c">static T_Point T_WorldToCamPos(T_Point p) {
+	p.x -= t_cam.p.x;
+	p.y -= t_cam.p.y;
+	return (T_Point){
+		.x = p.x * t_cam.sin - p.y * t_cam.cos,
+		.y = p.x * t_cam.cos + p.y * t_cam.sin,
+	};
+}
+</code></pre>
+<p>First, we offset the point by subtracting the camera's position from it. However, we still have to
+rotate the point based on the camera's angle.</p>
+<p>To do this, we use something called a <a href="https://en.wikipedia.org/wiki/Rotation_matrix">rotation matrix</a>.
+For example, let's look at how point A changes when you rotate it by 90 degrees (point A'):</p>
+<div align="center"><img src="visual5.png" width="90%"></div>
+<p>As you can see, the x and y coordinates got swapped, and the x-coordinate became negative. We can
+achieve that behavior using trigonometry:</p>
+<ul>
+<li><code class="language-math math-inline">\sin0\degree = 0</code> and <code class="language-math math-inline">\cos0\degree = 1</code></li>
+<li><code class="language-math math-inline">\sin90\degree = 1</code> and <code class="language-math math-inline">\cos90\degree = 0</code></li>
+</ul>
+<p>Using that to achieve the swapping effect, the coordinates can be calculated like so:</p>
+<pre><code class="language-math math-display">\begin{bmatrix} x' \\ y' \end{bmatrix} =
+\begin{bmatrix} \cos\alpha &amp; -\sin\alpha \\ \sin\alpha &amp; \cos\alpha \end{bmatrix}
+\begin{bmatrix} x \\ y \end{bmatrix}
+</code></pre>
+<p>Which means the new coordinates are:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+x' &amp;= x\cos\alpha - y\sin\alpha \\
+y' &amp;= x\sin\alpha + y\cos\alpha
+\end{aligned}
+</code></pre>
+<ul>
+<li><code class="language-math math-inline">\left(x,y\right)</code> = original point</li>
+<li><code class="language-math math-inline">\left(x',y'\right)</code> = rotated point</li>
+</ul>
+<p>However, because our camera faces upwards (<code class="language-math math-inline">90\degree</code>), not left (<code class="language-math math-inline">0\degree</code>), we have to modify
+the formula by swapping <code class="language-math math-inline">\sin</code> and <code class="language-math math-inline">\cos</code>:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+x' &amp;= x\sin\alpha - y\cos\alpha \\
+y' &amp;= x\cos\alpha + y\sin\alpha
+\end{aligned}
+</code></pre>
+<p>Now, we can render the transformed wall as a line in the 2D viewport:</p>
+<pre><code class="language-c">static void T_RenderWall(T_Wall *l) {
+	/* Line points in camera space */
+	T_Point a = T_WorldToCamPos(l-&gt;a), b = T_WorldToCamPos(l-&gt;b);
+
+	T_Render2dLine(a, b, 8, 7);
+}
+</code></pre>
+<p>The <code>T_RenderWall</code> function will have more code added to it later, so let's put the code for
+line-drawing inside the 2D viewport in a separate function:</p>
+<pre><code class="language-c">static void T_Render2dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	int ax = t_ra2d.cx + a.x * T_SCALE, ay = t_ra2d.cy - a.y * T_SCALE,
+	    bx = t_ra2d.cx + b.x * T_SCALE, by = t_ra2d.cy - b.y * T_SCALE;
+
+	T_BeginViewport(t_ra2d.r);
+	T_DrawLine(ax, ay, bx, by, linePx);
+	T_DrawPoint(ax, ay, pointPx);
+	T_DrawPoint(bx, by, pointPx);
+	T_EndViewport();
+}
+</code></pre>
+<p>Here, we just scale and offset the points so that <code class="language-math math-inline">\left(0,0\right)</code> is in the center of the 2D
+viewport. We subtract the y-coordinate but not x-coordinate because, as seen in the visualizations,
+our world space uses the regular 4-quadrant coordinate system where <code class="language-math math-inline">\left(0,0\right)</code> is the
+center, but on the screen, the top-left corner is <code class="language-math math-inline">\left(0,0\right)</code> and both x and y coordinates
+increase as you approach the bottom-right corner. This means that, compared to our world space's
+y-coordinate, the screen's y-coordinate is negated.</p>
+<p>If we run the code, we get a nice line:</p>
+<div align="center"><img src="img6.png" width="90%"></div>
+<blockquote>
+<p><em><code>T_DrawLine</code> uses <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham's line algorithm</a> for line rendering.</em></p>
+</blockquote>
+<p>Pretty nice! But a bit boring. Let's add movement:</p>
+<pre><code class="language-c">void T_UpdateEngine(double dt) {
+	if (t_keyboard[SDL_SCANCODE_E]) T_RotateCam      (&amp;t_cam,  T_PI * T_ROT_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_Q]) T_RotateCam      (&amp;t_cam, -T_PI * T_ROT_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_W]) T_MoveCamForward (&amp;t_cam, T_MOVE_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_A]) T_MoveCamLeft    (&amp;t_cam, T_MOVE_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_S]) T_MoveCamBackward(&amp;t_cam, T_MOVE_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_D]) T_MoveCamRight   (&amp;t_cam, T_MOVE_SPEED * dt);
+}
+</code></pre>
+<p>This function is called every frame. <code>dt</code> is the delta time of the current frame - the amount of
+time in milliseconds the frame took to execute. The rest of this code is pretty self-explanatory.</p>
+<p>If you move and look around, you can see the line moves and rotates around the camera as expected:</p>
+<div align="center"><img src="gif1.gif" width="90%"></div>
+<h2 id="3d-projection">3D Projection</h2>
+<p>It's time to get something 3D-looking on the screen. This process is not very hard - we simply
+project the camera space points onto the screen. So let's define a function for that:</p>
+<pre><code class="language-c">static void T_ProjectPoint(T_Point p, double z1, double z2, int *x, int *y1, int *y2) {
+	double scale = (double)t_ra3d.cx / p.y;
+	*x  = t_ra3d.cx + p.x            * scale;
+	*y1 = t_ra3d.cy - (z1 - t_cam.z) * scale; /* Point z height start */
+	*y2 = t_ra3d.cy - (z2 - t_cam.z) * scale; /* Point z height end */
+}
+</code></pre>
+<p>In order to understand how projecting a point works, we have to look at how a 2D top-down view of
+the scene looks compared to a 3D view from the camera:</p>
+<div align="center"><img src="visual6.png" width="90%"></div>
+<p>The wall has an arbitrary height to better visualize this. We can notice a simple rule - The farther
+an object is from the camera, the smaller it appears. The closer the point is to the camera's
+x-axis, the bigger the projected point's height is and the farther from the center of the screen it
+is. So, the closer to the camera's x-axis the point is, the farther away from the center of the
+screen the screen x and y positions of the point are.</p>
+<p>Since we know that the distance of a point from the camera's x-axis is the y-position of that point,
+this means we have to divide the x-position of the point by the y-position of the point to get the
+point's x-position on the screen. Similarly, we divide the z-height of the point by the y-position
+of the point to get the point's y-position on the screen:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+x' &amp;= \frac{x}{y} \\
+y' &amp;= \frac{z}{y}
+\end{aligned}
+</code></pre>
+<ul>
+<li><code class="language-math math-inline">\left(x',y'\right)</code> = projected screen coordinates</li>
+<li><code class="language-math math-inline">\left(x,y,z\right)</code> = camera space coordinates (including z-height)</li>
+</ul>
+<p>We have to keep in mind that we are still looking at the world from a top-down view - we are not
+doing real 3D. That means, from a top-down view, the point's y-position is up/down and the
+x-position is left/right. From the view of the camera (on the screen), the point's y-position
+becomes the depth, the x-position is left/right and the z-height is up/down. The z-height cannot be
+represented on a 2D top-down view.</p>
+<p>Since we defined our point to be 2D, the wall's starting and ending z-heights are passed as separate
+arguments, <code>z1</code> and <code>z2</code>, where <code>z1</code> is where the wall starts (bottom of the wall), and <code>z2</code> is
+where the wall ends (top of the wall). The point is in camera space, but the z-height values we pass
+in are not, so we have to subtract the camera z-height from them.</p>
+<p>Next, we scale up the screen coordinates to fit our viewport. To keep a 1:1 aspect ratio (preventing
+horizontal or vertical stretching), We scale them both by the viewport's width. I decided to use the
+viewport's width for scaling, but you could also use the height, that's up to you. The calculation
+looks like this:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+x' &amp;= \frac{w}{2} + w\frac{x}{y} \\
+y' &amp;= \frac{h}{2} - w\frac{z}{y}
+\end{aligned}
+</code></pre>
+<ul>
+<li><code class="language-math math-inline">\left(x',y'\right)</code> = projected screen coordinates, scaled up correctly for our viewport</li>
+</ul>
+<p>We scale the positions and subtract them from the width and height for the x and y axes,
+respectively, to make sure the center of the screen is positioned correctly. In my code, I
+pre-calculate <code class="language-math math-inline">\frac{w}{2}</code> and <code class="language-math math-inline">\frac{h}{2}</code> and store them as <code>.cx</code> and <code>.cy</code> in the
+<code>T_RenderArea</code> struct for convenience and efficiency.</p>
+<p>However, there is still one more thing we can do about this code - reduce the amount of divisions.
+This might seem pointless, but in software-rendering, every little thing counts, especially when
+it's getting rid of something that's performed for each point of a wall. Instead of dividing twice,
+we calculate the scale and simplify our 2 equations:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+s_\text{scale} &amp;= \frac{w}{y} \\
+x' &amp;= \frac{w}{2} + s_\text{scale}x \\
+y' &amp;= \frac{h}{2} - s_\text{scale}z
+\end{aligned}
+</code></pre>
+<p>So now, let's write a function to render a 3D line:</p>
+<pre><code class="language-c">static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	int ax, ay1, ay2, /* Screen coordinates for wall point A */
+	    bx, by1, by2; /* Screen coordinates for wall point B */
+	T_ProjectPoint(a, 0, 1, &amp;ax, &amp;ay1, &amp;ay2);
+	T_ProjectPoint(b, 0, 1, &amp;bx, &amp;by1, &amp;by2);
+
+	T_BeginViewport(t_ra3d.r);
+	/* Render wall points */
+	T_DrawVertLine(ax, ay1, ay2 - ay1, pointPx);
+	T_DrawVertLine(bx, by1, by2 - by1, pointPx);
+
+	T_DrawLine(ax, ay1, bx, by1, pointPx);
+	T_DrawLine(ax, ay2, bx, by2, pointPx);
+	T_EndViewport();
+}
+
+static void T_RenderWall(T_Wall *l) {
+	/* Line points in camera space */
+	T_Point a = T_WorldToCamPos(l-&gt;a), b = T_WorldToCamPos(l-&gt;b);
+
+	T_Render2dLine(a, b, 8, 7);
+	T_Render3dLine(a, b, 8, 7);
+}
+</code></pre>
+<p>We project the wall's points and connect them with lines. For now, the wall's <code>z1</code> and <code>z2</code> values
+will be hardcoded to 0 and 1 respectively.</p>
+<div align="center"><img src="img7.png" width="90%"></div>
+<p>Works like a charm. But you may notice that something very weird happens if one of the points moves
+behind the camera:</p>
+<div align="center"><img src="img8.png" width="90%"></div>
+<p>And when the entire wall is behind the camera, we suddenly got eyes on the back of our head!</p>
+<div align="center"><img src="img9.png" width="90%"></div>
+<p>This happens because when a point is behind the camera's x-axis in camera space, its y-position is
+less than 0 - negative. Since projection involves dividing by the y-position, this calculation
+returns negative values, which results in inverted screen coordinates. In order to fix this, we need
+to clip the line before projecting the points.</p>
+<h3 id="line-clipping">Line Clipping</h3>
+<p>There are several ways to approach this problem, including using vector cross products. However, I
+came up with my own solution, using mathematics I understand. Using vector cross products might be a
+better solution, but I don't fully understand them, and my method is efficient and works well.</p>
+<p>First, we need to define a constant for the minimum y-position, under which the line will get
+clipped - the clip plane:</p>
+<pre><code class="language-c">#define T_CLIP_PLANE_Y 0.1
+</code></pre>
+<p>This value can be very small, but not 0, because then the clipping code would cause a
+division-by-zero error.</p>
+<p>Let's define a function to clip a line's point against the clip plane:</p>
+<pre><code class="language-c">static void T_ClipLinePoint(T_Point *a, T_Point b) {
+	a-&gt;x += (T_CLIP_PLANE_Y - a-&gt;y) / (b.y - a-&gt;y) * (b.x - a-&gt;x);
+	a-&gt;y  = T_CLIP_PLANE_Y;
+}
+</code></pre>
+<p>This function clips point <code>a</code> by interpolating between <code>a</code> and <code>b</code> based on intersection with the
+clip plane. It's just simple <a href="https://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a>:</p>
+<div align="center"><img src="visual7.png" width="90%"></div>
+<p>Here, point C is the intersection of the line with the clip plane - the clipped version of point A.
+Since we know that the y-position of point C is equal to the y-position of the clip plane (0.1), we
+can calculate the x-position of point C by finding out at what percentage of the line the
+intersection happens (a value from 0 to 1). Since we know the y positions of all 3 points, we can
+use them for this calculation. If we divide the vertical distance of point A from the clip plane by
+the vertical distance between point A and point B, we get the percentage at which the intersection
+occurs:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+C_y &amp;= 0.1 \\
+t &amp;= \frac{C_y - A_y}{B_y - A_y} \\
+C_x &amp;= A_x + t\left(B_x - A_x\right)
+\end{aligned}
+</code></pre>
+<p>Let's use the clipping function in our code to clip walls before rendering:</p>
+<pre><code class="language-c">static void T_RenderWall(T_Wall *l) {
+	/* Line points in camera space */
+	T_Point a = T_WorldToCamPos(l-&gt;a), b = T_WorldToCamPos(l-&gt;b);
+
+	T_Point ca = a, cb = b; /* Clipped line points in camera space */
+	bool behindCam = a.y &lt; T_CLIP_PLANE_Y &amp;&amp; b.y &lt; T_CLIP_PLANE_Y;
+	if (!behindCam) {
+		if      (ca.y &lt; T_CLIP_PLANE_Y) T_ClipLinePoint(&amp;ca, cb);
+		else if (cb.y &lt; T_CLIP_PLANE_Y) T_ClipLinePoint(&amp;cb, ca);
+	}
+
+	T_Render2dLine(a, b, 18, 25);
+	if (!behindCam) {
+		T_Render2dLine(ca, cb, 8, 7);
+		T_Render3dLine(ca, cb, 8, 7);
+	}
+}
+</code></pre>
+<ul>
+<li>We check for clipping of both points and only clip if needed.</li>
+<li><code>T_Render2dLine</code> is called twice in order to visualize both the original and clipped line.</li>
+<li>If the wall is behind the camera, we skip 3D rendering and 2D visualization of the clipped line.</li>
+</ul>
+<div align="center"><img src="gif2.gif" width="90%"></div>
+<p>Everything works as it should now. There is however one side effect from using a clip plane - walls
+appear cut off when too close to the camera. This doesn't happen in the original Doom, but it's
+common in modern 3D engines. However, once collision detection is implemented, it won't matter.</p>
+<h3 id="field-of-view">Field of View</h3>
+<p>We're gonna set the field of view to something other than 90 degress now, for example 70 degrees:</p>
+<pre><code>#define T_FOV T_DegToRad(70)
+</code></pre>
+<p>Now, in order to implement a field of view, we need to modify <code>T_ProjectPoint</code>:</p>
+<pre><code class="language-c">static void T_ProjectPoint(T_Point p, double z1, double z2, int *x, int *y1, int *y2) {
+	double scale = (double)t_ra3d.cx / (p.y * t_cam.plane);
+	...
+}
+</code></pre>
+<p>The depth value gets scaled by the camera's plane. With a 90-degree field of view, the camera's
+plane was equal to 1 (<code class="language-math math-inline">\tan45\degree = 1</code>), so this multiplication had no effect. When field of view
+decreases, objects appear to &quot;zoom in&quot;, because the camera's plane value goes below 1. When it
+decreases, objects appear to &quot;zoom out&quot;, because the camera's plane value goes above 1.</p>
+<h3 id="wall-filling">Wall Filling</h3>
+<p>The last thing left to do is to fill the wall. Even though the concept is simple, this is actually
+probably the most involved part so far.</p>
+<p>First, let's only render the wall if it's in our field of view:</p>
+<pre><code class="language-c">static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	int ax, ay1, ay2, /* Screen coordinates for wall point A */
+	    bx, by1, by2; /* Screen coordinates for wall point B */
+	T_ProjectPoint(a, 0, 1, &amp;ax, &amp;ay1, &amp;ay2);
+	T_ProjectPoint(b, 0, 1, &amp;bx, &amp;by1, &amp;by2);
+
+	/* Is wall in FOV? */
+	if ((ax &lt; 0 &amp;&amp; bx &lt; 0) || (ax &gt;= t_ra3d.r.w - 1 &amp;&amp; bx &gt;= t_ra3d.r.w - 1))
+		return;
+
+	...
+}
+</code></pre>
+<p>If both points are off-screen to the left or right, we skip rendering.</p>
+<p>It will be easier to fill the wall if we order its points from left to right. Let's also leave a
+small gap around the viewport border to make sure we are not rendering outside the viewport:</p>
+<pre><code class="language-c">static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	...
+
+	/* Order points from left to right for simpler rendering */
+	if (ax &gt; bx) {
+		T_Swap(int, ax,  bx);
+		T_Swap(int, ay1, by1);
+		T_Swap(int, ay2, by2);
+	}
+
+	T_BeginViewport(t_ra3d.r);
+	/* Render wall points */
+	if (ax &gt;= 2 &amp;&amp; ax &lt; t_ra3d.r.w - 2) T_DrawVertLine(ax, ay1, ay2 - ay1, pointPx);
+	if (bx &gt;= 2 &amp;&amp; bx &lt; t_ra3d.r.w - 2) T_DrawVertLine(bx, by1, by2 - by1, pointPx);
+
+	T_DrawLine(ax, ay1, bx, by1, pointPx);
+	T_DrawLine(ax, ay2, bx, by2, pointPx);
+	T_EndViewport();
+}
+</code></pre>
+<p>Next, we can save the initial starting x-position (<code>ax0</code>) and calculate the wall's screen width
+(<code>w</code>). Then, we add boundary checks (with a small gap) to avoid filling outside the viewport:</p>
+<pre><code class="language-c">static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	...
+
+	T_DrawLine(ax, ay1, bx, by1, pointPx);
+	T_DrawLine(ax, ay2, bx, by2, pointPx);
+
+	int ax0 = ax, w = bx - ax0; /* Wall screen x start and wall screen width */
+	/* Avoid rendering outside the window */
+	if      (ax &lt; 2) ax = 2;
+	else if (bx &lt; 2) bx = 2;
+	if      (ax &gt;= t_ra3d.r.w - 2) ax = t_ra3d.r.w - 3;
+	else if (bx &gt;= t_ra3d.r.w - 2) bx = t_ra3d.r.w - 3;
+
+	T_EndViewport();
+}
+</code></pre>
+<p>And now, we can start filling from left to right. For each screen column, we calculate at what
+percentage of the wall we currently are:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+t = \frac{x - a_{x_0}}{b_x - a_{x_0}}
+\end{aligned}
+</code></pre>
+<ul>
+<li><code class="language-math math-inline">x</code> = current screen x-position</li>
+</ul>
+<p>With this, the vertical boundaries of the current column can
+easily be calculated using linear interpolation:</p>
+<pre><code class="language-math math-display">\begin{aligned}
+y_1 &amp;= a_{y_1} + t\left(b_{y_1} - a_{y_1}\right) \\
+y_2 &amp;= a_{y_2} + t\left(b_{y_2} - a_{y_2}\right)
+\end{aligned}
+</code></pre>
+<p>Then, we loop from <code class="language-math math-inline">y_2</code> to <code class="language-math math-inline">y_1</code> to fill the column. We also need to make sure we're not drawing
+outside the viewport:</p>
+<pre><code class="language-c">static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	...
+
+	/* Fill wall */
+	for (int x = ax; x &lt;= bx; ++ x) {
+		/* Calculate wall's vertical screen boundaries at current column */
+		double t = (double)(x - ax0) / w;
+		int y1 = ay1 + t * (by1 - ay1), y2 = ay2 + t * (by2 - ay2);
+		if (y1 &gt;= t_ra3d.r.h - 2) y1 = t_ra3d.r.h - 3;
+		if (y2 &lt; 2) y2 = 2;
+
+		/* Render wall column */
+		for (int y = y2; y &lt;= y1; ++ y)
+			T_DrawPoint(x, y, linePx);
+	}
+	T_EndViewport();
+}
+</code></pre>
+<div align="center"><img src="img10.png" width="90%"></div>
+<p>Our code seems to be working! But it's drawing over the white wall outline. We could reorder the
+draw calls, but when we add multiple walls it could cause issues with the drawing order. Instead,
+let's fill only every other row of the wall for now:</p>
+<pre><code class="language-c">static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	...
+
+	/* Fill wall */
+	for (int x = ax; x &lt;= bx; ++ x) {
+		...
+
+		/* Render wall column */
+		for (int y = y2; y &lt;= y1; ++ y) {
+			if (y % 2 == 0)
+				T_DrawPoint(x, y, linePx);
+		}
+	}
+
+	...
+}
+</code></pre>
+<div align="center"><img src="img11.png" width="90%"></div>
+<p>Looking good.</p>
+<h3 id="edge-case">Edge Case</h3>
+<p>There is one subtle edge-case that we haven't considered, which happens when the wall is looked at
+from a very specific angle, causing it to be only 1 pixel wide on the screen. This results in a
+division-by-zero error when calculating <code>t</code>, because <code>w</code> becomes 0. This does not cause visible
+issues because we are rendering the white wall outline.</p>
+<div align="center"><img src="img12.png" width="90%"></div>
+<p>But if we remove that code, the wall suddenly disappears.</p>
+<div align="center"><img src="img13.png" width="90%"></div>
+<p>This is because <code>t</code> becomes <code>-nan</code>, causing our vertical loop to not run. If I had used my
+<code>T_DrawVertLine</code> function, which allows to draw lines with negative height, the program would have
+frozen for some time trying to draw a really long vertical line. To handle this edge case, we need
+to check for when <code>w</code> is 0. When that happens, we simply take the highest and lowest y values of
+the two points:</p>
+<pre><code class="language-c">static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	...
+
+	/* Fill wall */
+	for (int x = ax; x &lt;= bx; ++ x) {
+		/* Calculate wall's vertical screen boundaries at current column */
+		int y1, y2;
+		if (w == 0) {
+			/* Get the lowest and highest wall screen y position */
+			y1 = ay1 &gt; by1? ay1 : by1;
+			y2 = ay2 &gt; by2? by2 : ay2;
+		} else {
+			double t = (double)(x - ax0) / w;
+			y1 = ay1 + t * (by1 - ay1);
+			y2 = ay2 + t * (by2 - ay2);
+		}
+		if (y1 &gt;= t_ra3d.r.h - 2) y1 = t_ra3d.r.h - 3;
+		if (y2 &lt; 2) y2 = 2;
+
+		...
+	}
+
+	...
+}
+</code></pre>
+<p>Now the rendering should work just fine. Let's add more walls to see what happens:</p>
+<pre><code class="language-c">static T_Wall t_walls[] = {
+	{.a = {.x = 1, .y = -1}, .b = {.x = 1, .y =  1}},
+	{.a = {.x = 1, .y =  1}, .b = {.x = 3, .y =  1}},
+	{.a = {.x = 3, .y =  1}, .b = {.x = 3, .y = -1}},
+	{.a = {.x = 3, .y = -1}, .b = {.x = 1, .y = -1}},
+};
+</code></pre>
+<div align="center"><img src="gif3.gif" width="90%"></div>
+<p>Great! And of course, since this is a Build-style engine, you can have any shapes and angles
+you want, not just squares.</p>
+<div align="center"><img src="img14.png" width="90%"></div>
+<p>But it looks a little boring - it's missing textures. We also don't handle rendering order. We'll
+add those in the next part.</p>
+<h2 id="trinity">Trinity</h2>
+<p>I've created a <a href="https://github.com/trinity-engine">Trinity Github organization</a> if you're
+interested. At the time of writing, the source code of Trinity hasn't been published there yet, but
+by the time you're reading this, it might be.</p>
+<h2 id="full-code">Full Code</h2>
+<p>Here's this part's full code:</p>
+<pre><code class="language-c">/* ========== Header File Code ========== */
+
+typedef struct {
+	double x, y;
+} T_Point;
+
+#define T_NewPoint(X, Y) (T_Point){.x = X, .y = Y}
+
+typedef struct {
+	T_Point a, b;
+} T_Wall;
+
+typedef struct {
+	T_Point p;
+	double  z, fov, dir, sin, cos, plane;
+} T_Cam;
+
+void T_SetupCam       (T_Cam *cam, T_Point p, double z, double fov, double dir);
+void T_RotateCam      (T_Cam *cam, double by);
+void T_MoveCamForward (T_Cam *cam, double by);
+void T_MoveCamBackward(T_Cam *cam, double by);
+void T_MoveCamLeft    (T_Cam *cam, double by);
+void T_MoveCamRight   (T_Cam *cam, double by);
+
+typedef struct {
+	T_Rect r;
+	int    cx, cy;
+} T_RenderArea;
+
+T_INLINE T_RenderArea T_NewRenderArea(T_Rect rect);
+
+void T_SetupEngine(void);
+void T_CleanupEngine(void);
+
+void T_RenderEngine(double dt);
+void T_UpdateEngine(double dt);
+void T_EngineHandleEvent(SDL_Event *evt);
+
+/* Inline definitions */
+T_INLINE T_RenderArea T_NewRenderArea(T_Rect rect) {
+	return (T_RenderArea){
+		.r  = rect,
+		.cx = rect.w/2,
+		.cy = rect.h/2,
+	};
+}
+
+/* ========== Source File Code ========== */
+
+#define T_SCALE        30
+#define T_PADDING      10
+#define T_FOV          T_DegToRad(70)
+#define T_CLIP_PLANE_Y 0.1
+#define T_MOVE_SPEED   0.003
+#define T_ROT_SPEED    0.001
+
+static T_RenderArea t_ra2d, t_ra3d;
+static T_Cam        t_cam;
+static T_Wall       t_walls[] = {
+	{.a = {.x = 1, .y = -1}, .b = {.x = 1, .y =  1}},
+	{.a = {.x = 1, .y =  1}, .b = {.x = 3, .y =  1}},
+	{.a = {.x = 3, .y =  1}, .b = {.x = 3, .y = -1}},
+	{.a = {.x = 3, .y = -1}, .b = {.x = 1, .y = -1}},
+};
+
+void T_SetupCam(T_Cam *cam, T_Point p, double z, double fov, double dir) {
+	*cam = (T_Cam){
+		.p     = p,
+		.z     = z,
+		.fov   = fov,
+		.plane = tan(fov/2),
+	};
+	T_RotateCam(cam, dir);
+}
+
+void T_RotateCam(T_Cam *cam, double angle) {
+	cam-&gt;dir += angle;
+	cam-&gt;sin  = sin(cam-&gt;dir);
+	cam-&gt;cos  = cos(cam-&gt;dir);
+}
+
+void T_MoveCamForward(T_Cam *cam, double step) {
+	cam-&gt;p.x += cam-&gt;cos * step;
+	cam-&gt;p.y += cam-&gt;sin * step;
+}
+
+void T_MoveCamBackward(T_Cam *cam, double step) {
+	cam-&gt;p.x -= cam-&gt;cos * step;
+	cam-&gt;p.y -= cam-&gt;sin * step;
+}
+
+void T_MoveCamLeft(T_Cam *cam, double step) {
+	cam-&gt;p.x -= cam-&gt;sin * step;
+	cam-&gt;p.y += cam-&gt;cos * step;
+}
+
+void T_MoveCamRight(T_Cam *cam, double step) {
+	cam-&gt;p.x += cam-&gt;sin * step;
+	cam-&gt;p.y -= cam-&gt;cos * step;
+}
+
+void T_SetupEngine(void) {
+	T_SetupCam(&amp;t_cam, T_NewPoint(0, 0), 0.5, T_FOV, 0);
+
+	int w = T_VideoWidth() / 2 - T_PADDING * 2, h = T_VideoHeight() - T_PADDING * 2;
+	t_ra2d = T_NewRenderArea(T_NewRect(T_PADDING, T_PADDING, w / 2, h));
+	t_ra3d = T_NewRenderArea(T_NewRect(T_PADDING * 3 + w / 2, T_PADDING, w * 1.5, h));
+}
+
+void T_CleanupEngine(void) {}
+
+/* Convert world space coordinate to camera space coordinate */
+static T_Point T_WorldToCamPos(T_Point p) {
+	p.x -= t_cam.p.x;
+	p.y -= t_cam.p.y;
+	return (T_Point){
+		.x = p.x * t_cam.sin - p.y * t_cam.cos,
+		.y = p.x * t_cam.cos + p.y * t_cam.sin,
+	};
+}
+
+static void T_ProjectPoint(T_Point p, double z1, double z2, int *x, int *y1, int *y2) {
+	double scale = (double)t_ra3d.cx / (p.y * t_cam.plane);
+	*x  = t_ra3d.cx + p.x            * scale;
+	*y1 = t_ra3d.cy - (z1 - t_cam.z) * scale; /* Point z height start */
+	*y2 = t_ra3d.cy - (z2 - t_cam.z) * scale; /* Point z height end */
+}
+
+/* Clip line point behind camera in camera space */
+static void T_ClipLinePoint(T_Point *a, T_Point b) {
+	a-&gt;x += (T_CLIP_PLANE_Y - a-&gt;y) / (b.y - a-&gt;y) * (b.x - a-&gt;x);
+	a-&gt;y  = T_CLIP_PLANE_Y;
+}
+
+static void T_Render2dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	int ax = t_ra2d.cx + a.x * T_SCALE, ay = t_ra2d.cy - a.y * T_SCALE,
+	    bx = t_ra2d.cx + b.x * T_SCALE, by = t_ra2d.cy - b.y * T_SCALE;
+
+	T_BeginViewport(t_ra2d.r);
+	T_DrawLine(ax, ay, bx, by, linePx);
+	T_DrawPoint(ax, ay, pointPx);
+	T_DrawPoint(bx, by, pointPx);
+	T_EndViewport();
+}
+
+static void T_Render3dLine(T_Point a, T_Point b, uint8_t linePx, uint8_t pointPx) {
+	int ax, ay1, ay2, /* Screen coordinates for wall point A */
+	    bx, by1, by2; /* Screen coordinates for wall point B */
+	T_ProjectPoint(a, 0, 1, &amp;ax, &amp;ay1, &amp;ay2);
+	T_ProjectPoint(b, 0, 1, &amp;bx, &amp;by1, &amp;by2);
+
+	/* Is wall in FOV? */
+	if ((ax &lt; 0 &amp;&amp; bx &lt; 0) || (ax &gt;= t_ra3d.r.w - 1 &amp;&amp; bx &gt;= t_ra3d.r.w - 1))
+		return;
+
+	/* Order points from left to right for simpler rendering */
+	if (ax &gt; bx) {
+		T_Swap(int, ax,  bx);
+		T_Swap(int, ay1, by1);
+		T_Swap(int, ay2, by2);
+	}
+
+	T_BeginViewport(t_ra3d.r);
+	/* Render wall points */
+	if (ax &gt;= 2 &amp;&amp; ax &lt; t_ra3d.r.w - 2) T_DrawVertLine(ax, ay1, ay2 - ay1, pointPx);
+	if (bx &gt;= 2 &amp;&amp; bx &lt; t_ra3d.r.w - 2) T_DrawVertLine(bx, by1, by2 - by1, pointPx);
+
+	T_DrawLine(ax, ay1, bx, by1, pointPx);
+	T_DrawLine(ax, ay2, bx, by2, pointPx);
+
+	int ax0 = ax, w = bx - ax0; /* Wall screen x start and wall screen width */
+	/* Avoid rendering outside the window */
+	if      (ax &lt; 2) ax = 2;
+	else if (bx &lt; 2) bx = 2;
+	if      (ax &gt;= t_ra3d.r.w - 2) ax = t_ra3d.r.w - 3;
+	else if (bx &gt;= t_ra3d.r.w - 2) bx = t_ra3d.r.w - 3;
+
+	/* Fill wall */
+	for (int x = ax; x &lt;= bx; ++ x) {
+		/* Calculate wall's vertical screen boundaries at current column */
+		int y1, y2;
+		if (w == 0) {
+			/* Get the lowest and highest wall screen y position */
+			y1 = ay1 &gt; by1? ay1 : by1;
+			y2 = ay2 &gt; by2? by2 : ay2;
+		} else {
+			double t = (double)(x - ax0) / w;
+			y1 = ay1 + t * (by1 - ay1);
+			y2 = ay2 + t * (by2 - ay2);
+		}
+		if (y1 &gt;= t_ra3d.r.h - 2) y1 = t_ra3d.r.h - 3;
+		if (y2 &lt; 2) y2 = 2;
+
+		/* Render wall column */
+		for (int y = y2; y &lt;= y1; ++ y) {
+			if (y % 2 == 0)
+				T_DrawPoint(x, y, linePx);
+		}
+	}
+	T_EndViewport();
+}
+
+static void T_RenderWall(T_Wall *l) {
+	/* Line points in camera space */
+	T_Point a = T_WorldToCamPos(l-&gt;a), b = T_WorldToCamPos(l-&gt;b);
+
+	T_Point ca = a, cb = b; /* Clipped line points in camera space */
+	bool behindCam = a.y &lt; T_CLIP_PLANE_Y &amp;&amp; b.y &lt; T_CLIP_PLANE_Y;
+	if (!behindCam) {
+		if      (ca.y &lt; T_CLIP_PLANE_Y) T_ClipLinePoint(&amp;ca, cb);
+		else if (cb.y &lt; T_CLIP_PLANE_Y) T_ClipLinePoint(&amp;cb, ca);
+	}
+
+	T_Render2dLine(a, b, 18, 25);
+	if (!behindCam) {
+		T_Render2dLine(ca, cb, 8, 7);
+		T_Render3dLine(ca, cb, 8, 7);
+	}
+}
+
+static void T_RenderViewportBorder(void) {
+	T_DrawRect(T_RectWithPos(T_GetViewport(), 0, 0), 1, 2, 4);
+}
+
+static void T_Render2dPlayer(void) {
+	double fovSin = sin(T_FOV/2), fovCos = cos(T_FOV/2);
+	T_DrawVertLine(t_ra2d.cx, t_ra2d.cy, -10, 18);
+	T_DrawLine(t_ra2d.cx, t_ra2d.cy, t_ra2d.cx + fovSin * 10, t_ra2d.cy - fovCos * 10, 18);
+	T_DrawLine(t_ra2d.cx, t_ra2d.cy, t_ra2d.cx - fovSin * 10, t_ra2d.cy - fovCos * 10, 18);
+	T_DrawPoint(t_ra2d.cx, t_ra2d.cy, 7);
+}
+
+void T_RenderEngine(double dt) {
+	T_Unused(dt);
+	T_ClearVideo();
+
+	for (size_t i = 0; i &lt; T_LenOf(t_walls); ++ i)
+		T_RenderWall(t_walls + i);
+
+	T_BeginViewport(t_ra2d.r);
+	T_RenderViewportBorder();
+	T_Render2dPlayer();
+	T_EndViewport();
+
+	T_BeginViewport(t_ra3d.r);
+	T_RenderViewportBorder();
+	T_EndViewport();
+}
+
+void T_UpdateEngine(double dt) {
+	if (t_keyboard[SDL_SCANCODE_Q]) T_RotateCam      (&amp;t_cam,  T_PI * T_ROT_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_E]) T_RotateCam      (&amp;t_cam, -T_PI * T_ROT_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_W]) T_MoveCamForward (&amp;t_cam, T_MOVE_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_A]) T_MoveCamLeft    (&amp;t_cam, T_MOVE_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_S]) T_MoveCamBackward(&amp;t_cam, T_MOVE_SPEED * dt);
+	if (t_keyboard[SDL_SCANCODE_D]) T_MoveCamRight   (&amp;t_cam, T_MOVE_SPEED * dt);
+}
+</code></pre>
+<hr />
+<p><em>Visualizations made using <a href="https://app.diagrams.net/">draw.io</a>, blog converted from Markdown to
+HTML using <a href="https://github.com/metafates/marky">Marky</a>.</em></p>
+<div align="right">
+<p><em>Published on 2025-03-05</em></p>
+</div>
+
+  </main>
+
+  <script>
+  function setupDiagrams(){if(typeof mermaid==='undefined'){return};mermaid.initialize({startOnLoad:false});const a=document.querySelectorAll("code.language-mermaid");let b=0;for(const c of a){const d=`mermaid${b}`;b++;const e=g=>{c.innerHTML=g};const f=c.textContent;mermaid.mermaidAPI.render(d,f,e)}}function setupMath(){if(typeof katex==='undefined'){return};for(const a of document.querySelectorAll(".language-math")){katex.render(a.textContent,a)}}function setupHighlight(){if(typeof hljs==='undefined'){return};hljs.highlightAll()}function setup(){setupMath();setupDiagrams();setupHighlight()}function setupWebSockets(){if(typeof ReconnectingWebSocket==='undefined'){return};var a='ws://'+ window.location.host;var b=new ReconnectingWebSocket(a);b.maxReconnectInterval=5000;b.onmessage=c=>{document.getElementById('root').innerHTML=c.data;setup()};b.onclose=()=>{window.open('','_self','');window.close()}}document.addEventListener('DOMContentLoaded',()=>{setup();setupWebSockets()})
+  </script>
+</body>
+
+</html>
