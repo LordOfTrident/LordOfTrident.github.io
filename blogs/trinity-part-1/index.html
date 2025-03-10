@@ -120,14 +120,14 @@ floor and ceiling height. I also implemented a procedural water animation with 3
 walls with varying floor/ceiling height. I realised that making an advanced raycaster takes too much
 effort and it's not even worth it - it isn't very fast or flexible. This lead to the decision to
 scrap the raycasting idea entirely. A Doom-style engine would be faster and much more flexible.</p>
-<p>Unlike a raycaster, makes use of a 2D tile grid, a Doom-style engine uses sectors enclosed by lines
-on a 2D map. This naturally allows for walls at any angle, without any width or height limitations
-at all.</p>
+<p>Unlike a raycaster, which makes use of a 2D tile grid, a Doom-style engine uses sectors enclosed by
+lines on a 2D map. This naturally allows for walls at any angle, without any width or height
+limitations at all.</p>
 <div align="center"><img src="visual1.png" width="90%"></div>
 <p>With that decision, I started the fourth (and current) rewrite of Trinity a few months ago. This
 time, I avoided the mistakes of my previous rewrites by first developing the skeleton of the
 application and engine before geting into the actual 2.5D rendering. I made a software-rendered UI,
-a game file browser, a Lua-based build system and some basic file formats, getting to around 4000
+a game file browser, a Lua-based build system, and some basic file formats, getting to around 4000
 lines of code (measured with <a href="https://github.com/AlDanial/cloc">cloc</a>).</p>
 <p>Just a few days ago, I finally started working on the 2.5D renderer. Specifically, I decided to
 go for a <a href="https://en.wikipedia.org/wiki/Build_(game_engine)">Build</a>-style renderer rather than a
@@ -144,7 +144,7 @@ things, and I can't guarantee that my solutions are 100% correct.</em></p>
 <p>So, first things first, we need some boilerplate code. I assume anyone reading this already knows
 basic C well enough, so I won't explain basic syntax or other parts of the Trinity source code,
 which are not relevant. The main focus is the 2.5D renderer. Functions defined elsewhere in my code
-should be self-explanatory from their name.</p>
+should have self-explanatory names.</p>
 <p>The 3 main structures we need to define are a point, a wall and a camera:</p>
 <pre><code class="language-c">typedef struct {
 	double x, y;

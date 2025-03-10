@@ -116,16 +116,16 @@ walls with varying floor/ceiling height. I realised that making an advanced rayc
 effort and it's not even worth it - it isn't very fast or flexible. This lead to the decision to
 scrap the raycasting idea entirely. A Doom-style engine would be faster and much more flexible.
 
-Unlike a raycaster, makes use of a 2D tile grid, a Doom-style engine uses sectors enclosed by lines
-on a 2D map. This naturally allows for walls at any angle, without any width or height limitations
-at all.
+Unlike a raycaster, which makes use of a 2D tile grid, a Doom-style engine uses sectors enclosed by
+lines on a 2D map. This naturally allows for walls at any angle, without any width or height
+limitations at all.
 
 <div align="center"><img src="visual1.png" width="90%"></div>
 
 With that decision, I started the fourth (and current) rewrite of Trinity a few months ago. This
 time, I avoided the mistakes of my previous rewrites by first developing the skeleton of the
 application and engine before geting into the actual 2.5D rendering. I made a software-rendered UI,
-a game file browser, a Lua-based build system and some basic file formats, getting to around 4000
+a game file browser, a Lua-based build system, and some basic file formats, getting to around 4000
 lines of code (measured with [cloc](https://github.com/AlDanial/cloc)).
 
 Just a few days ago, I finally started working on the 2.5D renderer. Specifically, I decided to
@@ -146,7 +146,7 @@ really isn't), but it's enough to start off this blog series.
 So, first things first, we need some boilerplate code. I assume anyone reading this already knows
 basic C well enough, so I won't explain basic syntax or other parts of the Trinity source code,
 which are not relevant. The main focus is the 2.5D renderer. Functions defined elsewhere in my code
-should be self-explanatory from their name.
+should have self-explanatory names.
 
 The 3 main structures we need to define are a point, a wall and a camera:
 ```c
@@ -1182,4 +1182,3 @@ HTML using [Marky](https://github.com/metafates/marky).*
 *Published on 2025-03-05*
 
 </div>
-
